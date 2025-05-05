@@ -191,7 +191,7 @@
     }
 
     .security-logo {
-      width: 60px;
+      width: 60px; /* Taille réduite ici */
       height: auto;
       margin-top: 5px;
     }
@@ -203,14 +203,14 @@
 <div class="payment-widget">
   <div class="top-banner">
     <div class="back-button" onclick="alert('Retour')"></div>
-    <div class="top-banner-text">Total à payer<br>5 000 Fcfa *</div>
+    <div class="top-banner-text">Total à payer<br>$montant Fcfa *</div>
     <div class="top-banner-subtext">(*) 1,9% de frais de transactions ont été ajoutés au montant</div>
   </div>
 
   <div class="payment-container">
     <h2 class="payment-methods-title">Sélectionnez un moyen de paiement</h2>
 
-    <div class="payment-option" data-link="mmoney.html">
+    <div class="payment-option" data-link="mmoney.php">
       <h3>Mobile Money</h3>
       <div class="payment-option-icons-container">
         <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/b158039ab12d29a92008d17362bbd4df895d2625" class="payment-icon" alt="Mobile money 1" />
@@ -221,7 +221,7 @@
       <div class="selected-check">✔</div>
     </div>
 
-    <div class="payment-option" data-link="cb.html">
+    <div class="payment-option" data-link="cb.php">
       <h3>Carte bancaire</h3>
       <div class="payment-option-icons-container">
         <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/5b5ff70976bffd37cecae13bf199088acd5c659b" class="payment-icon" alt="Visa" />
@@ -231,7 +231,7 @@
       <div class="selected-check">✔</div>
     </div>
 
-    <div class="payment-option" data-link="discount.html">
+    <div class="payment-option" id="discountPay">
       <h3>Discount Pay</h3>
       <div class="payment-option-icons-container">
         <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/5d098052520ecd25f69c28d459751a0e1f1a8390" class="discount-logo" alt="Discount Pay" />
@@ -240,7 +240,9 @@
     </div>
 
     <div class="payment-button-container">
-      <button type="button" class="payment-button" onclick="redirectToSelected()">Confirmer</button>
+      <form action="mmoney.php" method="get">
+        <button type="submit" class="payment-button">Confirmer</button>
+      </form>
     </div>
 
     <div class="footer-info-container">
@@ -255,33 +257,32 @@
 </div>
 
 <script>
-  function selectOption(selected) {
-    document.querySelectorAll('.payment-option').forEach(option => {
-      option.classList.remove('selected');
-    });
-    selected.classList.add('selected');
+function selectOption(selected) {
+  document.querySelectorAll('.payment-option').forEach(option => {
+    option.classList.remove('selected');
+  });
+  selected.classList.add('selected');
+}
+
+// Sélectionner "Mobile Money" par défaut
+window.onload = function() {
+  const mmoneyOption = document.querySelector('.payment-option[data-link="mmoney.php"]');
+  if (mmoneyOption) {
+    mmoneyOption.classList.add('selected');
   }
 
-  function redirectToSelected() {
-    const selectedOption = document.querySelector('.payment-option.selected');
-    const link = selectedOption ? selectedOption.getAttribute('data-link') : null;
-    if (link) {
-      window.location.href = link;
-    }
-  }
-
-  window.onload = function() {
-    const defaultOption = document.querySelector('.payment-option[data-link="mmoney.php"]');
-    if (defaultOption) {
-      defaultOption.classList.add('selected');
-    }
-
-    document.querySelectorAll('.payment-option').forEach(option => {
-      option.addEventListener('click', function () {
-        selectOption(this);
-      });
+  document.querySelectorAll('.payment-option').forEach(option => {
+    option.addEventListener('click', function() {
+      selectOption(this);
+      const link = this.getAttribute('data-link');
+      if (link) {
+        setTimeout(() => {
+          window.location.href = link;
+        }, 200);
+      }
     });
-  };
+  });
+};
 </script>
 
 </body>
