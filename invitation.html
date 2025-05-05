@@ -149,6 +149,7 @@
     <script>
       const codeInput = document.getElementById("invitation-code");
       const continueButton = document.querySelector(".continue-button");
+      const noCodeButton = document.querySelector(".no-code-button");
 
       codeInput.addEventListener("input", function () {
         if (this.value.trim() !== "") {
@@ -160,9 +161,13 @@
 
       continueButton.addEventListener("click", function () {
         if (!this.disabled) {
-          // Redirige vers la page creation_passwd.html
           window.location.href = "creation_passwd.html";
         }
+      });
+
+      noCodeButton.addEventListener("click", function () {
+        continueButton.disabled = false;
+        continueButton.focus(); // optionnel : donne un effet visuel
       });
     </script>
   </body>
