@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Récupérez votre bonus</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 400px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      height: 90vh;
+    }
+
+    .top-section {
+      flex-grow: 1;
+    }
+
+    .back-button {
+      font-size: 24px;
+      padding: 10px 0;
+      cursor: pointer;
+      width: fit-content;
+    }
+
+    h1 {
+      font-size: 24px;
+      font-weight: 700;
+      margin: 20px 0 30px;
+    }
+
+    label {
+      font-size: 14px;
+      font-weight: 500;
+      margin-bottom: 8px;
+      display: block;
+    }
+
+    input[type="tel"], select {
+      width: 100%;
+      padding: 14px;
+      border: none;
+      border-radius: 12px;
+      background-color: #f3f3f3;
+      font-size: 16px;
+      margin-bottom: 20px;
+    }
+
+    .operator-logo {
+      width: 40px;
+      height: 40px;
+      margin-bottom: 15px;
+      display: none;
+    }
+
+    .submit-button {
+      width: 100%;
+      background-color: #000;
+      color: #fff;
+      padding: 16px;
+      font-size: 16px;
+      font-weight: 600;
+      border: none;
+      border-radius: 16px;
+      cursor: not-allowed;
+      opacity: 0.5;
+      transition: 0.3s;
+    }
+
+    .submit-button.enabled {
+      cursor: pointer;
+      opacity: 1;
+    }
+
+    @media (max-width: 480px) {
+      .container {
+        height: auto;
+      }
+
+      h1 {
+        font-size: 20px;
+      }
+
+      .submit-button {
+        padding: 14px;
+        font-size: 15px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <div class="top-section">
+      <div class="back-button">&#x2190;</div>
+
+      <h1>Récupérez votre bonus</h1>
+
+      <label for="phone">Entrez le numéro</label>
+      <input type="tel" id="phone" placeholder="+225">
+
+      <label for="operator">Sélectionnez l’opérateur</label>
+      <select id="operator" name="operator">
+        <option value="">-- Sélectionnez un réseau --</option>
+        <option value="orange">Orange Money</option>
+        <option value="moov">Moov Money</option>
+        <option value="wave">Wave</option>
+        <option value="mtn">MTN Mobile Money</option>
+        <option value="free">Free Money</option>
+      </select>
+
+      <img id="logo" class="operator-logo" src="" alt="Logo opérateur">
+    </div>
+
+    <button id="submitBtn" class="submit-button" disabled>Transférez</button>
+  </div>
+
+  <script>
+    const phoneInput = document.getElementById('phone');
+    const operatorSelect = document.getElementById('operator');
+    const logoImg = document.getElementById('logo');
+    const submitBtn = document.getElementById('submitBtn');
+
+    const logos = {
+      orange: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Orange_logo_2019.svg/1200px-Orange_logo_2019.svg.png",
+      moov: "https://upload.wikimedia.org/wikipedia/commons/4/4b/Moov_Africa_Logo.svg",
+      wave: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/Wave_Logo.svg/1200px-Wave_Logo.svg.png",
+      mtn: "https://upload.wikimedia.org/wikipedia/commons/5/5f/MTN_Logo.svg",
+      free: "https://upload.wikimedia.org/wikipedia/commons/e/e5/Logo_Free_2021.svg"
+    };
+
+    operatorSelect.addEventListener("change", () => {
+      const value = operatorSelect.value;
+      if (logos[value]) {
+        logoImg.src = logos[value];
+        logoImg.style.display = "block";
+      } else {
+        logoImg.style.display = "none";
+      }
+    });
+
+    function validateForm() {
+      const phoneValue = phoneInput.value.trim();
+      const isPhoneValid = phoneValue.length >= 8;
+      if (isPhoneValid) {
+        submitBtn.disabled = false;
+        submitBtn.classList.add("enabled");
+      } else {
+        submitBtn.disabled = true;
+        submitBtn.classList.remove("enabled");
+      }
+    }
+
+    phoneInput.addEventListener("input", validateForm);
+
+    submitBtn.addEventListener("click", function() {
+      if (!submitBtn.disabled) {
+        window.location.href = "recompenses.html";  // Remplacez "votre-page.html" par l'URL de la page cible
+      }
+    });
+  </script>
+
+</body>
+</html>
