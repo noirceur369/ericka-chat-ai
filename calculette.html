@@ -1,12 +1,22 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calculette</title>
     <style>
+        html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  background-color: #f3f3f3;
+  font-family: sans-serif;
+  box-sizing: border-box;
+}
+
         /* Calculator Container */
-.calculator-container {
+        .calculator-container {
   border-radius: 30px;
   background-color: #fff;
   display: flex;
@@ -18,7 +28,10 @@
   flex-direction: column;
   overflow: hidden;
   align-items: stretch;
+  height: 100vh; /* <-- pour occuper toute la hauteur */
+  box-sizing: border-box;
 }
+
 
 .calculator-body {
   display: flex;
