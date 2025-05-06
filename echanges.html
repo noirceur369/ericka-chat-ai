@@ -380,6 +380,48 @@
           sendButton.disabled = true;
         }
       });
+      // Activer/désactiver le bouton envoyer selon si l'input est vide
+userInput.addEventListener("input", () => {
+  if (userInput.value.trim() !== "") {
+    sendButton.classList.add("active");
+    sendButton.disabled = false;
+  } else {
+    sendButton.classList.remove("active");
+    sendButton.disabled = true;
+  }
+});
+
+// Fonction d'envoi du message
+function sendMessage() {
+  const message = userInput.value.trim();
+  if (message === "") return;
+
+  // Vider la zone de chat
+  chatArea.innerHTML = "";
+
+  // Créer et ajouter le nouveau message
+  const messageDiv = document.createElement("div");
+  messageDiv.className = "chat-message";
+  messageDiv.textContent = message;
+  chatArea.appendChild(messageDiv);
+
+  // Réinitialiser le champ
+  userInput.value = "";
+  sendButton.classList.remove("active");
+  sendButton.disabled = true;
+}
+
+// Gérer le clic sur le bouton envoyer
+sendButton.addEventListener("click", sendMessage);
+
+// Gérer la touche Entrée
+userInput.addEventListener("keydown", (e) => {
+  if (e.key === "Enter") {
+    e.preventDefault();
+    sendMessage();
+  }
+});
+
     </script>
   </body>
 </html>
