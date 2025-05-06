@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Recommendations Screen</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=SF+Pro+Display:wght@500;700&display=swap" rel="stylesheet" />
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background-color: #f3f4f6;
+    }
+
+    .phone-container {
+      border-radius: 30px;
+      background-color: #ffffff;
+      display: flex;
+      flex-direction: column;
+      max-width: 480px;
+      width: 90%;
+      padding: 30px 20px;
+      box-sizing: border-box;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .recommendations-title {
+      color: #090909;
+      font-family: "SF Pro Display", -apple-system, Roboto, Helvetica, sans-serif;
+      font-size: 32px;
+      font-weight: 700;
+      margin: 0 0 20px 0;
+      letter-spacing: -0.64px;
+      text-align: left;
+    }
+
+    .share-code-banner {
+      width: 100%;
+      max-width: 360px;
+      margin: 0 auto 30px auto;
+    }
+
+    .share-code-text {
+      color: #4c5359;
+      background-color: rgba(67, 115, 216, 0.1);
+      border-radius: 20px;
+      min-height: 67px;
+      padding: 0 10px;
+      font-family: "Inter", sans-serif;
+      font-size: 11px;
+      font-weight: 400;
+      text-align: center;
+      letter-spacing: 0.2px;
+      line-height: 18px;
+      /* display: flex; */
+      align-items: center;
+      justify-content: center; 
+    }
+
+    .empty-state {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-family: "Inter", sans-serif;
+      font-size: 10px;
+      color: #4c5359;
+      font-weight: 400;
+      text-align: center;
+      letter-spacing: 0.2px;
+      line-height: 1.6;
+      max-width: 249px;
+      margin: 0 auto;
+    }
+
+    .empty-state-image {
+      width: 86px;
+      object-fit: contain;
+    }
+
+    .no-bonus-message {
+      margin-top: 13px;
+      background-color: rgba(118, 118, 128, 0.12);
+      border-radius: 30px;
+      padding: 10px;
+      width: 100%;
+    }
+
+    /* Responsive (mobile first) */
+    @media (max-width: 480px) {
+      .recommendations-title {
+        font-size: 24px;
+        text-align: center;
+      }
+
+      .share-code-text {
+        font-size: 10px;
+        line-height: 16px;
+      }
+
+      .empty-state {
+        font-size: 9px;
+      }
+
+      .phone-container {
+        padding: 20px 15px;
+        border-radius: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="phone-container">
+    <h1 class="recommendations-title">Recommandations</h1>
+
+    <section class="share-code-banner">
+      <p class="share-code-text">
+        Partagez votre code à <strong>+10 amis(es)</strong> et gagnez jusqu'à
+        1 500 FCFA lorsque votre code est utilisé
+      </p>
+    </section>
+
+    <section class="empty-state">
+      <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/ee483cae0ca6b3db67c31c9561a22320407d79d4?placeholderIfAbsent=true&apiKey=09748bf748fe4facb4250af70dcc6217" class="empty-state-image" alt="Empty state">
+      <p class="no-bonus-message">Vous n'avez reçu aucun bonus</p>
+    </section>
+  </div>
+</body>
+</html>
