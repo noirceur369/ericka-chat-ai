@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bonus Notification</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=SF+Pro+Display:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    /* Base styles */
+body {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  font-family: 'Inter', -apple-system, Roboto, Helvetica, sans-serif;
+}
+
+/* Bonus card container */
+.bonus-card {
+  border-radius: 15px;
+  background-color: #ffffff;
+  display: flex;
+  max-width: 390px;
+  padding: 30px 15px;
+  flex-direction: column;
+  align-items: center;
+  font-size: 18px;
+  font-weight: 700;
+  text-align: center;
+  line-height: 1.6;
+  justify-content: flex-start;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Congratulation section */
+.congratulation-container {
+  width: 281px;
+  max-width: 100%;
+  font-family: 'SF Pro Display', -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 32px;
+  white-space: nowrap;
+  letter-spacing: -0.64px;
+  line-height: 1;
+}
+
+.image-wrapper {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  aspect-ratio: 1.029;
+  width: 100%;
+  padding: 44px 28px;
+  align-items: stretch;
+  justify-content: center;
+}
+
+.background-image {
+  position: absolute;
+  inset: 0;
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.congratulation-circle {
+  position: relative;
+  border-radius: 160px;
+  background-color: #ffffff;
+  display: flex;
+  min-height: 186px;
+  padding: 0 8px 0 9px;
+  align-items: center;
+  gap: 10px;
+  width: 186px;
+  justify-content: center;
+  height: 186px;
+}
+
+.congratulation-text {
+  background: linear-gradient(90deg, #fd5a43 0%, #ffd029 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  align-self: stretch;
+  margin: auto 0;
+  font-size: 32px;
+  font-weight: 700;
+}
+
+/* Bonus information section */
+.bonus-info {
+  align-self: stretch;
+  display: flex;
+  margin-top: 25px;
+  width: 100%;
+  flex-direction: column;
+  align-items: flex-start;
+  font-size: 14px;
+  color: #4c5359;
+  font-weight: 500;
+  line-height: 1;
+  justify-content: flex-start;
+}
+
+.bonus-amount {
+  color: #4c5359;
+  margin: 0;
+}
+
+.promo-usage {
+  color: #4c5359;
+  margin: 5px 0 0 0;
+}
+
+/* Buttons */
+.transfer-button {
+  color: #ffffff;
+  align-self: stretch;
+  border-radius: 20px;
+  margin-top: 25px;
+  min-height: 55px;
+  width: 100%;
+  padding: 13px 15px;
+  gap: 10px;
+  letter-spacing: 0.2px;
+  background-color: #4373d8;
+  border: none;
+  font-family: 'Inter', -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.button-container {
+  margin-top: 25px;
+  width: 100%;
+  max-width: 360px;
+}
+
+.collect-button {
+  color: #ffffff;
+  align-self: stretch;
+  flex: 1;
+  border-radius: 20px;
+  min-height: 55px;
+  width: 100%;
+  padding: 13px 15px;
+  gap: 10px;
+  background-color: #090909;
+  border: none;
+  font-family: 'Inter', -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 0.2px;
+  cursor: pointer;
+}
+
+/* Hover effects for buttons */
+.transfer-button:hover, .collect-button:hover {
+  opacity: 0.9;
+}
+
+.transfer-button:active, .collect-button:active {
+  transform: scale(0.98);
+}
+
+  </style>
+</head>
+<body>
+  <main class="bonus-card">
+    <section class="congratulation-container">
+      <div class="image-wrapper">
+        <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/3cfe96e8417a6c6d419a6bce115cc721ba6212da?placeholderIfAbsent=true&apiKey=09748bf748fe4facb4250af70dcc6217" class="background-image" alt="Celebration background">
+        <div class="congratulation-circle">
+          <h1 class="congratulation-text">Félicitations</h1>
+        </div>
+      </div>
+    </section>
+
+    <section class="bonus-info">
+      <p class="bonus-amount">
+        Vous avez obtenu
+        <strong>1 500 FCFA de bonus</strong>
+      </p>
+      <p class="promo-usage">
+        Votre code promo a été utilisé par 10 utilisateurs
+      </p>
+    </section>
+
+    <button class="transfer-button">
+      Transférez vers votre compte
+    </button>
+
+    <div class="button-container">
+      <button class="collect-button">
+        Récupérez votre bonus
+      </button>
+    </div>
+  </main>
+</body>
+</html>
