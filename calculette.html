@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculette</title>
+    <style>
+        /* Calculator Container */
+.calculator-container {
+  border-radius: 30px;
+  background-color: #fff;
+  display: flex;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 480px;
+  width: 100%;
+  padding: 11px;
+  flex-direction: column;
+  overflow: hidden;
+  align-items: stretch;
+}
+
+.calculator-body {
+  display: flex;
+  width: 100%;
+  padding: 0 11px;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+
+
+/* Calculator Header */
+.calculator-header {
+  align-self: center;
+  display: flex;
+  margin-top: 67px;
+  width: 100%;
+  max-width: 353px;
+  align-items: stretch;
+  gap: 20px;
+  justify-content: space-between;
+}
+
+.header-content {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.calculator-title {
+  color: #090909;
+  font-family: "SF Pro Display", -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.64px;
+  margin: 0;
+}
+
+.powered-by {
+  align-self: start;
+  display: flex;
+  align-items: start;
+  gap: 5px;
+  font-family: Inter, -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 9px;
+  color: #4c5359;
+  font-weight: 400;
+  letter-spacing: 0.2px;
+  line-height: 1.6;
+}
+
+.powered-logo {
+  aspect-ratio: 4.37;
+  object-fit: contain;
+  object-position: center;
+  width: 48px;
+  flex-shrink: 0;
+}
+
+.theme-toggle {
+  justify-content: center;
+  align-items: center;
+  border-radius: 20px;
+  align-self: start;
+  display: flex;
+  min-height: 39px;
+  padding: 8px;
+  gap: 10px;
+  width: 40px;
+  height: 40px;
+  background-color: #090909;
+  border: none;
+  cursor: pointer;
+}
+
+.theme-icon {
+  aspect-ratio: 1.04;
+  object-fit: contain;
+  object-position: center;
+  width: 24px;
+  align-self: stretch;
+  margin: auto;
+}
+
+/* Calculator Display */
+.calculator-display {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.calculator-icon {
+  aspect-ratio: 1;
+  object-fit: contain;
+  object-position: center;
+  width: 24px;
+  margin-top: 18px;
+}
+
+.display-value {
+  color: #999;
+  text-align: right;
+  font-family: "SF Pro Display", -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 72px;
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: -1.44px;
+  margin-top: 94px;
+}
+
+/* Calculator Keypad */
+.calculator-keypad {
+  border-top: 1px solid rgba(60, 60, 67, 0.29);
+  align-self: center;
+  display: flex;
+  margin-top: 28px;
+  width: 100%;
+  padding: 20px;
+  gap: 10px;
+  font-family: "SF Pro Display", -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 16px;
+  color: #fff;
+  font-weight: 700;
+  white-space: nowrap;
+  line-height: 1;
+  justify-content: start;
+}
+
+.keypad-grid {
+  align-self: stretch;
+  display: flex;
+  flex-wrap: wrap;
+  min-width: 240px;
+  margin: auto;
+  width: 354px;
+  gap: 15px 18px;
+  justify-content: start;
+}
+
+.calc-button {
+  align-self: stretch;
+  border-radius: 20px;
+  min-height: 75px;
+  padding: 15px;
+  width: 75px;
+  height: 75px;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  color: inherit;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.number-key {
+  background-color: #4c5359;
+}
+
+.function-key {
+  background-color: #4c5359;
+}
+
+.operator-key {
+  color: #4c5359;
+  background-color: rgba(0, 122, 255, 0.15);
+}
+
+.zero-key {
+  width: 75px;
+}
+
+.equals-key {
+  width: 168px;
+  background-color: #4373d8;
+  padding: 28px 15px;
+}
+@media (max-width: 480px) {
+  .calculator-container {
+    border-radius: 20px;
+    padding: 8px;
+  }
+
+  .calculator-title {
+    font-size: 24px;
+  }
+
+  .display-value {
+    font-size: 48px;
+    margin-top: 40px;
+  }
+
+  .calc-button {
+    width: 60px;
+    height: 60px;
+    min-height: 60px;
+    font-size: 14px;
+  }
+
+  .equals-key {
+    width: 138px;
+    padding: 20px 10px;
+  }
+
+  .keypad-grid {
+    width: 100%;
+    gap: 10px;
+  }
+}
+
+    </style>
+</head>
+<body>
+    <div class="calculator-container">
+        <div class="calculator-body">
+          <div class="calculator-header">
+            <div class="header-content">
+              <h1 class="calculator-title">Calculette</h1>
+              <div class="powered-by">
+                <span class="powered-text">Powered by</span>
+                <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/74e8063fc96e6efa2756c0ac6ee413f1a5ff0a0e?placeholderIfAbsent=true&apiKey=38e47893336945848379668f2dc133bd" alt="Logo" class="powered-logo" />
+              </div>
+            </div>
+            <button class="theme-toggle">
+              <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/d2dc7e1d0512659bfe304c712a269e145fa25807?placeholderIfAbsent=true&apiKey=38e47893336945848379668f2dc133bd" alt="Toggle theme" class="theme-icon" />
+            </button>
+          </div>
+      
+          <div class="calculator-display">
+            <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/c2cdbbf7b74e71a8d47d97827594ebc60325c133?placeholderIfAbsent=true&apiKey=38e47893336945848379668f2dc133bd" alt="Calculator icon" class="calculator-icon" />
+            <output class="display-value">0</output>
+          </div>
+      
+          <div class="calculator-keypad">
+            <div class="keypad-grid">
+              <button class="calc-button function-key">AC</button>
+              <button class="calc-button function-key">+/-</button>
+              <button class="calc-button function-key">%</button>
+              <button class="calc-button operator-key">/</button>
+      
+              <button class="calc-button number-key">7</button>
+              <button class="calc-button number-key">8</button>
+              <button class="calc-button number-key">9</button>
+              <button class="calc-button operator-key">x</button>
+      
+              <button class="calc-button number-key">6</button>
+              <button class="calc-button number-key">5</button>
+              <button class="calc-button number-key">6</button>
+              <button class="calc-button operator-key">-</button>
+      
+              <button class="calc-button number-key">1</button>
+              <button class="calc-button number-key">2</button>
+              <button class="calc-button number-key">3</button>
+              <button class="calc-button operator-key">+</button>
+      
+              <button class="calc-button number-key zero-key">0</button>
+              <button class="calc-button number-key">.</button>
+              <button class="calc-button equals-key">=</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <script>
+        const display = document.querySelector(".display-value");
+        const buttons = document.querySelectorAll(".calc-button");
+        let currentInput = "";
+        let operator = "";
+        let operand = "";
+      
+        buttons.forEach((btn) => {
+          btn.addEventListener("click", () => {
+            const value = btn.textContent;
+      
+            if (value === "AC") {
+              currentInput = "";
+              operator = "";
+              operand = "";
+              display.textContent = "0";
+            } else if (value === "+/-") {
+              if (currentInput) {
+                currentInput = String(-parseFloat(currentInput));
+                display.textContent = currentInput;
+              }
+            } else if (value === "%") {
+              if (currentInput) {
+                currentInput = String(parseFloat(currentInput) / 100);
+                display.textContent = currentInput;
+              }
+            } else if (value === "=") {
+              if (operand && operator && currentInput) {
+                const a = parseFloat(operand);
+                const b = parseFloat(currentInput);
+                let result = 0;
+                switch (operator) {
+                  case "+":
+                    result = a + b;
+                    break;
+                  case "-":
+                    result = a - b;
+                    break;
+                  case "x":
+                    result = a * b;
+                    break;
+                  case "/":
+                    result = b !== 0 ? a / b : "Erreur";
+                    break;
+                }
+                display.textContent = String(result);
+                operand = "";
+                operator = "";
+                currentInput = String(result);
+              }
+            } else if (["+", "-", "x", "/"].includes(value)) {
+              if (currentInput) {
+                operand = currentInput;
+                operator = value;
+                currentInput = "";
+              }
+            } else {
+              currentInput += value;
+              display.textContent = currentInput;
+            }
+          });
+        });
+      </script>
+      
+</body>
+</html>
