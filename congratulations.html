@@ -1,172 +1,173 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Bonus Notification</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=SF+Pro+Display:wght@400;700&display=swap" rel="stylesheet">
   <style>
-    /* Base styles */
-body {
-  margin: 0;
-  padding: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  font-family: 'Inter', -apple-system, Roboto, Helvetica, sans-serif;
-}
+    body {
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      font-family: 'Inter', -apple-system, Roboto, Helvetica, sans-serif;
+      background-color: #f0f2f5;
+    }
 
-/* Bonus card container */
-.bonus-card {
-  border-radius: 15px;
-  background-color: #ffffff;
-  display: flex;
-  max-width: 390px;
-  padding: 30px 15px;
-  flex-direction: column;
-  align-items: center;
-  font-size: 18px;
-  font-weight: 700;
-  text-align: center;
-  line-height: 1.6;
-  justify-content: flex-start;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-}
+    .bonus-card {
+      border-radius: 15px;
+      background-color: #ffffff;
+      display: flex;
+      max-width: 390px;
+      width: 90%;
+      padding: 30px 15px;
+      flex-direction: column;
+      align-items: center;
+      font-size: 18px;
+      font-weight: 700;
+      text-align: center;
+      line-height: 1.6;
+      justify-content: flex-start;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
 
-/* Congratulation section */
-.congratulation-container {
-  width: 281px;
-  max-width: 100%;
-  font-family: 'SF Pro Display', -apple-system, Roboto, Helvetica, sans-serif;
-  font-size: 32px;
-  white-space: nowrap;
-  letter-spacing: -0.64px;
-  line-height: 1;
-}
+    .congratulation-container {
+      width: 100%;
+      font-family: 'SF Pro Display', -apple-system, Roboto, Helvetica, sans-serif;
+      font-size: 32px;
+      letter-spacing: -0.64px;
+      line-height: 1;
+    }
 
-.image-wrapper {
-  display: flex;
-  flex-direction: column;
-  position: relative;
-  aspect-ratio: 1.029;
-  width: 100%;
-  padding: 44px 28px;
-  align-items: stretch;
-  justify-content: center;
-}
+    .image-wrapper {
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      aspect-ratio: 1.029;
+      width: 100%;
+      padding: 44px 28px;
+      align-items: stretch;
+      justify-content: center;
+      box-sizing: border-box;
+    }
 
-.background-image {
-  position: absolute;
-  inset: 0;
-  height: 100%;
-  width: 100%;
-  object-fit: cover;
-  object-position: center;
-}
+    .background-image {
+      position: absolute;
+      inset: 0;
+      height: 100%;
+      width: 100%;
+      object-fit: cover;
+      object-position: center;
+      border-radius: 15px;
+      z-index: 0;
+    }
 
-.congratulation-circle {
-  position: relative;
-  border-radius: 160px;
-  background-color: #ffffff;
-  display: flex;
-  min-height: 186px;
-  padding: 0 8px 0 9px;
-  align-items: center;
-  gap: 10px;
-  width: 186px;
-  justify-content: center;
-  height: 186px;
-}
+    .congratulation-circle {
+      position: relative;
+      border-radius: 160px;
+      background-color: #ffffff;
+      display: flex;
+      min-height: 186px;
+      padding: 0 8px 0 9px;
+      align-items: center;
+      gap: 10px;
+      width: 186px;
+      justify-content: center;
+      height: 186px;
+      margin: 0 auto;
+      z-index: 1;
+    }
 
-.congratulation-text {
-  background: linear-gradient(90deg, #fd5a43 0%, #ffd029 100%);
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  align-self: stretch;
-  margin: auto 0;
-  font-size: 32px;
-  font-weight: 700;
-}
+    .congratulation-text {
+      background: linear-gradient(90deg, #fd5a43 0%, #ffd029 100%);
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-size: 32px;
+      font-weight: 700;
+    }
 
-/* Bonus information section */
-.bonus-info {
-  align-self: stretch;
-  display: flex;
-  margin-top: 25px;
-  width: 100%;
-  flex-direction: column;
-  align-items: flex-start;
-  font-size: 14px;
-  color: #4c5359;
-  font-weight: 500;
-  line-height: 1;
-  justify-content: flex-start;
-}
+    .bonus-info {
+      align-self: stretch;
+      display: flex;
+      margin-top: 25px;
+      width: 100%;
+      flex-direction: column;
+      align-items: flex-start;
+      font-size: 14px;
+      color: #4c5359;
+      font-weight: 500;
+      line-height: 1.4;
+      justify-content: flex-start;
+    }
 
-.bonus-amount {
-  color: #4c5359;
-  margin: 0;
-}
+    .bonus-amount, .promo-usage {
+      margin: 0;
+    }
 
-.promo-usage {
-  color: #4c5359;
-  margin: 5px 0 0 0;
-}
+    .promo-usage {
+      margin-top: 5px;
+    }
 
-/* Buttons */
-.transfer-button {
-  color: #ffffff;
-  align-self: stretch;
-  border-radius: 20px;
-  margin-top: 25px;
-  min-height: 55px;
-  width: 100%;
-  padding: 13px 15px;
-  gap: 10px;
-  letter-spacing: 0.2px;
-  background-color: #4373d8;
-  border: none;
-  font-family: 'Inter', -apple-system, Roboto, Helvetica, sans-serif;
-  font-size: 18px;
-  font-weight: 700;
-  cursor: pointer;
-}
+    .transfer-button, .collect-button {
+      color: #ffffff;
+      border-radius: 20px;
+      min-height: 55px;
+      width: 100%;
+      padding: 13px 15px;
+      gap: 10px;
+      border: none;
+      font-family: 'Inter', -apple-system, Roboto, Helvetica, sans-serif;
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: 0.2px;
+      cursor: pointer;
+      transition: all 0.2s ease-in-out;
+    }
 
-.button-container {
-  margin-top: 25px;
-  width: 100%;
-  max-width: 360px;
-}
+    .transfer-button {
+      background-color: #4373d8;
+      margin-top: 25px;
+    }
 
-.collect-button {
-  color: #ffffff;
-  align-self: stretch;
-  flex: 1;
-  border-radius: 20px;
-  min-height: 55px;
-  width: 100%;
-  padding: 13px 15px;
-  gap: 10px;
-  background-color: #090909;
-  border: none;
-  font-family: 'Inter', -apple-system, Roboto, Helvetica, sans-serif;
-  font-size: 18px;
-  font-weight: 700;
-  letter-spacing: 0.2px;
-  cursor: pointer;
-}
+    .collect-button {
+      background-color: #090909;
+      margin-top: 15px;
+    }
 
-/* Hover effects for buttons */
-.transfer-button:hover, .collect-button:hover {
-  opacity: 0.9;
-}
+    .transfer-button:hover,
+    .collect-button:hover {
+      opacity: 0.9;
+    }
 
-.transfer-button:active, .collect-button:active {
-  transform: scale(0.98);
-}
+    .transfer-button:active,
+    .collect-button:active {
+      transform: scale(0.98);
+    }
 
+    @media (max-width: 480px) {
+      .congratulation-text {
+        font-size: 24px;
+      }
+
+      .congratulation-circle {
+        width: 140px;
+        height: 140px;
+        min-height: 140px;
+      }
+
+      .bonus-card {
+        padding: 20px 10px;
+      }
+
+      .transfer-button, .collect-button {
+        font-size: 16px;
+        min-height: 48px;
+      }
+    }
   </style>
 </head>
 <body>
@@ -182,23 +183,22 @@ body {
 
     <section class="bonus-info">
       <p class="bonus-amount">
-        Vous avez obtenu
-        <strong>1 500 FCFA de bonus</strong>
+        Vous avez obtenu <strong>1 500 FCFA de bonus</strong>
       </p>
       <p class="promo-usage">
         Votre code promo a été utilisé par 10 utilisateurs
       </p>
     </section>
 
-    <button class="transfer-button">
+    <!-- Bouton de redirection vers transfert.html -->
+    <button class="transfer-button" onclick="window.location.href='transfert.html'">
       Transférez vers votre compte
     </button>
 
-    <div class="button-container">
-      <button class="collect-button">
-        Récupérez votre bonus
-      </button>
-    </div>
+    <!-- Bouton de redirection vers recuperation.html -->
+    <button class="collect-button" onclick="window.location.href='recuperation.html'">
+      Récupérez votre bonus
+    </button>
   </main>
 </body>
 </html>
