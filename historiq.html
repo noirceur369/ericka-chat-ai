@@ -1,1 +1,140 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Historique</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #f0f0f0;
+      margin: 0;
+      padding: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .notification-container {
+      border-radius: 15px;
+      background-color: #ffffff;
+      width: 100%;
+      max-width: 480px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      align-items: stretch;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .header-section {
+      display: flex;
+      width: 100%;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+
+    .title {
+      color: #4373d8;
+      font-size: 20px;
+      font-weight: 700;
+      white-space: nowrap;
+      letter-spacing: 0.2px;
+      line-height: 1.4;
+      margin: 0;
+    }
+
+    .settings-icon {
+      aspect-ratio: 1;
+      object-fit: contain;
+      object-position: center;
+      width: 24px;
+      flex-shrink: 0;
+      cursor: pointer;
+    }
+
+    .empty-state-message {
+      color: #4c5359;
+      text-align: center;
+      font-size: 12px;
+      font-weight: 400;
+      letter-spacing: 0.2px;
+      line-height: 1.6;
+      margin-top: 30px;
+    }
+
+    .refer-image {
+      width: 60%;
+      max-width: 180px;
+      height: auto;
+      display: block;
+      margin: 30px auto 15px auto;
+    }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      .notification-container {
+        margin: 10px;
+        border-radius: 10px;
+        padding: 15px;
+      }
+
+      .title {
+        font-size: 18px;
+      }
+
+      .settings-icon {
+        width: 22px;
+      }
+
+      .empty-state-message {
+        font-size: 11px;
+      }
+
+      .refer-image {
+        margin-top: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="notification-container">
+    <div class="header-section">
+      <h1 class="title">Historiques</h1>
+      <!-- Remplace l'image par une icône corbeille -->
+      <img
+        src="https://cdn-icons-png.flaticon.com/512/1214/1214428.png"
+        class="settings-icon"
+        alt="Supprimer notification"
+        onclick="confirmDelete()"
+      />
+    </div>
+
+    <img src="images/Refer.png" alt="Image référentielle" class="refer-image" />
+
+    <p class="empty-state-message" id="notification">
+      Aucune notification pour le moment
+    </p>
+  </main>
+
+  <script>
+    function confirmDelete() {
+      const messageElement = document.getElementById("notification");
+      if (messageElement && messageElement.textContent.trim() !== "Aucune notification pour le moment") {
+        if (confirm("Voulez-vous vraiment supprimer cette notification ?")) {
+          messageElement.textContent = "Aucune notification pour le moment";
+          alert("Notification supprimée.");
+        }
+      } else {
+        alert("Aucune notification à supprimer.");
+      }
+    }
+  </script>
+</body>
+</html>
 
