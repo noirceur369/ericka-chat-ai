@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Settings Screen</title>
+  <style>
+    /* Base styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Inter, -apple-system, Roboto, Helvetica, sans-serif;
+  background-color: #f5f5f5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+/* Phone container */
+.phone-container {
+  border-radius: 30px;
+  background-color: #fff;
+  display: flex;
+  margin: 0 auto;
+  max-width: 480px;
+  width: 100%;
+  padding: 11px 11px 31px;
+  flex-direction: column;
+  overflow: hidden;
+  align-items: center;
+}
+
+
+/* Settings title */
+.settings-title {
+  color: #4373d8;
+  background-color: #fff;
+  align-self: stretch;
+  padding: 3px 59px;
+  font-size: 18px;
+  font-weight: 700;
+  white-space: nowrap;
+  letter-spacing: 0.2px;
+  line-height: 1.6;
+}
+
+/* Profile card */
+.profile-card {
+  align-items: stretch;
+  border-radius: 20px;
+  display: flex;
+  margin-top: 11px;
+  width: 100%;
+  max-width: 360px;
+  padding: 10px;
+  flex-direction: column;
+  letter-spacing: 0.2px;
+  line-height: 1.6;
+  justify-content: center;
+  background: linear-gradient(263deg, #ff9f6b 0%, #ffc45e 100.77%);
+}
+
+.profile-content {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  gap: 10px;
+  justify-content: flex-start;
+}
+
+.profile-image {
+  aspect-ratio: 1;
+  object-fit: contain;
+  object-position: center;
+  width: 50px;
+  align-self: stretch;
+  margin: auto 0;
+  flex-shrink: 0;
+}
+
+.profile-info {
+  align-self: stretch;
+  margin: auto 0;
+}
+
+.profile-name {
+  color: #fff;
+  font-size: 18px;
+  font-weight: 400;
+}
+
+.profile-plan {
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+  display: flex;
+  width: 101px;
+  max-width: 100%;
+  padding: 0 6px;
+  gap: 10px;
+  font-size: 10px;
+  background-color: #090909;
+}
+
+.plan-pro {
+  font-weight: 700;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  align-self: stretch;
+  margin: auto 0;
+  background: linear-gradient(263deg, #ff9f6b 0%, #ffc45e 100.77%);
+}
+
+.plan-type {
+  font-weight: 400;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  align-self: stretch;
+  margin: auto 0;
+  background: linear-gradient(
+    98deg,
+    #e1e1e1 1.42%,
+    #f9f9f9 28.59%,
+    #f2f2f2 56.07%,
+    #dadada 91.28%
+  );
+}
+
+/* Settings sections */
+.settings-section {
+  margin-top: 16px;
+  width: 100%;
+  max-width: 360px;
+}
+
+.section-title {
+  color: #999;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.2px;
+  line-height: 1.6;
+}
+
+.settings-list {
+  border-radius: 20px;
+  background-color: #f9f9f9;
+  margin-top: 10px;
+  width: 100%;
+  font-size: 11px;
+  color: #4c5359;
+  font-weight: 400;
+}
+
+/* Settings items */
+.settings-item {
+  display: flex;
+  min-height: 40px;
+  width: 100%;
+  padding: 8px 10px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.item-content {
+  align-self: stretch;
+  display: flex;
+  margin: auto 0;
+  align-items: center;
+  gap: 10px;
+  justify-content: flex-start;
+}
+
+.item-icon {
+  aspect-ratio: 1;
+  object-fit: contain;
+  object-position: center;
+  width: 24px;
+  align-self: stretch;
+  margin: auto 0;
+  flex-shrink: 0;
+}
+
+.item-label {
+  color: #4c5359;
+  align-self: stretch;
+  margin: auto 0;
+}
+
+.item-value {
+  color: #4c5359;
+  align-self: stretch;
+  margin: auto 0;
+  font-weight: 700;
+}
+
+.arrow-icon {
+  aspect-ratio: 1.67;
+  object-fit: contain;
+  object-position: center;
+  width: 10px;
+  align-self: stretch;
+  margin: auto 0;
+  flex-shrink: 0;
+}
+
+/* Toggle switch */
+.toggle-switch {
+  align-items: center;
+  border-radius: 20px;
+  align-self: stretch;
+  display: flex;
+  margin: auto 0;
+  padding: 5px;
+  gap: 10px;
+  justify-content: flex-start;
+  width: 50px;
+  background-color: #ebedf0;
+}
+
+.toggle-switch.active {
+  justify-content: flex-end;
+  background-color: #4c5359;
+}
+
+.toggle-knob {
+  background-color: rgba(60, 60, 67, 0.29);
+  border-radius: 50%;
+  align-self: stretch;
+  display: flex;
+  min-height: 21px;
+  margin: auto 0;
+  width: 21px;
+  height: 21px;
+}
+
+.toggle-switch.active .toggle-knob {
+  background-color: #d9d9d9;
+}
+
+/* Logout button */
+.logout-button {
+  color: #fff;
+  align-self: stretch;
+  flex: 1;
+  border: none;
+  cursor: pointer;
+  border-radius: 20px;
+  margin-top: 33px;
+  min-height: 55px;
+  width: 100%;
+  max-width: 360px;
+  padding: 18px 15px;
+  font-family: Inter, -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  white-space: nowrap;
+  text-align: center;
+  line-height: 1;
+  background-color: #090909;
+}
+
+  </style>
+</head>
+<body>
+  <div class="phone-container">
+    <h1 class="settings-title">Paramètres</h1>
+
+    <section class="profile-card">
+      <div class="profile-content">
+        <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/243b9720c36297f354b63a89e959e0f800cc119a?placeholderIfAbsent=true&apiKey=09748bf748fe4facb4250af70dcc6217" class="profile-image" alt="Profile">
+        <div class="profile-info">
+          <h2 class="profile-name"><span>Melissa Peters</span></h2>
+          <div class="profile-plan">
+            <span class="plan-pro">PRO</span>
+            <span class="plan-type">Plan annuel</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="settings-section">
+      <h3 class="section-title">Compte</h3>
+      <div class="settings-list">
+        <div class="settings-item">
+          <div class="item-content">
+            <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/d41ca2bdc7629aa015c81c8fc264e2021d93dbb0?placeholderIfAbsent=true&apiKey=09748bf748fe4facb4250af70dcc6217" class="item-icon" alt="Profile">
+            <span class="item-label">Profil</span>
+          </div>
+        </div>
+
+        <div class="settings-item">
+          <div class="item-content">
+            <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/db8496883febfb9954bd18cb8d98ac7fade70179?placeholderIfAbsent=true&apiKey=09748bf748fe4facb4250af70dcc6217" class="item-icon" alt="Email">
+            <span class="item-label">Adresse e-mail</span>
+          </div>
+          <span class="item-value">email@gmail.com</span>
+        </div>
+
+        <div class="settings-item">
+          <div class="item-content">
+            <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/5edab41aee5c6f80491058d2d4c665414b027192?placeholderIfAbsent=true&apiKey=09748bf748fe4facb4250af70dcc6217" class="item-icon" alt="WhatsApp">
+            <span class="item-label">Numéro WhatsApp</span>
+          </div>
+          <span class="item-value">+255 0707070707</span>
+        </div>
+
+        <div class="settings-item">
+          <div class="item-content">
+            <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/febcc2c32f10f262c8972ec13ce4f3a9428b10c2?placeholderIfAbsent=true&apiKey=09748bf748fe4facb4250af70dcc6217" class="item-icon" alt="Subscription">
+            <span class="item-label">Abonnement</span>
+          </div>
+          <span class="item-value">Plan annuel</span>
+        </div>
+
+        <div class="settings-item">
+          <div class="item-content">
+            <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/024b97a7bfe0602a84a3fec3fc2048e83a5bdf1e?placeholderIfAbsent=true&apiKey=09748bf748fe4facb4250af70dcc6217" class="item-icon" alt="Balance">
+            <span class="item-label">Gestion de solde</span>
+          </div>
+          <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/24c96d53b93cb8ce1d754c1407dc109561387e76?placeholderIfAbsent=true&apiKey=09748bf748fe4facb4250af70dcc6217" class="arrow-icon" alt="Arrow">
+        </div>
+      </div>
+    </section>
+
+    <section class="settings-section">
+      <h3 class="section-title">Appli</h3>
+      <div class="settings-list">
+        <div class="settings-item">
+          <div class="item-content">
+            <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/b7f8d2b06c734aa49ae599ce54df2dc7bb19c0bc?placeholderIfAbsent=true&apiKey=09748bf748fe4facb4250af70dcc6217" class="item-icon" alt="Language">
+            <span class="item-label">Langue de l'appli</span>
+          </div>
+          <span class="item-value">Français</span>
+        </div>
+
+        <div class="settings-item">
+          <div class="item-content">
+            <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/0ce9ef1a564c3364670e2e0de8b1dc86c6febd4e?placeholderIfAbsent=true&apiKey=09748bf748fe4facb4250af70dcc6217" class="item-icon" alt="Auto Correction">
+            <span class="item-label">Correction automatique</span>
+          </div>
+          <div class="toggle-switch active">
+            <div class="toggle-knob"></div>
+          </div>
+        </div>
+
+        <div class="settings-item">
+          <div class="item-content">
+            <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/da1b4a8d931ffc89ae570e7eb01c842291b32dd6?placeholderIfAbsent=true&apiKey=09748bf748fe4facb4250af70dcc6217" class="item-icon" alt="Haptic">
+            <span class="item-label">Retour haptique</span>
+          </div>
+          <div class="toggle-switch">
+            <div class="toggle-knob"></div>
+          </div>
+        </div>
+
+        <div class="settings-item">
+          <div class="item-content">
+            <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/26693c85a74b4fd4472ef3039af9d214cdc86f2b?placeholderIfAbsent=true&apiKey=09748bf748fe4facb4250af70dcc6217" class="item-icon" alt="Location">
+            <span class="item-label">Localisation</span>
+          </div>
+          <div class="toggle-switch">
+            <div class="toggle-knob"></div>
+          </div>
+        </div>
+
+        <div class="settings-item">
+          <div class="item-content">
+            <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/e3c64b83c33a3f8bb661506354a3ff87e5c56737?placeholderIfAbsent=true&apiKey=09748bf748fe4facb4250af70dcc6217" class="item-icon" alt="Voice">
+            <span class="item-label">Voix</span>
+          </div>
+          <span class="item-value">Standard</span>
+        </div>
+
+        <div class="settings-item">
+          <div class="item-content">
+            <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/262505ee193eeac74095b22567725d7d44764600?placeholderIfAbsent=true&apiKey=09748bf748fe4facb4250af70dcc6217" class="item-icon" alt="Background">
+            <span class="item-label">Conversation en arrière plan</span>
+          </div>
+          <div class="toggle-switch">
+            <div class="toggle-knob"></div>
+          </div>
+        </div>
+
+        <div class="settings-item">
+          <div class="item-content">
+            <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/19668037aa224af3ea8f5ec9c6111993c3d471ee?placeholderIfAbsent=true&apiKey=09748bf748fe4facb4250af70dcc6217" class="item-icon" alt="Rotation">
+            <span class="item-label">Autoriser la rotation d'écran</span>
+          </div>
+          <div class="toggle-switch active">
+            <div class="toggle-knob"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="settings-section">
+      <h3 class="section-title">A propos</h3>
+      <div class="settings-list">
+        <div class="settings-item">
+          <div class="item-content">
+            <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/3ad13d30b9468f68c5c261043d852964df603899?placeholderIfAbsent=true&apiKey=09748bf748fe4facb4250af70dcc6217" class="item-icon" alt="Help">
+            <span class="item-label">Centre d'aide</span>
+          </div>
+        </div>
+
+        <div class="settings-item">
+          <div class="item-content">
+            <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/20f1d864bbe37c227df294c794bb51c34347c9cf?placeholderIfAbsent=true&apiKey=09748bf748fe4facb4250af70dcc6217" class="item-icon" alt="Terms">
+            <span class="item-label">Conditions d'utilisation</span>
+          </div>
+        </div>
+
+        <div class="settings-item">
+          <div class="item-content">
+            <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/73b370db4d5837a6e02a18ca82478d6c689e8a87?placeholderIfAbsent=true&apiKey=09748bf748fe4facb4250af70dcc6217" class="item-icon" alt="Privacy">
+            <span class="item-label">Politique de confidentialité</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <button class="logout-button">Déconnexion</button>
+  </div>
+</body>
+</html>
