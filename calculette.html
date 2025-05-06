@@ -5,18 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calculette</title>
     <style>
-        html, body {
-  margin: 0;
-  padding: 0;
-  height: 100%;
-  width: 100%;
-  background-color: #f3f3f3;
-  font-family: sans-serif;
-  box-sizing: border-box;
-}
-
         /* Calculator Container */
-        .calculator-container {
+.calculator-container {
   border-radius: 30px;
   background-color: #fff;
   display: flex;
@@ -28,10 +18,7 @@
   flex-direction: column;
   overflow: hidden;
   align-items: stretch;
-  height: 100vh; /* <-- pour occuper toute la hauteur */
-  box-sizing: border-box;
 }
-
 
 .calculator-body {
   display: flex;
@@ -211,38 +198,6 @@
   width: 168px;
   background-color: #4373d8;
   padding: 28px 15px;
-}
-@media (max-width: 480px) {
-  .calculator-container {
-    border-radius: 20px;
-    padding: 8px;
-  }
-
-  .calculator-title {
-    font-size: 24px;
-  }
-
-  .display-value {
-    font-size: 48px;
-    margin-top: 40px;
-  }
-
-  .calc-button {
-    width: 60px;
-    height: 60px;
-    min-height: 60px;
-    font-size: 14px;
-  }
-
-  .equals-key {
-    width: 138px;
-    padding: 20px 10px;
-  }
-
-  .keypad-grid {
-    width: 100%;
-    gap: 10px;
-  }
 }
 
     </style>
