@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Parrainage</title>
+  <style>
+    :root {
+      --primary-blue: #4373d8;
+      --primary-black: #090909;
+      --text-gray: #4c5359;
+      --background-light: #f5f5f5;
+    }
+
+    body {
+      margin: 0;
+      padding: 20px;
+      font-family: 'Inter', sans-serif;
+      background-color: #f0f0f0;
+      display: flex;
+      justify-content: center;
+    }
+
+    .promo-container {
+      border-radius: 15px;
+      background-color: #fff;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      align-items: center;
+      width: 100%;
+      max-width: 480px;
+      padding: 1.5rem 1rem 2rem;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+
+    .promo-header {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .promo-title {
+      color: var(--primary-blue);
+      font-size: 1.1rem;
+      font-weight: 700;
+      align-self: flex-start;
+      margin-left: 3rem;
+    }
+
+    .promo-image {
+      width: 60%;
+      margin-top: 2rem;
+      max-width: 220px;
+    }
+
+    .share-heading {
+      color: var(--primary-black);
+      text-align: center;
+      font-size: 2rem;
+      font-weight: 700;
+      margin-top: 1.5rem;
+    }
+
+    .code-section {
+      width: 100%;
+      max-width: 360px;
+      position: relative;
+      margin-top: 1.5rem;
+    }
+
+    .code-display {
+      background-color: var(--background-light);
+      border-radius: 15px;
+      padding: 0.7rem;
+      font-size: 1rem;
+      font-weight: 500;
+      text-align: center;
+      color: var(--primary-black);
+      user-select: all; /* Make the code selectable for manual copy as a fallback */
+    }
+
+    .copy-button {
+      position: absolute;
+      right: 1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+      background-color: rgba(60, 60, 67, 0.29);
+      border-radius: 10px;
+      padding: 0.3rem 0.6rem;
+      border: none;
+      cursor: pointer;
+    }
+
+    .copy-icon {
+      width: 1rem;
+      height: 1rem;
+    }
+
+    .copy-button span {
+      font-size: 0.75rem;
+      color: var(--primary-black);
+    }
+
+    .info-section {
+      width: 100%;
+      max-width: 360px;
+      margin-top: 1rem;
+    }
+
+    .info-text {
+      background-color: rgba(67, 115, 216, 0.1);
+      border-radius: 20px;
+      padding: 0.8rem;
+      font-size: 0.85rem;
+      text-align: center;
+      color: var(--text-gray);
+    }
+
+    .action-buttons {
+      width: 100%;
+      max-width: 360px;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+
+    .primary-button,
+    .secondary-button {
+      border-radius: 20px;
+      padding: 0.9rem 1rem;
+      font-size: 1rem;
+      font-weight: 700;
+      border: none;
+      cursor: pointer;
+      width: 100%;
+      text-decoration: none; /* Remove underline from the link */
+      display: inline-block; /* Make the <a> element behave like a block-level element */
+      text-align: center; /* Center the text inside the <a> element */
+    }
+
+    .primary-button {
+      background-color: var(--primary-black);
+      color: #fff;
+    }
+
+    .secondary-button {
+      color: var(--primary-blue);
+      background-color: transparent;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 480px) {
+      .promo-title {
+        margin-left: 1.5rem;
+        font-size: 1rem;
+      }
+
+      .share-heading {
+        font-size: 1.5rem;
+      }
+
+      .code-display {
+        font-size: 0.9rem;
+      }
+
+      .info-text {
+        font-size: 0.75rem;
+      }
+
+      .primary-button,
+      .secondary-button {
+        font-size: 0.9rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="promo-container">
+    <section class="promo-header">
+      <h1 class="promo-title">Code promo</h1>
+      <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/757428803c80407ba73a0f1b9a1c1ec4fc16bd65?placeholderIfAbsent=true&apiKey=38e47893336945848379668f2dc133bd" alt="Promo illustration" class="promo-image">
+      <h2 class="share-heading">Partagez votre code</h2>
+    </section>
+
+    <section class="code-section">
+      <div class="code-display" id="promoCode">RS4J RE8 JFF83</div>
+      <button class="copy-button" onclick="copyPromoCode()">
+        <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/24c456fd350d32c207786a3e2fbee659f8e5d3d5?placeholderIfAbsent=true&apiKey=38e47893336945848379668f2dc133bd" alt="Copy" class="copy-icon">
+        <span>Copier</span>
+      </button>
+    </section>
+
+    <section class="info-section">
+      <p class="info-text">
+        Partagez votre code à <strong>+10 amis(es)</strong> et gagnez jusqu'à<br>1 500 FCFA lorsque votre code est utilisé
+      </p>
+    </section>
+
+    <section class="action-buttons">
+      <a href="parrainage.html" class="primary-button">Parrainez un ami</a>
+      <a href="recommandation.html" class="secondary-button">Recommandations</a>
+    </section>
+  </main>
+
+  <script>
+    function copyPromoCode() {
+      const promoCodeElement = document.getElementById("promoCode");
+      const code = promoCodeElement.textContent;
+
+      navigator.clipboard.writeText(code)
+        .then(() => {
+          alert("Code promo copié dans le presse-papiers !");
+        })
+        .catch(err => {
+          console.error('Erreur lors de la copie du code: ', err);
+          alert("Impossible de copier le code pour le moment. Veuillez le sélectionner et le copier manuellement.");
+        });
+    }
+  </script>
+</body>
+</html>
