@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Paramètres</title>
+    <title data-i18n="settingsTitle">Paramètres</title>
     <style>
         /* Base styles */
         * {
@@ -19,45 +19,42 @@
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            padding: 20px; /* Add some padding around the container */
+            padding: 20px;
         }
 
-        /* Phone container */
         .phone-container {
             border-radius: 30px;
             background-color: #fff;
             display: flex;
             margin: 0 auto;
-            max-width: 480px; /* Limit maximum width */
+            max-width: 480px;
             width: 100%;
-            padding: 20px; /* Adjust padding for responsiveness */
+            padding: 20px;
             flex-direction: column;
             overflow: hidden;
             align-items: center;
         }
 
-        /* Settings title */
         .settings-title {
             color: #4373d8;
             background-color: #fff;
             align-self: stretch;
-            padding: 10px 20px; /* Adjust padding */
-            font-size: 20px; /* Adjust font size */
+            padding: 10px 20px;
+            font-size: 20px;
             font-weight: 700;
             white-space: nowrap;
             letter-spacing: 0.2px;
             line-height: 1.6;
         }
 
-        /* Profile card */
         .profile-card {
             align-items: stretch;
             border-radius: 20px;
             display: flex;
-            margin-top: 15px; /* Adjust margin */
+            margin-top: 15px;
             width: 100%;
             max-width: 360px;
-            padding: 15px; /* Adjust padding */
+            padding: 15px;
             flex-direction: column;
             letter-spacing: 0.2px;
             line-height: 1.6;
@@ -69,7 +66,7 @@
             display: flex;
             width: 100%;
             align-items: center;
-            gap: 15px; /* Adjust gap */
+            gap: 15px;
             justify-content: flex-start;
         }
 
@@ -77,7 +74,7 @@
             aspect-ratio: 1;
             object-fit: contain;
             object-position: center;
-            width: 60px; /* Adjust size */
+            width: 60px;
             align-self: stretch;
             margin: auto 0;
             flex-shrink: 0;
@@ -99,10 +96,10 @@
             align-items: center;
             border-radius: 5px;
             display: flex;
-            width: auto; /* Adjust width */
+            width: auto;
             max-width: 100%;
-            padding: 2px 8px; /* Adjust padding */
-            gap: 5px; /* Adjust gap */
+            padding: 2px 8px;
+            gap: 5px;
             font-size: 10px;
             background-color: #090909;
         }
@@ -133,16 +130,15 @@
             );
         }
 
-        /* Settings sections */
         .settings-section {
-            margin-top: 20px; /* Adjust margin */
+            margin-top: 20px;
             width: 100%;
             max-width: 360px;
         }
 
         .section-title {
             color: #999;
-            font-size: 12px; /* Adjust font size */
+            font-size: 12px;
             font-weight: 700;
             letter-spacing: 0.2px;
             line-height: 1.6;
@@ -153,17 +149,16 @@
             background-color: #f9f9f9;
             margin-top: 10px;
             width: 100%;
-            font-size: 14px; /* Adjust font size */
+            font-size: 14px;
             color: #4c5359;
             font-weight: 400;
         }
 
-        /* Settings items */
         .settings-item {
             display: flex;
-            min-height: 50px; /* Adjust min height */
+            min-height: 50px;
             width: 100%;
-            padding: 10px 15px; /* Adjust padding */
+            padding: 10px 15px;
             align-items: center;
             justify-content: space-between;
         }
@@ -173,7 +168,7 @@
             display: flex;
             margin: auto 0;
             align-items: center;
-            gap: 15px; /* Adjust gap */
+            gap: 15px;
             justify-content: flex-start;
         }
 
@@ -181,7 +176,7 @@
             aspect-ratio: 1;
             object-fit: contain;
             object-position: center;
-            width: 28px; /* Adjust size */
+            width: 28px;
             align-self: stretch;
             margin: auto 0;
             flex-shrink: 0;
@@ -204,13 +199,12 @@
             aspect-ratio: 1.67;
             object-fit: contain;
             object-position: center;
-            width: 12px; /* Adjust size */
+            width: 12px;
             align-self: stretch;
             margin: auto 0;
             flex-shrink: 0;
         }
 
-        /* Toggle switch */
         .toggle-switch {
             align-items: center;
             border-radius: 20px;
@@ -244,32 +238,54 @@
             background-color: #d9d9d9;
         }
 
-        /* Logout button */
         .logout-button {
             color: #fff;
-            align-self: stretch;
+            align-self: center;
             flex: 1;
             border: none;
             cursor: pointer;
             border-radius: 20px;
-            margin-top: 30px; /* Adjust margin */
-            min-height: 50px; /* Adjust min height */
+            margin-top: 30px;
+            min-height: 50px;
             width: 100%;
             max-width: 360px;
-            padding: 15px; /* Adjust padding */
+            padding: 15px;
             font-family: Inter, -apple-system, Roboto, Helvetica, sans-serif;
-            font-size: 16px; /* Adjust font size */
-            font-weight: 500;
+            font-size: 16px;
+            font-weight: 700;
             white-space: nowrap;
             text-align: center;
             line-height: 1;
             background-color: #090909;
         }
+
+        .language-select {
+            border: none;
+            background-color: transparent;
+            font-size: 14px;
+            color: #4c5359;
+            font-weight: 700;
+            align-self: stretch;
+            margin: auto 0;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            padding: 0 25px 0 0;
+            background-image: url('data:image/svg+xml;utf8,<svg fill="%234c5359" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/><path d="M0 0h24v24H0z" fill="none"/></svg>');
+            background-repeat: no-repeat;
+            background-position-x: 100%;
+            background-position-y: 50%;
+            cursor: pointer;
+        }
+
+        .language-select:focus {
+            outline: none;
+        }
     </style>
 </head>
 <body>
     <div class="phone-container">
-        <h1 class="settings-title">Paramètres</h1>
+        <h1 class="settings-title" data-i18n="settingsTitle">Paramètres</h1>
 
         <section class="profile-card">
             <div class="profile-content">
@@ -278,26 +294,26 @@
                     <h2 class="profile-name"><span>Melissa Peters</span></h2>
                     <div class="profile-plan">
                         <span class="plan-pro">PRO</span>
-                        <span class="plan-type">Plan annuel</span>
+                        <span class="plan-type" data-i18n="annualPlan">Plan annuel</span>
                     </div>
                 </div>
             </div>
         </section>
 
         <section class="settings-section">
-            <h3 class="section-title">Compte</h3>
+            <h3 class="section-title" data-i18n="account">Compte</h3>
             <div class="settings-list">
                 <div class="settings-item">
                     <div class="item-content">
                         <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/d41ca2bdc7629aa015c81c8fc264e2021d93dbb0?placeholderIfAbsent=true&apiKey=09748bf748fe4facb4250af70dcc6217" class="item-icon" alt="Profile">
-                        <span class="item-label">Profil</span>
+                        <span class="item-label" data-i18n="profile">Profil</span>
                     </div>
                 </div>
 
                 <div class="settings-item">
                     <div class="item-content">
                         <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/db8496883febfb9954bd18cb8d98ac7fade70179?placeholderIfAbsent=true&apiKey=09748bf748fe4facb4250af70dcc6217" class="item-icon" alt="Email">
-                        <span class="item-label">Adresse e-mail</span>
+                        <span class="item-label" data-i18n="emailAddress">Adresse e-mail</span>
                     </div>
                     <span class="item-value">email@gmail.com</span>
                 </div>
@@ -305,7 +321,7 @@
                 <div class="settings-item">
                     <div class="item-content">
                         <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/5edab41aee5c6f80491058d2d4c665414b027192?placeholderIfAbsent=true&apiKey=09748bf748fe4facb4250af70dcc6217" class="item-icon" alt="WhatsApp">
-                        <span class="item-label">Numéro WhatsApp</span>
+                        <span class="item-label" data-i18n="whatsAppNumber">Numéro WhatsApp</span>
                     </div>
                     <span class="item-value">+255 0707070707</span>
                 </div>
@@ -313,15 +329,15 @@
                 <div class="settings-item">
                     <div class="item-content">
                         <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/febcc2c32f10f262c8972ec13ce4f3a9428b10c2?placeholderIfAbsent=true&apiKey=09748bf748fe4facb4250af70dcc6217" class="item-icon" alt="Subscription">
-                        <span class="item-label">Abonnement</span>
+                        <span class="item-label" data-i18n="subscription">Abonnement</span>
                     </div>
-                    <span class="item-value">Plan annuel</span>
+                    <span class="item-value" data-i18n="annualPlan">Plan annuel</span>
                 </div>
 
                 <div class="settings-item">
                     <div class="item-content">
                         <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/024b97a7bfe0602a84a3fec3fc2048e83a5bdf1e?placeholderIfAbsent=true&apiKey=09748bf748fe4facb4250af70dcc6217" class="item-icon" alt="Balance">
-                        <span class="item-label">Gestion de solde</span>
+                        <span class="item-label" data-i18n="balanceManagement">Gestion de solde</span>
                     </div>
                     <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/24c96d53b93cb8ce1d754c1407dc109561387e76?placeholderIfAbsent=true&apiKey=09748bf748fe4facb4250af70dcc6217" class="arrow-icon" alt="Arrow">
                 </div>
@@ -329,20 +345,25 @@
         </section>
 
         <section class="settings-section">
-            <h3 class="section-title">Appli</h3>
+            <h3 class="section-title" data-i18n="app">Appli</h3>
             <div class="settings-list">
                 <div class="settings-item">
                     <div class="item-content">
                         <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/b7f8d2b06c734aa49ae599ce54df2dc7bb19c0bc?placeholderIfAbsent=true&apiKey=09748bf748fe4facb4250af70dcc6217" class="item-icon" alt="Language">
-                        <span class="item-label">Langue de l'appli</span>
+                        <span class="item-label" data-i18n="applicationLanguage">Langue de l'appli</span>
                     </div>
-                    <span class="item-value">Français</span>
+                    <select class="language-select">
+                        <option value="fr">Français</option>
+                        <option value="en">Anglais</option>
+                        <option value="es">Español</option>
+                        <option value="de">Deutsch</option>
+                    </select>
                 </div>
 
                 <div class="settings-item">
                     <div class="item-content">
                         <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/0ce9ef1a564c3364670e2e0de8b1dc86c6febd4e?placeholderIfAbsent=true&apiKey=09748bf748fe4facb4250af70dcc6217" class="item-icon" alt="Auto Correction">
-                        <span class="item-label">Correction automatique</span>
+                        <span class="item-label" data-i18n="autoCorrection">Correction automatique</span>
                     </div>
                     <div class="toggle-switch active">
                         <div class="toggle-knob"></div>
@@ -350,18 +371,149 @@
                 </div>
 
                 <div class="settings-item">
-                    <div class="item-content">
-                        <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/da1b4a8d931ffc89ae570e7eb01c842291b32dd6?placeholderIfAbsent=true&apiKey=09748bf748fe4facb4250af70dcc6217" class="item-icon" alt="Haptic">
-                        <span class="item-label">Retour haptique</span>
-                    </div>
-                    <div class="toggle-switch">
-                        <div class="toggle-knob"></div>
-                    </div>
+                  <div class="item-content">
+                    <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/da1b4a8d931ffc89ae570e7eb01c842291b32dd6?placeholderIfAbsent=true&apiKey=09748bf748fe4facb4250af70dcc6217" class="item-icon" alt="Haptic">
+                    <span class="item-label" data-i18n="hapticFeedback">Retour haptique</span>
                 </div>
+                <div class="toggle-switch">
+                    <div class="toggle-knob"></div>
+                </div>
+            </div>
 
-                <div class="settings-item">
-                    <div class="item-content">
-                        <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/26693c85a74b4fd4472ef3039af9d214cdc86f2b?placeholderIfAbsent=true&apiKey=09748bf748fe4facb4250af70dcc6217" class="item-icon" alt="Location">
-                        <span class="item-label">Localisation</span>
-                    </div>
-                    <div class="toggle-switch">
+            <div class="settings-item">
+                <div class="item-content">
+                    <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/26693c85a74b4fd4472ef3039af9d214cdc86f2b?placeholderIfAbsent=true&apiKey=09748bf748fe4facb4250af70dcc6217" class="item-icon" alt="Location">
+                    <span class="item-label" data-i18n="location">Localisation</span>
+                </div>
+                <div class="toggle-switch">
+                    <div class="toggle-knob"></div>
+                </div>
+            </div>
+
+            <div class="settings-item">
+                <div class="item-content">
+                    <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/e3c64b83c33a3f8bb661506354a3ff87e5c56737?placeholderIfAbsent=true&apiKey=09748bf748fe4facb4250af70dcc6217" class="item-icon" alt="Voice">
+                    <span class="item-label" data-i18n="voice">Voix</span>
+                </div>
+                <span class="item-value" data-i18n="standard">Standard</span>
+            </div>
+
+            <div class="settings-item">
+                <div class="item-content">
+                    <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/262505ee193eeac74095b22567725d7d44764600?placeholderIfAbsent=true&apiKey=09748bf748fe4facb4250af70dcc6217" class="item-icon" alt="Background">
+                    <span class="item-label" data-i18n="backgroundConversation">Conversation en arrière plan</span>
+                </div>
+                <div class="toggle-switch">
+                    <div class="toggle-knob"></div>
+                </div>
+            </div>
+
+            <div class="settings-item">
+                <div class="item-content">
+                    <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/19668037aa224af3ea8f5ec9c6111993c3d471ee?placeholderIfAbsent=true&apiKey=09748bf748fe4facb4250af70dcc6217" class="item-icon" alt="Rotation">
+                    <span class="item-label" data-i18n="allowScreenRotation">Autoriser la rotation d'écran</span>
+                </div>
+                <div class="toggle-switch active">
+                    <div class="toggle-knob"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="settings-section">
+        <h3 class="section-title" data-i18n="about">A propos</h3>
+        <div class="settings-list">
+            <div class="settings-item">
+                <div class="item-content">
+                    <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/3ad13d30b9468f68c5c261043d852964df603899?placeholderIfAbsent=true&apiKey=09748bf748fe4facb4250af70dcc6217" class="item-icon" alt="Help">
+                    <span class="item-label" data-i18n="helpCenter">Centre d'aide</span>
+                </div>
+            </div>
+
+            <div class="settings-item">
+                <div class="item-content">
+                    <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/20f1d864bbe37c227df294c794bb51c34347c9cf?placeholderIfAbsent=true&apiKey=09748bf748fe4facb4250af70dcc6217" class="item-icon" alt="Terms">
+                    <span class="item-label" data-i18n="termsOfUse">Conditions d'utilisation</span>
+                </div>
+            </div>
+
+            <div class="settings-item">
+                <div class="item-content">
+                    <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/73b370db4d5837a6e02a18ca82478d6c689e8a87?placeholderIfAbsent=true&apiKey=09748bf748fe4facb4250af70dcc6217" class="item-icon" alt="Privacy">
+                    <span class="item-label" data-i18n="privacyPolicy">Politique de confidentialité</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <button class="logout-button" data-i18n="logout">Déconnexion</button>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const toggleSwitches = document.querySelectorAll('.toggle-switch');
+        toggleSwitches.forEach(switchElement => {
+            switchElement.addEventListener('click', function() {
+                this.classList.toggle('active');
+                const labelElement = this.previousElementSibling && this.previousElementSibling.querySelector('.item-label');
+                const labelText = labelElement ? labelElement.textContent : 'Option';
+                const newState = this.classList.contains('active') ? 'activé' : 'désactivé';
+                console.log(`${labelText} est maintenant ${newState}.`);
+            });
+        });
+
+        const languageSelect = document.querySelector('.language-select');
+        const translations = {};
+
+        function loadTranslations(lang) {
+            fetch(`./locales/${lang}.json`)
+                .then(response => response.json())
+                .then(data => {
+                    translations[lang] = data;
+                    translatePage(lang);
+                    localStorage.setItem('app_language', lang);
+                })
+                .catch(error => console.error('Erreur lors du chargement des traductions:', error));
+        }
+
+        function translatePage(lang) {
+            const elementsToTranslate = document.querySelectorAll('[data-i18n]');
+            elementsToTranslate.forEach(element => {
+                const key = element.getAttribute('data-i18n');
+                if (translations[lang] && translations[lang][key]) {
+                    element.textContent = translations[lang][key];
+                    if (element.placeholder) {
+                        element.placeholder = translations[lang][key];
+                    }
+                }
+            });
+            document.documentElement.lang = lang;
+        }
+
+        if (languageSelect) {
+            languageSelect.addEventListener('change', function() {
+                const selectedLanguage = this.value;
+                loadTranslations(selectedLanguage);
+            });
+
+            const storedLanguage = localStorage.getItem('app_language');
+            if (storedLanguage) {
+                languageSelect.value = storedLanguage;
+                loadTranslations(storedLanguage);
+            } else {
+                loadTranslations(languageSelect.value);
+            }
+        }
+
+        window.translateTo = function(lang) {
+            if (languageSelect && languageSelect.value !== lang) {
+                languageSelect.value = lang;
+                loadTranslations(lang);
+            } else if (!localStorage.getItem('app_language')) {
+                loadTranslations(lang);
+            }
+        };
+    });
+</script>
+</body>
+</html>
