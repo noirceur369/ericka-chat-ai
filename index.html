@@ -1,57 +1,93 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Loading...</title>
-    <style>
-        body {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            margin: 0;
-            background-color: #f0f0f0;
-        }
-        .loading-image-container {
-            width: 70px;
-            height: 70px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-bottom: 20px;
-        }
-        .loading-image {
-            width: 40px;
-            height: 40px;
-            animation: loading 3s linear infinite; /* L'animation se répète indéfiniment */
-        }
-        @keyframes loading {
-            0% {
-                transform: scale(1);
-                opacity: 0.2;
-            }
-            50% {
-                transform: scale(1.2);
-                opacity: 1;
-            }
-            100% {
-                transform: scale(1);
-                opacity: 0.2;
-            }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Loading...</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      background-color: #f0f0f0;
+      padding: 5vh 5vw;
+      font-family: sans-serif;
+    }
+
+    .top-image {
+      max-width: 100%;
+      height: auto;
+      margin-bottom: 8vh;
+    }
+
+    .loading-image-container {
+      width: 40px;
+      height: 40px;
+      max-width: 25vw;
+      max-height: 25vw;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .loading-image {
+      width: 100%;
+      height: 100%;
+      animation: loading 3s linear infinite; /* Animation plus lente */
+    }
+
+    @keyframes loading {
+      0% {
+        transform: scale(1);
+        opacity: 0.2;
+      }
+      50% {
+        transform: scale(1.2);
+        opacity: 1;
+      }
+      100% {
+        transform: scale(1);
+        opacity: 0.2;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .loading-image-container {
+        width: 40px;
+        height: 40px;
+      }
+
+      .top-image {
+        margin-bottom: 5vh;
+      }
+    }
+  </style>
 </head>
-<body align="center">
-    <img src="images/Group 3.png" alt="" style="max-width: 100%; height: auto;"> <br> <br><br><br><br><br>
-    <div class="loading-image-container">
-        <img src="images/Component 2.png" alt="" class="loading-image">
-    </div>
-    <script>
-        setTimeout(function() {
-            window.location.href = "index.html";
-        }, 5000);
-    </script>
+<body>
+  <img src="images/Group 3.png" alt="Logo" class="top-image">
+  <div class="loading-image-container">
+    <img src="images/Component 2.png" alt="Chargement" class="loading-image" id="loader">
+  </div>
+
+  <script>
+    // Arrête l'animation après 5 secondes
+    setTimeout(() => {
+      document.getElementById("loader").style.animation = "none";
+    }, 5000);
+
+    // Redirection après 7 secondes
+    setTimeout(() => {
+      window.location.href = "presentation.html";
+    }, 7000);
+  </script>
 </body>
 </html>
+
