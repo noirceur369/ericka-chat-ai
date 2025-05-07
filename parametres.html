@@ -4,7 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title data-i18n="settingsTitle">Paramètres</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
         /* Base styles */
         * {
             margin: 0;
@@ -35,16 +38,23 @@
             align-items: center;
         }
 
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start; /* Align items to the start */
+            align-self: stretch;
+            padding: 10px 20px;
+        }
+
         .settings-title {
             color: #4373d8;
             background-color: #fff;
-            align-self: stretch;
-            padding: 10px 20px;
             font-size: 20px;
             font-weight: 700;
             white-space: nowrap;
             letter-spacing: 0.2px;
             line-height: 1.6;
+            margin-left: 10px; /* Add some space between the button and the title */
         }
 
         .profile-card {
@@ -281,12 +291,105 @@
         .language-select:focus {
             outline: none;
         }
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: -260px;
+            width: 240px;
+            height: 100%;
+            background-color: #fff;
+            box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px 15px;
+            border-radius: 0 30px 0 0;
+            transition: left 0.3s ease;
+            z-index: 10;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            box-sizing: border-box;
+        }
+
+        .sidebar.open {
+            left: 0;
+        }
+
+        .sidebar a {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 15px;
+            font-size: 14px;
+            color: #333;
+            text-decoration: none;
+            font-weight: 700; /* Make sidebar links bold */
+            transition: background-color 0.2s ease, color 0.2s ease;
+            border-radius: 10px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .sidebar a i {
+            color: #4373d8;
+            width: 20px;
+            text-align: center;
+        }
+
+        .sidebar a:hover {
+            background-color: #f0f4ff;
+            color: #4373d8;
+        }
+
+        .button-deconnexion {
+            margin-top: auto;
+            border: none;
+            cursor: pointer;
+            border-radius: 20px;
+            background-color: #090909;
+            min-height: 40px;
+            padding: 10px 20px;
+            font-size: 14px;
+            color: #fff;
+            font-weight: 700; /* Make disconnect button bold */
+            text-align: center;
+            text-decoration: none;
+            display: block;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .button-deconnexion:hover {
+            background-color: #1a1a1a;
+        }
+
+        .hamburger {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: #4373d8;
+            padding: 0;
+            margin-right: 10px;
+        }
     </style>
 </head>
 <body>
     <div class="phone-container">
-        <h1 class="settings-title" data-i18n="settingsTitle">Paramètres</h1>
-
+        <div class="header">
+            <button class="hamburger" onclick="toggleSidebar()">
+                <i class="fas fa-bars"></i>
+            </button>
+            <h1 class="settings-title" data-i18n="settingsTitle">Paramètres</h1>
+        </div>
+        <nav class="sidebar" id="sidebar">
+            <a href="echanges.html"><i class="fas fa-exchange-alt"></i> Échanger</a>
+            <a href="historiq.html"><i class="fas fa-clock-rotate-left"></i> Historique</a>
+            <a href="outils.html"><i class="fas fa-wrench"></i> Outils</a>
+            <a href="se_recharger.html"><i class="fas fa-wallet"></i> Se recharger</a>
+            <a href="notif.html"><i class="fas fa-bell"></i> Notifications</a>
+            <a href="code_promo.html"><i class="fas fa-ticket-alt"></i> Code promo</a>
+            <a href="parametres.html"><i class="fas fa-cog"></i> Paramètres</a>
+            <button class="button-deconnexion">Deconnexion</button>
+        </nav>
         <section class="profile-card">
             <div class="profile-content">
                 <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/243b9720c36297f354b63a89e959e0f800cc119a?placeholderIfAbsent=true&apiKey=09748bf748fe4facb4250af70dcc6217" class="profile-image" alt="Profile">
@@ -371,149 +474,179 @@
                 </div>
 
                 <div class="settings-item">
-                  <div class="item-content">
-                    <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/da1b4a8d931ffc89ae570e7eb01c842291b32dd6?placeholderIfAbsent=true&apiKey=09748bf748fe4facb4250af70dcc6217" class="item-icon" alt="Haptic">
-                    <span class="item-label" data-i18n="hapticFeedback">Retour haptique</span>
+                    <div class="item-content">
+                        <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/da1b4a8d931ffc89ae570e7eb01c842291b32dd6?placeholderIfAbsent=true&apiKey=09748bf748fe4facb4250af70dcc6217" class="item-icon" alt="Haptic">
+                        <span class="item-label" data-i18n="hapticFeedback">Retour haptique</span>
+                    </div>
+                    <div class="toggle-switch">
+                        <div class="toggle-knob"></div>
+                    </div>
                 </div>
-                <div class="toggle-switch">
-                    <div class="toggle-knob"></div>
+
+                <div class="settings-item">
+                    <div class="item-content">
+                        <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/26693c85a74b4fd4472ef3039af9d214cdc86f2b?placeholderIfAbsent=true&apiKey=09748bf748fe4facb4250af70dcc6217" class="item-icon" alt="Location">
+                        <span class="item-label" data-i18n="location">Localisation</span>
+                    </div>
+                    <div class="toggle-switch">
+                        <div class="toggle-knob"></div>
+                    </div>
+                </div>
+
+                <div class="settings-item">
+                    <div class="item-content">
+                        <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/e3c64b83c33a3f8bb661506354a3ff87e5c56737?placeholderIfAbsent=true&apiKey=09748bf748fe4facb4250af70dcc6217" class="item-icon" alt="Voice">
+                        <span class="item-label" data-i18n="voice">Voix</span>
+                    </div>
+                    <span class="item-value" data-i18n="standard">Standard</span>
+                </div>
+
+                <div class="settings-item">
+                    <div class="item-content">
+                        <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/262505ee193eeac74095b22567725d7d44764600?placeholderIfAbsent=true&apiKey=09748bf748fe4facb4250af70dcc6217" class="item-icon" alt="Background">
+                        <span class="item-label" data-i18n="backgroundConversation">Conversation en arrière plan</span>
+                    </div>
+                    <div class="toggle-switch">
+                        <div class="toggle-knob"></div>
+                    </div>
+                </div>
+
+                <div class="settings-item">
+                    <div class="item-content">
+                        <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/19668037aa224af3ea8f5ec9c6111993c3d471ee?placeholderIfAbsent=true&apiKey=09748bf748fe4facb4250af70dcc6217" class="item-icon" alt="Rotation">
+                        <span class="item-label" data-i18n="allowScreenRotation">Autoriser la rotation d'écran</span>
+                    </div>
+                    <div class="toggle-switch active">
+                        <div class="toggle-knob"></div>
+                    </div>
                 </div>
             </div>
+        </section>
 
-            <div class="settings-item">
-                <div class="item-content">
-                    <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/26693c85a74b4fd4472ef3039af9d214cdc86f2b?placeholderIfAbsent=true&apiKey=09748bf748fe4facb4250af70dcc6217" class="item-icon" alt="Location">
-                    <span class="item-label" data-i18n="location">Localisation</span>
+        <section class="settings-section">
+            <h3 class="section-title" data-i18n="about">A propos</h3>
+            <div class="settings-list">
+                <div class="settings-item">
+                    <div class="item-content">
+                        <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/3ad13d30b9468f68c5c261043d852964df603899?placeholderIfAbsent=true&apiKey=09748bf748fe4facb4250af70dcc6217" class="item-icon" alt="Help">
+                        <span class="item-label" data-i18n="helpCenter">Centre d'aide</span>
+                    </div>
                 </div>
-                <div class="toggle-switch">
-                    <div class="toggle-knob"></div>
+
+                <div class="settings-item">
+                    <div class="item-content">
+                        <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/20f1d864bbe37c227df294c794bb51c34347c9cf?placeholderIfAbsent=true&apiKey=09748bf748fe4facb4250af70dcc6217" class="item-icon" alt="Terms">
+                        <span class="item-label" data-i18n="termsOfUse">Conditions d'utilisation</span>
+                    </div>
+                </div>
+
+                <div class="settings-item">
+                    <div class="item-content">
+                        <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/73b370db4d5837a6e02a18ca82478d6c689e8a87?placeholderIfAbsent=true&apiKey=09748bf748fe4facb4250af70dcc6217" class="item-icon" alt="Privacy">
+                        <span class="item-label" data-i18n="privacyPolicy">Politique de confidentialité</span>
+                    </div>
                 </div>
             </div>
+        </section>
 
-            <div class="settings-item">
-                <div class="item-content">
-                    <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/e3c64b83c33a3f8bb661506354a3ff87e5c56737?placeholderIfAbsent=true&apiKey=09748bf748fe4facb4250af70dcc6217" class="item-icon" alt="Voice">
-                    <span class="item-label" data-i18n="voice">Voix</span>
-                </div>
-                <span class="item-value" data-i18n="standard">Standard</span>
-            </div>
+        <button class="logout-button" data-i18n="logout">Déconnexion</button>
+    </div>
 
-            <div class="settings-item">
-                <div class="item-content">
-                    <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/262505ee193eeac74095b22567725d7d44764600?placeholderIfAbsent=true&apiKey=09748bf748fe4facb4250af70dcc6217" class="item-icon" alt="Background">
-                    <span class="item-label" data-i18n="backgroundConversation">Conversation en arrière plan</span>
-                </div>
-                <div class="toggle-switch">
-                    <div class="toggle-knob"></div>
-                </div>
-            </div>
-
-            <div class="settings-item">
-                <div class="item-content">
-                    <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/19668037aa224af3ea8f5ec9c6111993c3d471ee?placeholderIfAbsent=true&apiKey=09748bf748fe4facb4250af70dcc6217" class="item-icon" alt="Rotation">
-                    <span class="item-label" data-i18n="allowScreenRotation">Autoriser la rotation d'écran</span>
-                </div>
-                <div class="toggle-switch active">
-                    <div class="toggle-knob"></div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="settings-section">
-        <h3 class="section-title" data-i18n="about">A propos</h3>
-        <div class="settings-list">
-            <div class="settings-item">
-                <div class="item-content">
-                    <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/3ad13d30b9468f68c5c261043d852964df603899?placeholderIfAbsent=true&apiKey=09748bf748fe4facb4250af70dcc6217" class="item-icon" alt="Help">
-                    <span class="item-label" data-i18n="helpCenter">Centre d'aide</span>
-                </div>
-            </div>
-
-            <div class="settings-item">
-                <div class="item-content">
-                    <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/20f1d864bbe37c227df294c794bb51c34347c9cf?placeholderIfAbsent=true&apiKey=09748bf748fe4facb4250af70dcc6217" class="item-icon" alt="Terms">
-                    <span class="item-label" data-i18n="termsOfUse">Conditions d'utilisation</span>
-                </div>
-            </div>
-
-            <div class="settings-item">
-                <div class="item-content">
-                    <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/73b370db4d5837a6e02a18ca82478d6c689e8a87?placeholderIfAbsent=true&apiKey=09748bf748fe4facb4250af70dcc6217" class="item-icon" alt="Privacy">
-                    <span class="item-label" data-i18n="privacyPolicy">Politique de confidentialité</span>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <button class="logout-button" data-i18n="logout">Déconnexion</button>
-</div>
-
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const toggleSwitches = document.querySelectorAll('.toggle-switch');
-        toggleSwitches.forEach(switchElement => {
-            switchElement.addEventListener('click', function() {
-                this.classList.toggle('active');
-                const labelElement = this.previousElementSibling && this.previousElementSibling.querySelector('.item-label');
-                const labelText = labelElement ? labelElement.textContent : 'Option';
-                const newState = this.classList.contains('active') ? 'activé' : 'désactivé';
-                console.log(`${labelText} est maintenant ${newState}.`);
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const toggleSwitches = document.querySelectorAll('.toggle-switch');
+            toggleSwitches.forEach(switchElement => {
+                switchElement.addEventListener('click', function() {
+                    this.classList.toggle('active');
+                    const labelElement = this.previousElementSibling && this.previousElementSibling.querySelector('.item-label');
+                    const labelText = labelElement ? labelElement.textContent : 'Option';
+                    const newState = this.classList.contains('active') ? 'activé' : 'désactivé';
+                    console.log(`${labelText} est maintenant ${newState}.`);
+                });
             });
+
+            const languageSelect = document.querySelector('.language-select');
+            const translations = {};
+
+            function loadTranslations(lang) {
+                fetch(`./locales/${lang}.json`)
+                    .then(response => response.json())
+                    .then(data => {
+                        translations[lang] = data;
+                        translatePage(lang);
+                        localStorage.setItem('app_language', lang);
+                    })
+                    .catch(error => console.error('Erreur lors du chargement des traductions:', error));
+            }
+
+            function translatePage(lang) {
+                const elementsToTranslate = document.querySelectorAll('[data-i18n]');
+                elementsToTranslate.forEach(element => {
+                    const key = element.getAttribute('data-i18n');
+                    if (translations[lang] && translations[lang][key]) {
+                        element.textContent = translations[lang][key];
+                        if (element.placeholder) {
+                            element.placeholder = translations[lang][key];
+                        }
+                    }
+                });
+                document.documentElement.lang = lang;
+            }
+
+            if (languageSelect) {
+                languageSelect.addEventListener('change', function() {
+                    const selectedLanguage = this.value;
+                    loadTranslations(selectedLanguage);
+                });
+
+                const storedLanguage = localStorage.getItem('app_language');
+                if (storedLanguage) {
+                    languageSelect.value = storedLanguage;
+                    loadTranslations(storedLanguage);
+                } else {
+                    loadTranslations(languageSelect.value);
+                }
+            }
+
+            window.translateTo = function(lang) {
+                if (languageSelect && languageSelect.value !== lang) {
+                    languageSelect.value = lang;
+                    loadTranslations(lang);
+                } else if (!localStorage.getItem('app_language')) {
+                    loadTranslations(lang);
+                }
+            };
         });
 
-        const languageSelect = document.querySelector('.language-select');
-        const translations = {};
+        const sidebar = document.getElementById('sidebar');
+        const hamburger = document.querySelector('.hamburger');
+        const body = document.body;
 
-        function loadTranslations(lang) {
-            fetch(`./locales/${lang}.json`)
-                .then(response => response.json())
-                .then(data => {
-                    translations[lang] = data;
-                    translatePage(lang);
-                    localStorage.setItem('app_language', lang);
-                })
-                .catch(error => console.error('Erreur lors du chargement des traductions:', error));
-        }
-
-        function translatePage(lang) {
-            const elementsToTranslate = document.querySelectorAll('[data-i18n]');
-            elementsToTranslate.forEach(element => {
-                const key = element.getAttribute('data-i18n');
-                if (translations[lang] && translations[lang][key]) {
-                    element.textContent = translations[lang][key];
-                    if (element.placeholder) {
-                        element.placeholder = translations[lang][key];
-                    }
-                }
-            });
-            document.documentElement.lang = lang;
-        }
-
-        if (languageSelect) {
-            languageSelect.addEventListener('change', function() {
-                const selectedLanguage = this.value;
-                loadTranslations(selectedLanguage);
-            });
-
-            const storedLanguage = localStorage.getItem('app_language');
-            if (storedLanguage) {
-                languageSelect.value = storedLanguage;
-                loadTranslations(storedLanguage);
+        function toggleSidebar() {
+            sidebar.classList.toggle('open');
+            if (sidebar.classList.contains('open')) {
+                body.style.overflow = 'hidden';
             } else {
-                loadTranslations(languageSelect.value);
+                body.style.overflow = '';
             }
         }
 
-        window.translateTo = function(lang) {
-            if (languageSelect && languageSelect.value !== lang) {
-                languageSelect.value = lang;
-                loadTranslations(lang);
-            } else if (!localStorage.getItem('app_language')) {
-                loadTranslations(lang);
+        document.addEventListener('click', function(event) {
+            const isClickInsideSidebar = sidebar.contains(event.target);
+            const isClickOnHamburger = hamburger.contains(event.target);
+
+            if (!isClickInsideSidebar && !isClickOnHamburger) {
+                sidebar.classList.remove('open');
+                body.style.overflow = '';
             }
-        };
-    });
-</script>
+        });
+
+        document.addEventListener('keydown', function(event){
+            if(event.key === 'Escape'){
+                sidebar.classList.remove('open');
+                body.style.overflow = '';
+            }
+        })
+    </script>
 </body>
 </html>
