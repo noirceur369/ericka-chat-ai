@@ -1,283 +1,348 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Outils</title>
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap');
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Outils</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap');
 
-    * {
-      box-sizing: border-box;
-    }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
 
-    body {
-      margin: 0;
-      font-family: 'Inter', sans-serif;
-      background-color: #f0f0f0;
-    }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f0f0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
 
-    .iphone-frame {
-      border-radius: 30px;
-      background-color: #fff;
-      margin: 20px auto;
-      max-width: 480px;
-      width: 90%;
-      padding: 20px;
-      display: flex;
-      flex-direction: column;
-      overflow: hidden;
-      align-items: stretch;
-      position: relative;
-    }
+        .iphone-frame {
+            border-radius: 30px;
+            background-color: #fff;
+            margin: 20px auto;
+            max-width: 95%;
+            width: 480px;
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
 
-    .header {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start; /* Aligner les éléments au début */
+            gap: 10px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid #e0e0e0;
+        }
 
-    .hamburger {
-      background: none;
-      border: none;
-      font-size: 24px;
-      cursor: pointer;
-      color: #4373d8;
-    }
+        .hamburger {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: #4373d8;
+            padding: 0;
+        }
 
-    .tools-title {
-      color: #4373d8;
-      font-size: 18px;
-      font-weight: 700;
-      line-height: 1.6;
-    }
+        .tools-title {
+            color: #4373d8;
+            font-size: 18px;
+            font-weight: 700;
+            line-height: 1.6;
+            margin: 0;
+        }
 
-    .tools-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 13px 16px;
-      margin-top: 21px;
-      width: 100%;
-    }
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 16px;
+            margin-top: 21px;
+            width: 100%;
+        }
 
-    .tool-card {
-      border-radius: 15px;
-      padding: 10px;
-      background-color: #f5f5f5;
-      min-height: 90px;
-      text-decoration: none;
-      display: block;
-      transition: background-color 0.2s ease;
-    }
+        .tool-card {
+            border-radius: 15px;
+            padding: 10px;
+            background-color: #f5f5f5;
+            min-height: 90px;
+            text-decoration: none;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: background-color 0.2s ease;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
 
-    .tool-card:hover {
-      background-color: #e2e2e2;
-    }
+        .tool-card:hover {
+            background-color: #e2e2e2;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
 
-    .tool-header {
-      display: flex;
-      align-items: center;
-      gap: 7px;
-      font-size: 14px;
-      color: #4c5359;
-      font-weight: 500;
-      line-height: 1;
-    }
+        .tool-header {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            font-size: 14px;
+            color: #4c5359;
+            font-weight: 500;
+            line-height: 1;
+        }
 
-    .tool-icon {
-      width: 34px;
-      height: 34px;
-      object-fit: contain;
-      border-radius: 10px;
-    }
+        .tool-icon {
+            width: 34px;
+            height: 34px;
+            object-fit: contain;
+            border-radius: 10px;
+        }
 
-    .tool-name {
-      font-size: 14px;
-      font-weight: 500;
-      color: #4c5359;
-    }
+        .tool-name {
+            font-size: 14px;
+            font-weight: 500;
+            color: #4c5359;
+            margin: 0;
+        }
 
-    .tool-description {
-      color: #999;
-      font-size: 10px;
-      font-weight: 400;
-      line-height: 14px;
-      letter-spacing: 0.2px;
-      margin-top: 8px;
-    }
+        .tool-description {
+            color: #999;
+            font-size: 10px;
+            font-weight: 400;
+            line-height: 1.4;
+            letter-spacing: 0.2px;
+            margin-top: 8px;
+        }
 
-    /* Sidebar styles */
-    .sidebar {
-      position: absolute;
-      top: 0;
-      left: -260px;
-      width: 240px;
-      height: 100%;
-      background-color: #fff;
-      box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
-      padding: 20px 15px;
-      border-radius: 30px 0 0 30px;
-      transition: left 0.3s ease;
-      z-index: 10;
-    }
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: -260px;
+            width: 240px;
+            height: 100%;
+            background-color: #fff;
+            box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px 15px;
+            border-radius: 0 30px 0 0;
+            transition: left 0.3s ease;
+            z-index: 10;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+        }
 
-    .sidebar.open {
-      left: 0;
-    }
+        .sidebar.open {
+            left: 0;
+        }
 
-    .sidebar a {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      padding: 10px 0;
-      font-size: 14px;
-      color: #333;
-      text-decoration: none;
-      font-weight: 500;
-      transition: background-color 0.2s ease, color 0.2s ease;
-      border-radius: 10px;
-    }
+        .sidebar a {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 15px;
+            font-size: 14px;
+            color: #333;
+            text-decoration: none;
+            font-weight: 500;
+            transition: background-color 0.2s ease, color 0.2s ease;
+            border-radius: 10px;
+            width: 100%;
+        }
 
-    .sidebar a i {
-      color: #4373d8;
-      width: 20px;
-      text-align: center;
-    }
+        .sidebar a i {
+            color: #4373d8;
+            width: 20px;
+            text-align: center;
+        }
 
-    .sidebar a:hover {
-      background-color: #f0f4ff;
-      color: #4373d8;
-    }
+        .sidebar a:hover {
+            background-color: #f0f4ff;
+            color: #4373d8;
+        }
 
-    @media (max-width: 480px) {
-      .tools-grid {
-        grid-template-columns: 1fr;
-      }
+        .button-deconnexion {
+            margin-top: auto;
+            border: none;
+            cursor: pointer;
+            border-radius: 20px;
+            background-color: #090909;
+            min-height: 40px;
+            padding: 10px 20px;
+            font-size: 14px;
+            color: #fff;
+            font-weight: 300;
+            text-align: center;
+            text-decoration: none;
+            display: block;
+            width: 100%;
+        }
 
-      .iphone-frame {
-        padding: 16px;
-        border-radius: 20px;
-      }
+        .button-deconnexion:hover {
+            background-color: #1a1a1a;
+        }
 
-      .tool-header {
-        font-size: 13px;
-      }
+        @media (max-width: 480px) {
+            .iphone-frame {
+                padding: 16px;
+                border-radius: 20px;
+                margin: 10px auto;
+            }
 
-      .tool-name {
-        font-size: 13px;
-      }
+            .header {
+                flex-direction: row;
+                align-items: center;
+            }
 
-      .tool-description {
-        font-size: 11px;
-      }
-    }
-    .button-deconnexion {
-        margin-top: 30px;
-        border: none;
-        cursor: pointer;
-        border-radius: 20px;
-        background-color: #090909;
-        min-height: 40px;
-        padding: 10px;
-        font-size: 14px;
-        color: #fff;
-        font-weight: 300;
-        text-align: center;
-        text-decoration: none;
-        display: inline-block;
-      }
-  </style>
+            .tools-title {
+                font-size: 16px;
+            }
+
+            .tools-grid {
+                grid-template-columns: 1fr;
+                gap: 12px;
+            }
+
+            .tool-card {
+                padding: 12px;
+                min-height: auto;
+            }
+
+            .tool-header {
+                font-size: 12px;
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 4px;
+            }
+
+            .tool-name {
+                font-size: 14px;
+            }
+
+            .tool-description {
+                font-size: 10px;
+            }
+
+            .sidebar {
+                width: 100%;
+                max-width: 280px;
+                border-radius: 0 0 0 0;
+                left: -100%;
+            }
+
+            .sidebar.open {
+                left: 0;
+            }
+        }
+    </style>
 </head>
 <body>
-  <main class="iphone-frame">
-    <div class="header">
-      <button class="hamburger" onclick="toggleSidebar()">
-        <i class="fas fa-bars"></i>
-      </button>
-      <h1 class="tools-title">Outils</h1>
-    </div>
-    <!-- Sidebar -->
-    <nav class="sidebar" id="sidebar">
-      <a href="echanges.html"><i class="fas fa-exchange-alt"></i> Échanger</a>
-      <a href="historiq.html"><i class="fas fa-clock-rotate-left"></i> Historique</a>
-      <a href="outils.html"><i class="fas fa-wrench"></i> Outils</a>
-      <a href="se_recharger.html"><i class="fas fa-wallet"></i> Se recharger</a>
-      <a href="notif.html"><i class="fas fa-bell"></i> Notifications</a>
-      <a href="code_promo.html"><i class="fas fa-ticket-alt"></i> Code promo</a>
-      <a href="parametres.html"><i class="fas fa-cog"></i> Paramètres</a>
-      <button class="button-deconnexion">Deconnexion</button>
-    </nav>
-
-
-    <!-- Tools Grid -->
-    <section class="tools-grid">
-      <a href="traducteur.html" class="tool-card">
-        <div class="tool-header">
-          <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/b1593adeb759bad2a0867dc968bfa4bb0f36de13?placeholderIfAbsent=true" alt="Traducteur" class="tool-icon" />
-          <h2 class="tool-name">Traducteur</h2>
+    <main class="iphone-frame">
+        <div class="header">
+            <button class="hamburger" onclick="toggleSidebar()">
+                <i class="fas fa-bars"></i>
+            </button>
+            <h1 class="tools-title">Outils</h1>
         </div>
-        <p class="tool-description">Traduisez dans plusieurs<br />langues vos textes</p>
-      </a>
+        <nav class="sidebar" id="sidebar">
+            <a href="echanges.html"><i class="fas fa-exchange-alt"></i> Échanger</a>
+            <a href="historiq.html"><i class="fas fa-clock-rotate-left"></i> Historique</a>
+            <a href="outils.html"><i class="fas fa-wrench"></i> Outils</a>
+            <a href="se_recharger.html"><i class="fas fa-wallet"></i> Se recharger</a>
+            <a href="notif.html"><i class="fas fa-bell"></i> Notifications</a>
+            <a href="code_promo.html"><i class="fas fa-ticket-alt"></i> Code promo</a>
+            <a href="parametres.html"><i class="fas fa-cog"></i> Paramètres</a>
+            <button class="button-deconnexion">Deconnexion</button>
+        </nav>
 
-      <a href="calculette.html" class="tool-card">
-        <div class="tool-header">
-          <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/58432ab58ca05402915b2d12ca093eca52076a4e?placeholderIfAbsent=true" alt="Calculette" class="tool-icon" />
-          <h2 class="tool-name">Calculette</h2>
-        </div>
-        <p class="tool-description">Effectuez vos opérations</p>
-      </a>
+        <section class="tools-grid">
+            <a href="traducteur.html" class="tool-card">
+                <div class="tool-header">
+                    <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/b1593adeb759bad2a0867dc968bfa4bb0f36de13?placeholderIfAbsent=true" alt="Traducteur" class="tool-icon" />
+                    <h2 class="tool-name">Traducteur</h2>
+                </div>
+                <p class="tool-description">Traduisez dans plusieurs<br />langues vos textes</p>
+            </a>
 
-      <a href="convertisseur.php" class="tool-card">
-        <div class="tool-header">
-          <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/5cbe836e020869d4e36c18c0dff1ca04c14c5913?placeholderIfAbsent=true" alt="Convertisseur" class="tool-icon" />
-          <h2 class="tool-name">Convertisseur</h2>
-        </div>
-        <p class="tool-description">Utilisez votre convertisseur dans plusieurs mesures</p>
-      </a>
+            <a href="calculette.html" class="tool-card">
+                <div class="tool-header">
+                    <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/58432ab58ca05402915b2d12ca093eca52076a4e?placeholderIfAbsent=true" alt="Calculette" class="tool-icon" />
+                    <h2 class="tool-name">Calculette</h2>
+                </div>
+                <p class="tool-description">Effectuez vos opérations</p>
+            </a>
 
-      <a href="lyrisme.php" class="tool-card">
-        <div class="tool-header">
-          <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/f7be116628901e2e0bb013e6816e3f3754f5a595?placeholderIfAbsent=true" alt="Lyrisme" class="tool-icon" />
-          <h2 class="tool-name">Lyrisme</h2>
-        </div>
-        <p class="tool-description">Générez les lyriques depuis n'importe quelle musique</p>
-      </a>
+            <a href="convertisseur.php" class="tool-card">
+                <div class="tool-header">
+                    <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/5cbe836e020869d4e36c18c0dff1ca04c14c5913?placeholderIfAbsent=true" alt="Convertisseur" class="tool-icon" />
+                    <h2 class="tool-name">Convertisseur</h2>
+                </div>
+                <p class="tool-description">Utilisez votre convertisseur dans plusieurs mesures</p>
+            </a>
 
-      <a href="qrcode.html" class="tool-card">
-        <div class="tool-header">
-          <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/abacac7e991519d5dcd375c95fdf9ec181ceb606?placeholderIfAbsent=true" alt="QR Code" class="tool-icon" />
-          <h2 class="tool-name">QR Code</h2>
-        </div>
-        <p class="tool-description">Générez des QR codes depuis n'importe quel lien</p>
-      </a>
+            <a href="lyrisme.php" class="tool-card">
+                <div class="tool-header">
+                    <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/f7be116628901e2e0bb013e6816e3f3754f5a595?placeholderIfAbsent=true" alt="Lyrisme" class="tool-icon" />
+                    <h2 class="tool-name">Lyrisme</h2>
+                </div>
+                <p class="tool-description">Générez les lyriques depuis n'importe quelle musique</p>
+            </a>
 
-      <a href="memo-vocal.html" class="tool-card">
-        <div class="tool-header">
-          <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/d59600123ac531d19ac6c59de50cb5b602f6f013?placeholderIfAbsent=true" alt="Mémo vocal" class="tool-icon" />
-          <h2 class="tool-name">Mémo vocal</h2>
-        </div>
-        <p class="tool-description">Générez des sons parlés grâce à vos vocaux</p>
-      </a>
-    </section>
-  </main>
+            <a href="qrcode.html" class="tool-card">
+                <div class="tool-header">
+                    <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/abacac7e991519d5dcd375c95fdf9ec181ceb606?placeholderIfAbsent=true" alt="QR Code" class="tool-icon" />
+                    <h2 class="tool-name">QR Code</h2>
+                </div>
+                <p class="tool-description">Générez des QR codes depuis n'importe quel lien</p>
+            </a>
 
-  <script>
-    const sidebar = document.getElementById('sidebar');
-    const hamburger = document.querySelector('.hamburger');
+            <a href="memo-vocal.html" class="tool-card">
+                <div class="tool-header">
+                    <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/d59600123ac531d19ac6c59de50cb5b602f6f013?placeholderIfAbsent=true" alt="Mémo vocal" class="tool-icon" />
+                    <h2 class="tool-name">Mémo vocal</h2>
+                </div>
+                <p class="tool-description">Générez des sons parlés grâce à vos vocaux</p>
+            </a>
+        </section>
+    </main>
 
-    function toggleSidebar() {
-      sidebar.classList.toggle('open');
-    }
+    <script>
+        const sidebar = document.getElementById('sidebar');
+        const hamburger = document.querySelector('.hamburger');
+        const body = document.body;
 
-    document.addEventListener('click', function(event) {
-      const isClickInsideSidebar = sidebar.contains(event.target);
-      const isClickOnHamburger = hamburger.contains(event.target);
+        function toggleSidebar() {
+            sidebar.classList.toggle('open');
+            if (sidebar.classList.contains('open')) {
+                body.style.overflow = 'hidden';
+            } else {
+                body.style.overflow = '';
+            }
+        }
 
-      if (!isClickInsideSidebar && !isClickOnHamburger) {
-        sidebar.classList.remove('open');
-      }
-    });
-  </script>
+        document.addEventListener('click', function(event) {
+            const isClickInsideSidebar = sidebar.contains(event.target);
+            const isClickOnHamburger = hamburger.contains(event.target);
+
+            if (!isClickInsideSidebar && !isClickOnHamburger) {
+                sidebar.classList.remove('open');
+                body.style.overflow = '';
+            }
+        });
+
+        document.addEventListener('keydown', function(event){
+            if(event.key === 'Escape'){
+                 sidebar.classList.remove('open');
+                 body.style.overflow = '';
+            }
+        })
+    </script>
 </body>
 </html>
