@@ -17,10 +17,14 @@
             align-items: center;
             min-height: 100vh;
             background-color: #f5f5f5;
+            margin: 0; /* Reset default body margin */
+            padding: 20px; /* Add padding for overall body */
+            box-sizing: border-box; /* Include padding in body's total width/height */
         }
 
         .login-card {
-            width: 360px;
+            width: 100%; /* Make login card take up full width of its container */
+            max-width: 360px; /* But don't let it get wider than 360px */
             border-radius: 27px;
             box-shadow: 0px 13.316px 55.484px 0px rgba(37, 31, 48, 0.05);
             display: flex;
@@ -29,6 +33,7 @@
             padding: 30px;
             background-color: #fff;
             gap: 20px;
+            box-sizing: border-box; /* Include padding in card's total width/height */
         }
 
         .back-button-container {
@@ -52,6 +57,8 @@
             cursor: pointer;
             text-decoration: none;
             transition: background-color 0.2s ease;
+            display: inline-flex; /* Use inline-flex for better alignment of icon and text */
+            align-items: center;
         }
 
         .back-button:hover {
@@ -60,7 +67,16 @@
 
         .logo-container {
             margin-bottom: 30px;
+            width: 100%; /* Ensure logo container takes full width */
+            display: flex;
+            justify-content: center; /* Center the logo horizontally */
         }
+
+        .logo-container img {
+            max-width: 100%; /* Make sure logo doesn't exceed its container */
+            height: auto; /* Maintain aspect ratio */
+        }
+
 
         .login-title {
             font-family:
@@ -76,6 +92,7 @@
             line-height: 1;
             text-align: center;
             margin-bottom: 20px;
+            width: 100%; /* Ensure title takes full width */
         }
 
         .login-form {
@@ -98,7 +115,8 @@
             line-height: 1.6;
             letter-spacing: 0.2px;
             width: 100%;
-            text-align: center;
+            text-align: left; /* Changed to left alignment */
+            box-sizing: border-box; /* Ensure padding doesn't affect width */
         }
 
         .input-field::placeholder {
@@ -109,7 +127,6 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            align-self: stretch;
             height: 50px;
             border-radius: 15px;
             background-color: #090909;
@@ -131,6 +148,8 @@
             cursor: pointer;
             text-decoration: none;
             transition: background-color 0.2s ease;
+            width: 100%; /* Make button take full width */
+            box-sizing: border-box; /* Ensure padding doesn't affect width */
         }
 
         .primary-button:hover {
@@ -141,12 +160,38 @@
             outline: 2px solid #4d90fe;
             outline-offset: 2px;
         }
+
+        /* Responsive adjustments for smaller screens */
+        @media (max-width: 400px) {
+            .login-card {
+                padding: 20px; /* Adjust padding for very small screens */
+            }
+
+            .login-title {
+                font-size: 20px; /* Smaller title on very small screens */
+            }
+
+            .input-field {
+                font-size: 14px; /* Smaller input field text */
+                height: 45px; /* Adjust input height */
+            }
+
+            .primary-button {
+                font-size: 16px; /* Smaller button text */
+                height: 45px; /* Adjust button height */
+            }
+
+            .back-button {
+                font-size: 14px;
+                padding: 8px 12px;
+            }
+        }
     </style>
 </head>
 <body>
     <div class="login-card">
         <div class="back-button-container">
-            <button class="back-button"><a href="accueil.html" style="text-decoration: none; color: inherit;"><</a></button>
+            <a href="accueil.html" class="back-button"><</a>
         </div>
         <div class="logo-container">
             <img src="images/Group 5.png" alt="">
@@ -156,7 +201,7 @@
         </div>
         <div class="login-form">
             <input type="email" name="email" id="email" class="input-field" placeholder="Entrez votre adresse email" required>
-            <a href="connexion_passwd.html" class="primary-button" style="text-decoration: none;">Continuer</a>
+            <a href="connexion_passwd.html" class="primary-button">Continuer</a>
         </div>
     </div>
 </body>
