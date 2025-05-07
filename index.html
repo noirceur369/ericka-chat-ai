@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loading...</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        .loading-image-container {
+            width: 70px;
+            height: 70px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .loading-image {
+            width: 40px;
+            height: 40px;
+            animation: loading 3s linear infinite; /* L'animation se répète indéfiniment */
+        }
+        @keyframes loading {
+            0% {
+                transform: scale(1);
+                opacity: 0.2;
+            }
+            50% {
+                transform: scale(1.2);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(1);
+                opacity: 0.2;
+            }
+        }
+    </style>
+</head>
+<body align="center">
+    <img src="images/Group 3.png" alt="" style="max-width: 100%; height: auto;"> <br> <br><br><br><br><br>
+    <div class="loading-image-container">
+        <img src="images/Component 2.png" alt="" class="loading-image">
+    </div>
+    <script>
+        setTimeout(function() {
+            window.location.href = "index.html";
+        }, 5000);
+    </script>
+</body>
+</html>
