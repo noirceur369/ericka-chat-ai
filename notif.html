@@ -4,7 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Notifications</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
         @font-face {
             font-family: 'SF Pro Display';
             src: local('SF Pro Display');
@@ -15,7 +17,7 @@
             font-family: Inter, -apple-system, Roboto, Helvetica, sans-serif;
             background-color: #f0f0f0;
             margin: 0;
-            padding: 20px;
+            padding: 0;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -29,6 +31,10 @@
             max-width: 480px;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
             overflow: hidden;
+            height: auto;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
         }
 
         .notification-header {
@@ -40,6 +46,10 @@
             padding: 20px;
             border-bottom: 1px solid #eee;
             text-align: left;
+            display: flex;
+            align-items: center;
+            width: 100%;
+            box-sizing: border-box;
         }
 
         .notification-card {
@@ -50,6 +60,7 @@
             align-items: center;
             background-color: #fff;
             border-bottom: 1px solid #eee;
+            box-sizing: border-box;
         }
 
         .notification-card:last-child {
@@ -65,6 +76,7 @@
 
         .notification-content {
             flex-grow: 1;
+            width: calc(100% - 115px);
         }
 
         .notification-title {
@@ -73,6 +85,7 @@
             line-height: 1.4;
             font-weight: 500;
             margin-bottom: 5px;
+            word-wrap: break-word;
         }
 
         .notification-description {
@@ -80,6 +93,7 @@
             font-size: 12px;
             line-height: 1.3;
             margin: 0;
+            word-wrap: break-word;
         }
 
         .notification-time {
@@ -88,13 +102,17 @@
             font-weight: 700;
             line-height: 1.4;
             margin-left: auto;
+            flex-shrink: 0;
+            width: auto;
         }
 
         /* Responsive adjustments */
         @media (max-width: 600px) {
             .notification-screen {
-                margin: 10px;
-                border-radius: 10px;
+                margin: 0;
+                border-radius: 0;
+                padding: 0;
+                min-height: 100vh;
             }
 
             .notification-header {
@@ -104,6 +122,7 @@
 
             .notification-card {
                 padding: 12px 15px;
+                flex-wrap: wrap;
             }
 
             .notification-icon {
@@ -122,14 +141,115 @@
 
             .notification-time {
                 font-size: 10px;
+                margin-left: 0;
+                width: 100%;
+                text-align: right;
             }
+
+            .notification-content {
+                width: 100%;
+            }
+        }
+
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: -260px;
+            width: 240px;
+            height: 100%;
+            background-color: #fff;
+            box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px 15px;
+            border-radius: 0 30px 0 0;
+            transition: left 0.3s ease;
+            z-index: 10;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            box-sizing: border-box;
+        }
+
+        .sidebar.open {
+            left: 0;
+        }
+
+        .sidebar a {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 15px;
+            font-size: 14px;
+            color: #333;
+            text-decoration: none;
+            font-weight: 700; /* Make sidebar links bold */
+            transition: background-color 0.2s ease, color 0.2s ease;
+            border-radius: 10px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .sidebar a i {
+            color: #4373d8;
+            width: 20px;
+            text-align: center;
+        }
+
+        .sidebar a:hover {
+            background-color: #f0f4ff;
+            color: #4373d8;
+        }
+
+        .button-deconnexion {
+            margin-top: auto;
+            border: none;
+            cursor: pointer;
+            border-radius: 20px;
+            background-color: #090909;
+            min-height: 40px;
+            padding: 10px 20px;
+            font-size: 14px;
+            color: #fff;
+            font-weight: 700; /* Make disconnect button bold */
+            text-align: center;
+            text-decoration: none;
+            display: block;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .button-deconnexion:hover {
+            background-color: #1a1a1a;
+        }
+
+        .hamburger {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: #4373d8;
+            padding: 0;
+            margin-right: 10px;
         }
     </style>
 </head>
 <body>
     <div class="notification-screen">
-        <h1 class="notification-header">Notifications</h1>
-
+        <div style="display: flex; align-items: center; width: 100%; box-sizing: border-box; padding-left: 10px;">
+            <button class="hamburger" onclick="toggleSidebar()">
+                <i class="fas fa-bars"></i>
+            </button>
+            <h1 class="notification-header">Notifications</h1>
+        </div>
+        <nav class="sidebar" id="sidebar">
+            <a href="echanges.html"><i class="fas fa-exchange-alt"></i> Échanger</a>
+            <a href="historiq.html"><i class="fas fa-clock-rotate-left"></i> Historique</a>
+            <a href="outils.html"><i class="fas fa-wrench"></i> Outils</a>
+            <a href="se_recharger.html"><i class="fas fa-wallet"></i> Se recharger</a>
+            <a href="notif.html"><i class="fas fa-bell"></i> Notifications</a>
+            <a href="code_promo.html"><i class="fas fa-ticket-alt"></i> Code promo</a>
+            <a href="parametres.html"><i class="fas fa-cog"></i> Paramètres</a>
+            <button class="button-deconnexion">Deconnexion</button>
+        </nav>
         <article class="notification-card">
             <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/f41b77500e3c8ee089777844cb467be2dc3cb8ca?placeholderIfAbsent=true&apiKey=38e47893336945848379668f2dc133bd" alt="Notification icon" class="notification-icon">
             <div class="notification-content">
@@ -142,5 +262,36 @@
             <time class="notification-time">3h</time>
         </article>
     </div>
+    <script>
+        const sidebar = document.getElementById('sidebar');
+        const hamburger = document.querySelector('.hamburger');
+        const body = document.body;
+
+        function toggleSidebar() {
+            sidebar.classList.toggle('open');
+            if (sidebar.classList.contains('open')) {
+                body.style.overflow = 'hidden';
+            } else {
+                body.style.overflow = '';
+            }
+        }
+
+        document.addEventListener('click', function(event) {
+            const isClickInsideSidebar = sidebar.contains(event.target);
+            const isClickOnHamburger = hamburger.contains(event.target);
+
+            if (!isClickInsideSidebar && !isClickOnHamburger) {
+                sidebar.classList.remove('open');
+                body.style.overflow = '';
+            }
+        });
+
+        document.addEventListener('keydown', function(event){
+            if(event.key === 'Escape'){
+                sidebar.classList.remove('open');
+                body.style.overflow = '';
+            }
+        })
+    </script>
 </body>
 </html>
