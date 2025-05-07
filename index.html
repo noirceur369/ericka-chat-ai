@@ -24,13 +24,12 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            max-width: 90%; /* Ajustement de la largeur maximale */
+            max-width: 320px;
             width: 100%;
-            box-sizing: border-box; /* Important pour que le padding n'affecte pas la largeur totale */
         }
 
         img {
-            max-width: 100%; /* L'image prendra 100% de la largeur de son conteneur */
+            max-width: 70%;
             height: auto;
             display: block;
             margin-bottom: 10px;
@@ -55,16 +54,16 @@
             justify-content: center;
         }
 
-        div img {
+        div img { /* Style pour l'image "Qui est ERICKA ?" */
             max-width: 45%;
             margin-bottom: 8px;
         }
 
         footer {
             display: flex;
-            justify-content: center;
+            justify-content: center; /* Centre le bouton horizontalement dans le footer */
             padding-top: 20px;
-            width: 100%;
+            width: 100%; /* Assure que le footer prend toute la largeur pour le centrage */
         }
 
         .navigation-button {
@@ -72,9 +71,9 @@
             border: none;
             padding: 10px;
             cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            display: flex; /* Utilise flexbox pour centrer l'image à l'intérieur du bouton (si nécessaire) */
+            align-items: center; /* Centre verticalement l'image (si nécessaire) */
+            justify-content: center; /* Centre horizontalement l'image (si nécessaire) */
         }
 
         .navigation-button img {
@@ -88,11 +87,11 @@
             .page-container {
                 border-radius: 20px;
                 padding: 20px;
-                max-width: 80%; /* Ajustement de la largeur maximale pour les grands écrans */
+                max-width: 360px;
             }
 
             img {
-                max-width: 100%;
+                max-width: 80%;
                 margin-bottom: 15px;
                 border-radius: 10px;
             }
@@ -114,20 +113,6 @@
 
             .navigation-button img {
                 width: 200px;
-            }
-        }
-
-        /* Media query pour les très grands écrans (tablettes et ordinateurs) */
-        @media (min-width: 768px) {
-            .page-container {
-                max-width: 60%; /* Réduction de la largeur sur les grands écrans */
-            }
-        }
-
-        /* Media query pour les écrans de bureau */
-        @media (min-width: 1200px) {
-            .page-container {
-                max-width: 50%; /* Réduction de la largeur sur les très grands écrans */
             }
         }
     </style>
