@@ -1,140 +1,276 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Historique</title>
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Historique</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
 
-    body {
-      font-family: 'Inter', sans-serif;
-      background-color: #f0f0f0;
-      margin: 0;
-      padding: 20px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-    }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
 
-    .notification-container {
-      border-radius: 15px;
-      background-color: #ffffff;
-      width: 100%;
-      max-width: 480px;
-      padding: 20px;
-      display: flex;
-      flex-direction: column;
-      overflow: hidden;
-      align-items: stretch;
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-    }
+        .notification-container {
+            border-radius: 15px;
+            background-color: #ffffff;
+            width: 100%;
+            max-width: 480px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            align-items: stretch;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
 
-    .header-section {
-      display: flex;
-      width: 100%;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 20px;
-    }
+        .header-section {
+            display: flex;
+            width: 100%;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
 
-    .title {
-      color: #4373d8;
-      font-size: 20px;
-      font-weight: 700;
-      white-space: nowrap;
-      letter-spacing: 0.2px;
-      line-height: 1.4;
-      margin: 0;
-    }
+        .title {
+            color: #4373d8;
+            font-size: 20px;
+            font-weight: 700;
+            white-space: nowrap;
+            letter-spacing: 0.2px;
+            line-height: 1.4;
+            margin: 0;
+        }
 
-    .settings-icon {
-      aspect-ratio: 1;
-      object-fit: contain;
-      object-position: center;
-      width: 24px;
-      flex-shrink: 0;
-      cursor: pointer;
-    }
+        .settings-icon {
+            aspect-ratio: 1;
+            object-fit: contain;
+            object-position: center;
+            width: 24px;
+            flex-shrink: 0;
+            cursor: pointer;
+        }
 
-    .empty-state-message {
-      color: #4c5359;
-      text-align: center;
-      font-size: 12px;
-      font-weight: 400;
-      letter-spacing: 0.2px;
-      line-height: 1.6;
-      margin-top: 30px;
-    }
+        .empty-state-message {
+            color: #4c5359;
+            text-align: center;
+            font-size: 12px;
+            font-weight: 400;
+            letter-spacing: 0.2px;
+            line-height: 1.6;
+            margin-top: 30px;
+            display: block;
+        }
 
-    .refer-image {
-      width: 60%;
-      max-width: 180px;
-      height: auto;
-      display: block;
-      margin: 30px auto 15px auto;
-    }
+        .refer-image {
+            width: 60%;
+            max-width: 180px;
+            height: auto;
+            display: block;
+            margin: 30px auto 15px auto;
+        }
 
-    /* Responsive */
-    @media (max-width: 600px) {
-      .notification-container {
-        margin: 10px;
-        border-radius: 10px;
-        padding: 15px;
-      }
+        .notification-content {
+            color: #000;
+            text-align: left;
+            font-size: 14px;
+            font-weight: 400;
+            letter-spacing: 0.2px;
+            line-height: 1.6;
+            margin-top: 0;
+            display: none;
+            padding: 10px;
+            border-radius: 8px;
+            background-color: #f0f0f0;
+            border: 1px solid #ddd;
+            margin-bottom: 20px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
 
-      .title {
-        font-size: 18px;
-      }
+        .notification-content:hover {
+            background-color: #e0e0e0;
+        }
 
-      .settings-icon {
-        width: 22px;
-      }
+        .search-container {
+            display: none;
+            width: 100%;
+            margin-top: 20px;
+            align-items: center;
+            gap: 10px;
+        }
 
-      .empty-state-message {
-        font-size: 11px;
-      }
+        .search-input {
+            flex: 1;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 14px;
+        }
 
-      .refer-image {
-        margin-top: 20px;
-      }
-    }
-  </style>
+        .search-button {
+            padding: 8px 16px;
+            background-color: #4373d8;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .notification-container {
+                margin: 10px;
+                border-radius: 10px;
+                padding: 15px;
+            }
+
+            .title {
+                font-size: 18px;
+            }
+
+            .settings-icon {
+                width: 22px;
+            }
+
+            .empty-state-message {
+                font-size: 11px;
+            }
+
+            .refer-image {
+                margin-top: 20px;
+            }
+
+            .search-container {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 10px;
+            }
+
+            .search-button {
+                padding: 10px;
+            }
+        }
+
+        #notification, .refer-image {
+            margin-left: auto;
+            margin-right: auto;
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
-  <main class="notification-container">
-    <div class="header-section">
-      <h1 class="title">Historiques</h1>
-      <!-- Remplace l'image par une icône corbeille -->
-      <img
-        src="https://cdn-icons-png.flaticon.com/512/1214/1214428.png"
-        class="settings-icon"
-        alt="Supprimer notification"
-        onclick="confirmDelete()"
-      />
-    </div>
+    <main class="notification-container">
+        <div class="header-section">
+            <h1 class="title">Historiques</h1>
+            <img
+                src="https://cdn-icons-png.flaticon.com/512/1214/1214428.png"
+                class="settings-icon"
+                alt="Supprimer notification"
+                onclick="confirmDelete()"
+            />
+        </div>
 
-    <img src="images/Refer.png" alt="Image référentielle" class="refer-image" />
+        <img src="images/Refer.png" alt="Image référentielle" class="refer-image" id="referImage"/>
 
-    <p class="empty-state-message" id="notification">
-      Aucune notification pour le moment
-    </p>
-  </main>
+        <p class="empty-state-message" id="notification">
+            Aucune notification pour le moment
+        </p>
+        <div class="notification-content" id="notificationContent" onclick="deleteNotification()"></div>
 
-  <script>
-    function confirmDelete() {
-      const messageElement = document.getElementById("notification");
-      if (messageElement && messageElement.textContent.trim() !== "Aucune notification pour le moment") {
-        if (confirm("Voulez-vous vraiment supprimer cette notification ?")) {
-          messageElement.textContent = "Aucune notification pour le moment";
-          alert("Notification supprimée.");
+        <div class="search-container" id="searchContainer">
+            <input type="text" class="search-input" placeholder="Rechercher une notification..." id="searchNotifications"/>
+            <button class="search-button" onclick="searchNotification()">Rechercher</button>
+        </div>
+    </main>
+
+    <script>
+        const notificationElement = document.getElementById("notification");
+        const referImageElement = document.getElementById("referImage");
+        const notificationContentElement = document.getElementById("notificationContent");
+        const searchContainer = document.getElementById("searchContainer");
+        const searchInput = document.getElementById("searchNotifications");
+
+        let notifications = [];
+        let selectedNotification = null;
+
+        function displayNotification(message) {
+            notificationElement.style.display = "none";
+            referImageElement.style.display = "none";
+            notificationContentElement.textContent = message;
+            notificationContentElement.style.display = "block";
+            searchContainer.style.display = "flex";
+            notifications.push(message);
         }
-      } else {
-        alert("Aucune notification à supprimer.");
-      }
-    }
-  </script>
+
+        function clearNotification() {
+            notificationElement.style.display = "block";
+            referImageElement.style.display = "block";
+            notificationContentElement.textContent = "";
+            notificationContentElement.style.display = "none";
+            searchContainer.style.display = "none";
+            notifications = [];
+            selectedNotification = null;
+        }
+
+        function confirmDelete() {
+            if (notifications.length > 0) {
+                if (confirm("Voulez-vous vraiment supprimer cette notification ?")) {
+                    if (selectedNotification) {
+                        deleteNotification();
+                    } else {
+                         alert("Veuillez sélectionner une notification à supprimer.");
+                    }
+                }
+            } else {
+                alert("Aucune notification à supprimer.");
+            }
+        }
+
+        function deleteNotification() {
+             if (selectedNotification) {
+                const index = notifications.indexOf(selectedNotification);
+                if (index > -1) {
+                    notifications.splice(index, 1);
+                }
+                clearNotification();
+                if (notifications.length > 0) {
+                    displayNotification(notifications.join("\n"));
+                }
+                alert("Notification supprimée.");
+            } else {
+                alert("Aucune notification sélectionnée.");
+            }
+        }
+
+        function searchNotification() {
+            const searchTerm = searchInput.value.toLowerCase();
+            if (notifications.length > 0) {
+                const found = notifications.filter(notification => notification.toLowerCase().includes(searchTerm));
+                if (found.length > 0) {
+                    notificationContentElement.textContent = "Résultats de la recherche : \n\n" + found.join("\n");
+                } else {
+                    notificationContentElement.textContent = "Aucune notification correspondante trouvée.";
+                }
+            } else {
+                alert("Aucune notification à rechercher.");
+            }
+        }
+
+        notificationContentElement.addEventListener('click', () => {
+            selectedNotification = notificationContentElement.textContent;
+        });
+
+        // Exemple d'utilisation de la fonction displayNotification :
+        // displayNotification("Ceci est un exemple de notification !");
+    </script>
 </body>
 </html>
-
