@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="fr">
   <head>
     <meta charset="UTF-8" />
@@ -21,15 +21,18 @@
       .container {
         background-color: #fff;
         border-radius: 30px;
-        max-width: 500px;
-        height: 100vh;
+        max-width: 95%;
+        height: auto;
         box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
         display: flex;
         flex-direction: column;
         padding: 20px;
-        margin: 0 auto;
+        margin: 20px auto;
         position: relative;
         z-index: 1;
+        min-height: calc(
+          100vh - 40px
+        ); /* Ensure container takes up full viewport height minus margin */
       }
 
       .header {
@@ -89,7 +92,7 @@
         background-color: #e2e2e2;
         padding: 10px;
         border-radius: 10px;
-        max-width: 80%;
+        max-width: 90%;
         font-size: 14px;
         color: #333;
         word-wrap: break-word;
@@ -103,6 +106,7 @@
         margin-bottom: 10px;
         text-align: center;
         position: relative;
+        display: none;
       }
 
       .file-name {
@@ -121,6 +125,7 @@
 
       .input-section {
         margin-top: 10px;
+        width: 100%;
       }
 
       .input-container {
@@ -130,6 +135,7 @@
         border-radius: 15px;
         padding: 8px 12px;
         margin-bottom: 8px;
+        width: 100%;
       }
 
       .user-input {
@@ -139,6 +145,7 @@
         outline: none;
         font-size: 14px;
         color: #1b1f26;
+        width: 100%;
       }
 
       .send-button {
@@ -160,6 +167,7 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
+        width: 100%;
       }
 
       .action-icon {
@@ -188,6 +196,7 @@
         justify-content: flex-start;
         z-index: 1000;
         transition: left 0.3s ease;
+        overflow-y: auto;
       }
 
       .sidebar.open {
@@ -218,10 +227,12 @@
         color: #4373d8;
       }
 
-      @media (max-width: 480px) {
+      @media (max-width: 768px) {
         .container {
           border-radius: 20px;
           padding: 15px;
+          margin: 10px auto;
+          max-width: 95%;
         }
 
         .main-logo {
@@ -241,7 +252,86 @@
         .user-input {
           font-size: 13px;
         }
+
+        .header {
+          flex-direction: row;
+        }
+
+        .input-container {
+          flex-direction: row;
+        }
+
+        .action-bar {
+          flex-direction: row;
+        }
+
+        .sidebar {
+          width: 90%;
+          max-width: 320px;
+        }
       }
+
+      @media (max-width: 480px) {
+        .container {
+          padding: 10px;
+          border-radius: 15px;
+          margin: 10px auto;
+        }
+
+        .header {
+          flex-direction: column;
+          text-align: center;
+        }
+
+        .header-logo,
+        .settings-icon {
+          margin-bottom: 10px;
+        }
+
+        .main-logo {
+          width: 60px;
+        }
+
+        .features {
+          gap: 10px;
+          margin-bottom: 15px;
+        }
+
+        .feature-card {
+          font-size: 10px;
+          padding: 10px;
+        }
+
+        .chat-message {
+          font-size: 12px;
+          padding: 8px;
+        }
+
+        .input-container {
+          padding: 8px;
+        }
+
+        .user-input {
+          font-size: 12px;
+        }
+
+        .send-button,
+        .action-icon {
+          width: 24px;
+          height: 24px;
+        }
+
+        .action-bar {
+          justify-content: space-around;
+        }
+
+        .button-deconnexion {
+          margin-top: 30px;
+          font-size: 16px;
+          padding: 12px;
+        }
+      }
+
       .button-deconnexion {
         margin-top: 70px;
         border: none;
@@ -256,9 +346,9 @@
         text-align: center;
         text-decoration: none;
         display: inline-block;
+        width: 100%;
       }
     </style>
-
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap"
       rel="stylesheet"
@@ -269,7 +359,6 @@
     />
   </head>
   <body>
-    <!-- Sidebar -->
     <nav class="sidebar" id="sidebar">
       <a href="echanges.html"><i class="fas fa-exchange-alt"></i> Échanger</a>
       <a href="historiq.html"><i class="fas fa-clock-rotate-left"></i> Historique</a>
@@ -281,19 +370,34 @@
       <button class="button-deconnexion">Deconnexion</button>
     </nav>
 
-    <!-- Main -->
     <main class="container" id="main">
       <header class="header">
-        <button class="hamburger" id="hamburger"><i class="fas fa-bars"></i></button>
-        <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/e332f709bc54cd7b905ba438a1bf5c154160c423" alt="Settings" class="settings-icon" />
+        <button class="hamburger" id="hamburger">
+          <i class="fas fa-bars"></i>
+        </button>
+        <img
+          src="https://cdn.builder.io/api/v1/image/assets/TEMP/e332f709bc54cd7b905ba438a1bf5c154160c423"
+          alt="Settings"
+          class="settings-icon"
+        />
       </header>
 
-      <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/1681d395f5dfaa65851af5951e0b242de322fdd0" alt="Main logo" class="main-logo" />
+      <img
+        src="https://cdn.builder.io/api/v1/image/assets/TEMP/1681d395f5dfaa65851af5951e0b242de322fdd0"
+        alt="Main logo"
+        class="main-logo"
+      />
 
       <section class="features" id="features">
-        <div class="feature-card">Se souvient de ce que l'utilisateur a dit plus tôt dans la conversation</div>
-        <div class="feature-card">Connaissances illimitées du monde et des événements</div>
-        <div class="feature-card">Peut résoudre tous vos problèmes de vos matières scientifiques</div>
+        <div class="feature-card">
+          Se souvient de ce que l'utilisateur a dit plus tôt dans la conversation
+        </div>
+        <div class="feature-card">
+          Connaissances illimitées du monde et des événements
+        </div>
+        <div class="feature-card">
+          Peut résoudre tous vos problèmes de vos matières scientifiques
+        </div>
       </section>
 
       <div class="chat-area" id="chat-area"></div>
@@ -305,20 +409,26 @@
         </div>
 
         <div class="input-container">
-          <input type="text" class="user-input" placeholder="Tapez votre message..." id="user-input" />
+          <input
+            type="text"
+            class="user-input"
+            placeholder="Tapez votre message..."
+            id="user-input"
+          />
           <button class="send-button" id="send-button">
             <i class="fas fa-paper-plane"></i>
           </button>
         </div>
 
         <div class="action-bar">
-          <label for="file-upload" class="action-icon"><i class="fas fa-paperclip"></i></label>
+          <label for="file-upload" class="action-icon"
+            ><i class="fas fa-paperclip"></i
+          ></label>
           <input type="file" id="file-upload" />
           <button class="action-icon"><i class="fas fa-microphone"></i></button>
         </div>
       </footer>
     </main>
-
     <script>
       const sidebar = document.getElementById("sidebar");
       const hamburger = document.getElementById("hamburger");
@@ -381,47 +491,46 @@
         }
       });
       // Activer/désactiver le bouton envoyer selon si l'input est vide
-userInput.addEventListener("input", () => {
-  if (userInput.value.trim() !== "") {
-    sendButton.classList.add("active");
-    sendButton.disabled = false;
-  } else {
-    sendButton.classList.remove("active");
-    sendButton.disabled = true;
-  }
-});
+      userInput.addEventListener("input", () => {
+        if (userInput.value.trim() !== "") {
+          sendButton.classList.add("active");
+          sendButton.disabled = false;
+        } else {
+          sendButton.classList.remove("active");
+          sendButton.disabled = true;
+        }
+      });
 
-// Fonction d'envoi du message
-function sendMessage() {
-  const message = userInput.value.trim();
-  if (message === "") return;
+      // Fonction d'envoi du message
+      function sendMessage() {
+        const message = userInput.value.trim();
+        if (message === "") return;
 
-  // Vider la zone de chat
-  chatArea.innerHTML = "";
+        // Vider la zone de chat
+        chatArea.innerHTML = "";
 
-  // Créer et ajouter le nouveau message
-  const messageDiv = document.createElement("div");
-  messageDiv.className = "chat-message";
-  messageDiv.textContent = message;
-  chatArea.appendChild(messageDiv);
+        // Créer et ajouter le nouveau message
+        const messageDiv = document.createElement("div");
+        messageDiv.className = "chat-message";
+        messageDiv.textContent = message;
+        chatArea.appendChild(messageDiv);
 
-  // Réinitialiser le champ
-  userInput.value = "";
-  sendButton.classList.remove("active");
-  sendButton.disabled = true;
-}
+        // Réinitialiser le champ
+        userInput.value = "";
+        sendButton.classList.remove("active");
+        sendButton.disabled = true;
+      }
 
-// Gérer le clic sur le bouton envoyer
-sendButton.addEventListener("click", sendMessage);
+      // Gérer le clic sur le bouton envoyer
+      sendButton.addEventListener("click", sendMessage);
 
-// Gérer la touche Entrée
-userInput.addEventListener("keydown", (e) => {
-  if (e.key === "Enter") {
-    e.preventDefault();
-    sendMessage();
-  }
-});
-
+      // Gérer la touche Entrée
+      userInput.addEventListener("keydown", (e) => {
+        if (e.key === "Enter") {
+          e.preventDefault();
+          sendMessage();
+        }
+      });
     </script>
   </body>
 </html>
