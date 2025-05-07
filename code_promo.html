@@ -1,354 +1,492 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Parrainage</title>
-  <style>
-    :root {
-      --primary-blue: #4373d8;
-      --primary-black: #090909;
-      --text-gray: #4c5359;
-      --background-light: #f5f5f5;
-    }
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Parrainage</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-blue: #4373d8;
+            --primary-black: #090909;
+            --text-gray: #4c5359;
+            --background-light: #f5f5f5;
+        }
 
-    body {
-      margin: 0;
-      padding: 0; /* Supprimé la valeur fixe de 20px */
-      font-family: 'Inter', sans-serif;
-      background-color: #f0f0f0;
-      display: flex;
-      justify-content: center;
-      align-items: center; /* Ajouté pour centrer verticalement le contenu */
-      min-height: 100vh;
-    }
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
 
-    .promo-container {
-      border-radius: 15px;
-      background-color: #fff;
-      display: flex;
-      flex-direction: column;
-      overflow: hidden;
-      align-items: center;
-      width: 100%;
-      max-width: 480px;
-      padding: 2rem 1rem; /* увеличен padding для promo-container */
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-      box-sizing: border-box;
-      min-height: auto; /* Changed from 100% to auto */
-    }
+        .promo-container {
+            border-radius: 15px;
+            background-color: #fff;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            align-items: center;
+            width: 100%;
+            max-width: 480px;
+            padding: 2rem 1rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            box-sizing: border-box;
+            min-height: auto;
+            position: relative;
+        }
 
-    .promo-header {
-      width: 100%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      box-sizing: border-box;
-    }
+        .promo-header {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            box-sizing: border-box;
+        }
 
-    .promo-title {
-      color: var(--primary-blue);
-      font-size: 1.2rem; /* Increased font size */
-      font-weight: 700;
-      align-self: flex-start;
-      margin-left: 1.5rem; /* Increased margin-left */
-      margin-bottom: 0.5rem; /* Added margin-bottom */
-    }
+        .promo-title {
+            color: var(--primary-blue);
+            font-size: 1.2rem;
+            font-weight: 700;
+            align-self: flex-start;
+            margin-left: 1.5rem;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            width: 100%;
+            justify-content: space-between;
+        }
 
-    .promo-image {
-      width: 90%; /* Increased width */
-      margin-top: 2rem;
-      max-width: 300px; /* Increased max-width */
-      height: auto;
-    }
+        .promo-image {
+            width: 90%;
+            margin-top: 2rem;
+            max-width: 300px;
+            height: auto;
+        }
 
-    .share-heading {
-      color: var(--primary-black);
-      text-align: center;
-      font-size: 2rem;
-      font-weight: 700;
-      margin-top: 2rem; /* Increased margin-top */
-    }
+        .share-heading {
+            color: var(--primary-black);
+            text-align: center;
+            font-size: 2rem;
+            font-weight: 700;
+            margin-top: 2rem;
+        }
 
-    .code-section {
-      width: 100%;
-      max-width: 360px;
-      position: relative;
-      margin-top: 1.5rem;
-    }
+        .code-section {
+            width: 100%;
+            max-width: 360px;
+            position: relative;
+            margin-top: 1.5rem;
+        }
 
-    .code-display {
-      background-color: var(--background-light);
-      border-radius: 15px;
-      padding: 0.8rem; /* Increased padding */
-      font-size: 1rem;
-      font-weight: 500;
-      text-align: center;
-      color: var(--primary-black);
-      user-select: all;
-      word-wrap: break-word;
-    }
+        .code-display {
+            background-color: var(--background-light);
+            border-radius: 15px;
+            padding: 0.8rem;
+            font-size: 1rem;
+            font-weight: 500;
+            text-align: center;
+            color: var(--primary-black);
+            user-select: all;
+            word-wrap: break-word;
+        }
 
-    .copy-button {
-      position: absolute;
-      right: 0.5rem;
-      top: 50%;
-      transform: translateY(-50%);
-      display: flex;
-      align-items: center;
-      gap: 0.5rem; /* Increased gap */
-      background-color: rgba(60, 60, 67, 0.29);
-      border-radius: 10px;
-      padding: 0.3rem 0.7rem; /* Increased horizontal padding */
-      border: none;
-      cursor: pointer;
-    }
+        .copy-button {
+            position: absolute;
+            right: 0.5rem;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background-color: rgba(60, 60, 67, 0.29);
+            border-radius: 10px;
+            padding: 0.3rem 0.7rem;
+            border: none;
+            cursor: pointer;
+        }
 
-    .copy-icon {
-      width: 1.2rem; /* Increased size */
-      height: 1.2rem; /* Increased size */
-    }
+        .copy-icon {
+            width: 1.2rem;
+            height: 1.2rem;
+        }
 
-    .copy-button span {
-      font-size: 0.8rem; /* Increased font size */
-      color: var(--primary-black);
-      font-weight: 500; /* Added font weight */
-    }
+        .copy-button span {
+            font-size: 0.8rem;
+            color: var(--primary-black);
+            font-weight: 500;
+        }
 
-    .info-section {
-      width: 100%;
-      max-width: 360px;
-      margin-top: 1rem;
-    }
+        .info-section {
+            width: 100%;
+            max-width: 360px;
+            margin-top: 1rem;
+        }
 
-    .info-text {
-      background-color: rgba(67, 115, 216, 0.1);
-      border-radius: 20px;
-      padding: 1rem; /* Increased padding */
-      font-size: 0.9rem; /* Increased font size */
-      text-align: center;
-      color: var(--text-gray);
-      line-height: 1.5; /* Increased line height */
-    }
+        .info-text {
+            background-color: rgba(67, 115, 216, 0.1);
+            border-radius: 20px;
+            padding: 1rem;
+            font-size: 0.9rem;
+            text-align: center;
+            color: var(--text-gray);
+            line-height: 1.5;
+        }
 
-    .action-buttons {
-      width: 100%;
-      max-width: 360px;
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-      margin-top: 2rem; /* Increased margin-top */
-      margin-bottom: 0;
-    }
+        .action-buttons {
+            width: 100%;
+            max-width: 360px;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-top: 2rem;
+            margin-bottom: 0;
+        }
 
-    .primary-button,
-    .secondary-button {
-      border-radius: 20px;
-      padding: 1rem; /* Increased padding */
-      font-size: 1rem;
-      font-weight: 700;
-      border: none;
-      cursor: pointer;
-      width: 100%;
-      text-decoration: none;
-      display: inline-block;
-      text-align: center;
-      box-sizing: border-box;
-    }
+        .primary-button,
+        .secondary-button {
+            border-radius: 20px;
+            padding: 1rem;
+            font-size: 1rem;
+            font-weight: 700;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+            box-sizing: border-box;
+        }
 
-    .primary-button {
-      background-color: var(--primary-black);
-      color: #fff;
-    }
+        .primary-button {
+            background-color: var(--primary-black);
+            color: #fff;
+            font-weight: bold;
+        }
 
-    .secondary-button {
-      color: var(--primary-blue);
-      background-color: transparent;
-    }
+        .secondary-button {
+            color: var(--primary-blue);
+            background-color: transparent;
+            font-weight: bold;
+        }
 
-    /* Responsive adjustments */
-    @media (max-width: 768px) { /* размер экрана планшета */
-      padding: 15px;
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            padding: 15px;
 
-      .promo-container {
-        padding: 1.5rem;
-      }
+            .promo-container {
+                padding: 1.5rem;
+            }
 
-      .promo-title {
-        margin-left: 1rem;
-        font-size: 1.1rem;
-      }
+            .promo-title {
+                margin-left: 1rem;
+                font-size: 1.1rem;
+            }
 
-      .promo-image {
-        width: 90%;
-        max-width: 280px;
-      }
+            .promo-image {
+                width: 90%;
+                max-width: 280px;
+            }
 
-      .share-heading {
-        font-size: 1.8rem;
-      }
+            .share-heading {
+                font-size: 1.8rem;
+            }
 
-      .code-display {
-        font-size: 0.9rem;
-        padding: 0.7rem;
-      }
+            .code-display {
+                font-size: 0.9rem;
+                padding: 0.7rem;
+            }
 
-      .copy-button {
-        padding: 0.25rem 0.6rem;
-      }
+            .copy-button {
+                padding: 0.25rem 0.6rem;
+            }
 
-      .copy-button span {
-        font-size: 0.75rem;
-      }
+            .copy-button span {
+                font-size: 0.75rem;
+            }
 
-      .info-text {
-        font-size: 0.85rem;
-        padding: 0.8rem;
-      }
+            .info-text {
+                font-size: 0.85rem;
+                padding: 0.8rem;
+            }
 
-      .primary-button,
-      .secondary-button {
-        font-size: 0.95rem;
-        padding: 0.9rem;
-      }
+            .primary-button,
+            .secondary-button {
+                font-size: 0.95rem;
+                padding: 0.9rem;
+            }
 
-      .action-buttons {
-        gap: 1rem;
-      }
-    }
+            .action-buttons {
+                gap: 1rem;
+            }
+        }
 
-    @media (max-width: 480px) {
-      padding: 10px;
+        @media (max-width: 480px) {
+            padding: 10px;
 
-      .promo-container {
-        padding: 1rem;
-        border-radius: 10px;
-      }
+            .promo-container {
+                padding: 1rem;
+                border-radius: 10px;
+            }
 
-      .promo-title {
-        margin-left: 0.5rem;
-        font-size: 1rem;
-      }
+            .promo-title {
+                margin-left: 0.5rem;
+                font-size: 1rem;
+            }
 
-      .promo-image {
-        width: 95%; /* Increased width */
-        max-width: 250px; /* Increased max-width */
-      }
+            .promo-image {
+                width: 95%;
+                max-width: 250px;
+            }
 
-      .share-heading {
-        font-size: 1.5rem; /* Further reduced heading size */
-      }
+            .share-heading {
+                font-size: 1.5rem;
+            }
 
-      .code-display {
-        font-size: 0.85rem; /* Keep code display size */
-        padding: 0.6rem;
-      }
+            .code-display {
+                font-size: 0.85rem;
+                padding: 0.6rem;
+            }
 
-      .copy-button {
-        padding: 0.2rem 0.4rem;
-        right: 0.2rem;
-      }
+            .copy-button {
+                padding: 0.2rem 0.4rem;
+                right: 0.2rem;
+            }
 
-      .copy-button span {
-        font-size: 0.7rem; /* Smaller copy button text */
-      }
+            .copy-button span {
+                font-size: 0.7rem;
+            }
 
-      .info-text {
-        font-size: 0.8rem; /* Keep info text size */
-        padding: 0.7rem;
-      }
+            .info-text {
+                font-size: 0.8rem;
+                padding: 0.7rem;
+            }
 
-      .primary-button,
-      .secondary-button {
-        font-size: 0.9rem; /* Slightly smaller button text */
-        padding: 0.8rem;
-      }
+            .primary-button,
+            .secondary-button {
+                font-size: 0.9rem;
+                padding: 0.8rem;
+            }
 
-      .action-buttons {
-        gap: 0.75rem;
-      }
-    }
+            .action-buttons {
+                gap: 0.75rem;
+            }
+        }
 
-    /* For very small screens, like portrait phones */
-    @media (max-width: 375px) {
-      .promo-title {
-        font-size: 0.95rem;
-      }
+        @media (max-width: 375px) {
+            .promo-title {
+                font-size: 0.95rem;
+            }
 
-      .share-heading {
-        font-size: 1.25rem;
-      }
+            .share-heading {
+                font-size: 1.25rem;
+            }
 
-      .code-display {
-        font-size: 0.8rem;
-      }
+            .code-display {
+                font-size: 0.8rem;
+            }
 
-      .info-text {
-        font-size: 0.75rem;
-        padding: 0.6rem;
-      }
+            .info-text {
+                font-size: 0.75rem;
+                padding: 0.6rem;
+            }
 
-      .primary-button,
-      .secondary-button {
-        font-size: 0.85rem;
-      }
-    }
-  </style>
+            .primary-button,
+            .secondary-button {
+                font-size: 0.85rem;
+            }
+        }
+
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: -260px;
+            width: 240px;
+            height: 100%;
+            background-color: #fff;
+            box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px 15px;
+            border-radius: 0 30px 0 0;
+            transition: left 0.3s ease;
+            z-index: 10;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            box-sizing: border-box;
+        }
+
+        .sidebar.open {
+            left: 0;
+        }
+
+        .sidebar a {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 15px;
+            font-size: 14px;
+            color: #333;
+            text-decoration: none;
+            font-weight: 500;
+            transition: background-color 0.2s ease, color 0.2s ease;
+            border-radius: 10px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .sidebar a i {
+            color: #4373d8;
+            width: 20px;
+            text-align: center;
+        }
+
+        .sidebar a:hover {
+            background-color: #f0f4ff;
+            color: #4373d8;
+        }
+
+        .button-deconnexion {
+            margin-top: auto;
+            border: none;
+            cursor: pointer;
+            border-radius: 20px;
+            background-color: #090909;
+            min-height: 40px;
+            padding: 10px 20px;
+            font-size: 14px;
+            color: #fff;
+            font-weight: 300;
+            text-align: center;
+            text-decoration: none;
+            display: block;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .button-deconnexion:hover {
+            background-color: #1a1a1a;
+        }
+
+        .hamburger {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: #4373d8;
+            padding: 0;
+            margin-right: 10px;
+        }
+
+        .sidebar a {
+            font-weight: bold;
+        }
+
+    </style>
 </head>
 <body>
-  <main class="promo-container">
-    <section class="promo-header">
-      <h1 class="promo-title">Code promo</h1>
-      <img
-        src="https://cdn.builder.io/api/v1/image/assets/TEMP/757428803c80407ba73a0f1b9a1c1ec4fc16bd65?placeholderIfAbsent=true&apiKey=38e47893336945848379668f2dc133bd"
-        alt="Promo illustration"
-        class="promo-image"
-      />
-      <h2 class="share-heading">Partagez votre code</h2>
-    </section>
+    <main class="promo-container">
+        <section class="promo-header">
+            <div style="display: flex; align-items: center; width: 100%; justify-content: space-between;">
+                <button class="hamburger" onclick="toggleSidebar()">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <h1 class="promo-title">Code promo</h1>
+            </div>
+            <img
+                src="https://cdn.builder.io/api/v1/image/assets/TEMP/757428803c80407ba73a0f1b9a1c1ec4fc16bd65?placeholderIfAbsent=true&apiKey=38e47893336945848379668f2dc133bd"
+                alt="Promo illustration"
+                class="promo-image"
+            />
+            <h2 class="share-heading">Partagez votre code</h2>
+        </section>
 
-    <section class="code-section">
-      <div class="code-display" id="promoCode">RS4J RE8 JFF83</div>
-      <button class="copy-button" onclick="copyPromoCode()">
-        <img
-          src="https://cdn.builder.io/api/v1/image/assets/TEMP/24c456fd350d32c207786a3e2fbee659f8e5d3d5?placeholderIfAbsent=true&apiKey=38e47893336945848379668f2dc133bd"
-          alt="Copy"
-          class="copy-icon"
-        />
-        <span>Copier</span>
-      </button>
-    </section>
+        <nav class="sidebar" id="sidebar">
+            <a href="echanges.html"><i class="fas fa-exchange-alt"></i> Échanger</a>
+            <a href="historiq.html"><i class="fas fa-clock-rotate-left"></i> Historique</a>
+            <a href="outils.html"><i class="fas fa-wrench"></i> Outils</a>
+            <a href="se_recharger.html"><i class="fas fa-wallet"></i> Se recharger</a>
+            <a href="notif.html"><i class="fas fa-bell"></i> Notifications</a>
+            <a href="code_promo.html"><i class="fas fa-ticket-alt"></i> Code promo</a>
+            <a href="parametres.html"><i class="fas fa-cog"></i> Paramètres</a>
+            <button class="button-deconnexion">Deconnexion</button>
+        </nav>
 
-    <section class="info-section">
-      <p class="info-text">
-        Partagez votre code à <strong>+10 amis(es)</strong> et gagnez jusqu'à<br />1
-        500 FCFA lorsque votre code est utilisé
-      </p>
-    </section>
+        <section class="code-section">
+            <div class="code-display" id="promoCode">RS4J RE8 JFF83</div>
+            <button class="copy-button" onclick="copyPromoCode()">
+                <img
+                    src="https://cdn.builder.io/api/v1/image/assets/TEMP/24c456fd350d32c207786a3e2fbee659f8e5d3d5?placeholderIfAbsent=true&apiKey=38e47893336945848379668f2dc133bd"
+                    alt="Copy"
+                    class="copy-icon"
+                />
+                <span>Copier</span>
+            </button>
+        </section>
 
-    <section class="action-buttons">
-      <a href="parrainage.html" class="primary-button">Parrainez un ami</a>
-      <a href="recommandation.html" class="secondary-button">Recommandations</a>
-    </section>
-  </main>
+        <section class="info-section">
+            <p class="info-text">
+                Partagez votre code à <strong>+10 amis(es)</strong> et gagnez jusqu'à<br />1
+                500 FCFA lorsque votre code est utilisé
+            </p>
+        </section>
 
-  <script>
-    function copyPromoCode() {
-      const promoCodeElement = document.getElementById("promoCode");
-      const code = promoCodeElement.textContent;
+        <section class="action-buttons">
+            <a href="parrainage.html" class="primary-button">Parrainez un ami</a>
+            <a href="recommandation.html" class="secondary-button">Recommandations</a>
+        </section>
+    </main>
 
-      navigator.clipboard
-        .writeText(code)
-        .then(() => {
-          alert("Code promo copié dans le presse-papiers !");
-        })
-        .catch((err) => {
-          console.error("Erreur lors de la copie du code: ", err);
-          alert(
-            "Impossible de copier le code pour le moment. Veuillez le sélectionner et le copier manuellement."
-          );
+    <script>
+        function copyPromoCode() {
+            const promoCodeElement = document.getElementById("promoCode");
+            const code = promoCodeElement.textContent;
+
+            navigator.clipboard
+                .writeText(code)
+                .then(() => {
+                    alert("Code promo copié dans le presse-papiers !");
+                })
+                .catch((err) => {
+                    console.error("Erreur lors de la copie du code: ", err);
+                    alert(
+                        "Impossible de copier le code pour le moment. Veuillez le sélectionner et le copier manuellement."
+                    );
+                });
+        }
+
+        const sidebar = document.getElementById('sidebar');
+        const hamburger = document.querySelector('.hamburger');
+        const body = document.body;
+
+        function toggleSidebar() {
+            sidebar.classList.toggle('open');
+            if (sidebar.classList.contains('open')) {
+                body.style.overflow = 'hidden';
+            } else {
+                body.style.overflow = '';
+            }
+        }
+
+        document.addEventListener('click', function (event) {
+            const isClickInsideSidebar = sidebar.contains(event.target);
+            const isClickOnHamburger = hamburger.contains(event.target);
+
+            if (!isClickInsideSidebar && !isClickOnHamburger) {
+                sidebar.classList.remove('open');
+                body.style.overflow = '';
+            }
         });
-    }
-  </script>
+
+        document.addEventListener('keydown', function (event) {
+            if (event.key === 'Escape') {
+                sidebar.classList.remove('open');
+                body.style.overflow = '';
+            }
+        })
+    </script>
 </body>
 </html>
