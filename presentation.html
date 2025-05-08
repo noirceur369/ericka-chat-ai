@@ -13,30 +13,30 @@
             min-height: 100vh;
             background-color: #f5f5f5;
             margin: 0;
-            padding: 0; /* Supprimer le padding par défaut du body */
+            padding: 0;
         }
 
         .page-container {
             background-color: #fff;
-            border-radius: 0; /* Enlever les bordures arrondies pour plein écran sur mobile */
+            border-radius: 0; /* Retirer le cadre sur mobile */
             padding: 15px;
-            box-shadow: none; /* Supprimer l'ombre pour un style plus plat sur mobile */
+            box-shadow: none; /* Retirer l'ombre sur mobile */
             display: flex;
             flex-direction: column;
             align-items: center;
             max-width: 100%; /* Laisser prendre toute la largeur */
             width: 100%;
-            min-height: 100vh; /* Assurer une hauteur minimale de 100vh */
+            min-height: 100vh; /* Assurer 100% de la hauteur de la vue */
             box-sizing: border-box; /* Inclure padding et border dans la largeur/hauteur */
         }
 
         img {
-            max-width: 100%; /* Les images prennent 100% de la largeur du conteneur parent */
+            max-width: 100%;
             height: auto;
             display: block;
             margin-bottom: 10px;
-            border-radius: 0; /* Enlever les bordures arrondies des images sur mobile */
-            box-shadow: none; /* Supprimer les ombres des images sur mobile */
+            border-radius: 0; /* Retirer les bordures arrondies sur mobile */
+            box-shadow: none; /* Retirer les ombres sur mobile */
         }
 
         h1 {
@@ -66,7 +66,7 @@
             justify-content: center;
             padding-top: 20px;
             width: 100%;
-            margin-top: auto; /* Pousser le footer en bas de la page */
+            margin-top: auto;
         }
 
         .navigation-button {
@@ -88,18 +88,18 @@
         /* Media query pour les écrans plus grands */
         @media (min-width: 400px) {
             .page-container {
-                border-radius: 20px;
+                border-radius: 20px; /* Réactiver le cadre sur les écrans plus grands */
                 padding: 20px;
-                box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05); /* Rétablir l'ombre sur les écrans plus grands */
+                box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05); /* Réactiver l'ombre sur les écrans plus grands */
                 max-width: 360px;
-                min-height: auto; /* Retirer la contrainte de hauteur pour les grands écrans */
+                min-height: auto;
             }
 
             img {
                 max-width: 80%;
                 margin-bottom: 15px;
-                border-radius: 8px; /* Rétablir les bordures arrondies des images sur les grands écrans */
-                box-shadow: 0 1px 2px rgba(0, 0, 0, 0.02); /* Rétablir l'ombre des images sur les grands écrans */
+                border-radius: 8px; /* Réactiver les bordures arrondies sur les écrans plus grands */
+                box-shadow: 0 1px 2px rgba(0, 0, 0, 0.02); /* Réactiver l'ombre sur les écrans plus grands */
             }
 
             h1 {
