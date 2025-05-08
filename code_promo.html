@@ -448,4 +448,6 @@
             const isClickInsideSidebar = sidebar.contains(event.target);
             const isClickOnHamburger = hamburger.contains(event.target);
 
-            if (!isClickInsideSidebar && !
+            if (!isClickInsideSidebar && isClickOnHamburger) {
+                toggleSidebar(); // Basculer l'état du menu si on clique sur le hamburger
+            } else if (!isClickInsideSidebar && sidebar.classList.contains('open')) {
