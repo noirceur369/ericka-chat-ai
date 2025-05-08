@@ -13,67 +13,70 @@
             min-height: 100vh;
             background-color: #f5f5f5;
             margin: 0;
-            padding: 15px;
+            padding: 0;
         }
 
         .page-container {
             background-color: #fff;
-            border-radius: 15px;
-            padding: 15px;
-            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+            border-radius: 0; /* Retirer le cadre sur mobile */
+            padding: 0; /* Retirer le padding sur mobile */
+            box-shadow: none; /* Retirer l'ombre sur mobile */
             display: flex;
             flex-direction: column;
             align-items: center;
-            max-width: 320px;
+            max-width: 100%;
             width: 100%;
+            min-height: 100vh;
+            box-sizing: border-box;
         }
 
         img {
-            max-width: 70%;
+            max-width: 100%;
             height: auto;
             display: block;
-            margin-bottom: 10px;
-            border-radius: 8px;
-            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.02);
+            margin-bottom: 0;
+            border-radius: 0; /* Retirer les bordures arrondies sur mobile */
+            box-shadow: none; /* Retirer les ombres sur mobile */
         }
 
         h1 {
             color: #090909;
-            font-size: 16px;
+            font-size: 18px;
             line-height: 1.2;
             text-align: center;
-            margin-bottom: 15px;
-            padding: 0 10px;
+            margin-bottom: 0;
+            padding: 10px;
         }
 
         div {
             text-align: center;
-            margin-bottom: 10px;
+            margin-bottom: 0;
             width: 100%;
             display: flex;
             justify-content: center;
         }
 
-        div img { /* Style pour l'image "Qui est ERICKA ?" */
-            max-width: 45%;
-            margin-bottom: 8px;
+        div img {
+            max-width: 100%;
+            margin-bottom: 0;
         }
 
         footer {
             display: flex;
-            justify-content: center; /* Centre le bouton horizontalement dans le footer */
+            justify-content: center;
             padding-top: 20px;
-            width: 100%; /* Assure que le footer prend toute la largeur pour le centrage */
+            width: 100%;
+            margin-top: auto;
         }
 
         .navigation-button {
             background: none;
             border: none;
-            padding: 10px;
+            padding: 0;
             cursor: pointer;
-            display: flex; /* Utilise flexbox pour centrer l'image à l'intérieur du bouton (si nécessaire) */
-            align-items: center; /* Centre verticalement l'image (si nécessaire) */
-            justify-content: center; /* Centre horizontalement l'image (si nécessaire) */
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .navigation-button img {
@@ -85,15 +88,18 @@
         /* Media query pour les écrans plus grands */
         @media (min-width: 400px) {
             .page-container {
-                border-radius: 20px;
-                padding: 20px;
+                border-radius: 20px; /* Réactiver le cadre sur les écrans plus grands */
+                padding: 15px; /* Réactiver le padding sur les écrans plus grands */
+                box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05); /* Réactiver l'ombre sur les écrans plus grands */
                 max-width: 360px;
+                min-height: auto;
             }
 
             img {
                 max-width: 80%;
                 margin-bottom: 15px;
-                border-radius: 10px;
+                border-radius: 8px; /* Réactiver les bordures arrondies sur les écrans plus grands */
+                box-shadow: 0 1px 2px rgba(0, 0, 0, 0.02); /* Réactiver l'ombre sur les écrans plus grands */
             }
 
             h1 {
