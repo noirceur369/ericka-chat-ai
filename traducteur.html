@@ -30,10 +30,10 @@
         main {
             display: flex;
             flex-direction: column;
-            align-items: center;
+            align-items: stretch; /* Étirer les éléments enfants sur toute la largeur */
             padding: 16px;
             width: 100%;
-            max-width: 480px;
+            max-width: 480px; /* Garder une largeur maximale pour les grands écrans */
             box-sizing: border-box;
         }
 
@@ -43,7 +43,7 @@
             display: flex;
             flex-direction: column;
             overflow: hidden;
-            align-items: stretch;
+            align-items: stretch; /* Étirer les éléments enfants */
             width: 100%;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
             box-sizing: border-box;
@@ -205,6 +205,8 @@
             width: 100%;
             background-color: var(--background-light);
             box-sizing: border-box;
+            display: flex;
+            flex-direction: column; /* Organiser l'input et l'output verticalement */
         }
 
         .input-container {
@@ -269,98 +271,49 @@
             box-sizing: border-box;
         }
 
-        @media (max-width: 480px) {
+        /* Styles spécifiques pour les écrans mobiles */
+        @media (max-width: 600px) {
+            body {
+                align-items: flex-start; /* Aligner le contenu en haut sur mobile */
+                background-color: #fff; /* Fond blanc sur mobile pour un look plein écran */
+                min-height: 100vh; /* Assurer que le body prend toute la hauteur */
+            }
+
+            main {
+                max-width: 100%; /* Le main prend toute la largeur */
+                height: 100vh; /* Le main prend toute la hauteur */
+                border-radius: 0; /* Supprimer les bords arrondis */
+                padding: 0; /* Supprimer le padding autour du cadre */
+            }
+
             .translator-frame {
-                border-radius: 20px;
-                padding: 12px;
+                border-radius: 0; /* Supprimer les bords arrondis du cadre */
+                height: 100%; /* Le cadre prend toute la hauteur */
+                display: flex;
+                flex-direction: column; /* Assurer que les éléments internes s'organisent bien en hauteur */
             }
 
-            .translator-header {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 12px;
-                padding: 12px;
-            }
-
-            .translator-title {
-                font-size: 20px;
-            }
-
-            .powered-by {
-                font-size: 8px;
-            }
-
-            .deepl-logo {
-                width: 30px;
-            }
-
-            .translator-description {
-                font-size: 10px;
-                margin-top: 12px;
-            }
-
-            .action-button {
-                width: 36px;
-                height: 36px;
-                padding: 6px;
-            }
-
-            .action-icon {
-                width: 20px;
-            }
-
-            .language-selector {
-                margin-top: 12px;
-                padding: 8px;
-            }
-
-            .language-controls {
-                gap: 8px;
-            }
-
-            .language-option {
-                font-size: 10px;
-                padding: 6px;
-                gap: 6px;
-            }
-
-            .language-dot {
-                width: 14px;
-                height: 14px;
-            }
-
-            .swap-button {
-                width: 36px;
-                height: 36px;
-                padding: 6px;
-            }
-
-            .swap-icon {
-                width: 18px;
+            .translator-header,
+            .language-selector,
+            .translation-area {
+                padding: 16px; /* Remettre un peu de padding interne */
             }
 
             .translation-area {
-                margin-top: 12px;
+                flex: 1; /* Permettre à la zone de traduction de grandir et de prendre l'espace restant */
+                display: flex;
+                flex-direction: column;
+                border-radius: 0; /* Supprimer les bords arrondis de la zone de traduction */
             }
 
             .input-container {
-                padding: 12px;
-                min-height: 60px;
-            }
-
-            .input-field {
-                font-size: 12px;
-                min-height: 40px;
-            }
-
-            .mic-icon {
-                width: 20px;
+                border-radius: 0;
+                flex-shrink: 0; /* Empêcher le conteneur d'entrée de rétrécir */
             }
 
             .translation-output {
-                font-size: 12px;
-                padding: 12px;
-                min-height: 60px;
+                flex-grow: 1; /* Permettre à la sortie de traduction de grandir et de prendre l'espace restant */
+                border-radius: 0;
             }
         }
     </style>
