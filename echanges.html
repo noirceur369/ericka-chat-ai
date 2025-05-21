@@ -288,7 +288,7 @@
         <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/e332f709bc54cd7b905ba438a1bf5c154160c423" alt="Settings" class="settings-icon" />
       </header>
 
-      <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/1681d395f5dfaa65851af5951e0b242de322fdd0" alt="Main logo" class="main-logo" />
+      <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/1681d395f5dfaa65851af5951e0b242de322fdd0" alt="Main logo" class="main-logo" id="main-logo" />
 
       <section class="features" id="features">
         <div class="feature-card">Se souvient de ce que l'utilisateur a dit plus tôt dans la conversation</div>
@@ -297,7 +297,7 @@
       </section>
 
       <div class="chat-area" id="chat-area"></div>
-
+      
       <footer class="input-section">
         <div id="file-preview" class="file-preview" style="display: none;">
           <span id="file-name" class="file-name"></span>
@@ -396,8 +396,15 @@ function sendMessage() {
   const message = userInput.value.trim();
   if (message === "") return;
 
-  // Vider la zone de chat
-  chatArea.innerHTML = "";
+  // Au premier message, cacher les features et le logo
+  const features = document.getElementById("features");
+  const mainLogo = document.getElementById("main-logo");
+  if (features && !features.classList.contains("hidden")) {
+    features.classList.add("hidden");
+  }
+  if (mainLogo && !mainLogo.classList.contains("hidden")) {
+    mainLogo.classList.add("hidden");
+  }
 
   // Créer et ajouter le nouveau message
   const messageDiv = document.createElement("div");
@@ -405,10 +412,29 @@ function sendMessage() {
   messageDiv.textContent = message;
   chatArea.appendChild(messageDiv);
 
+  // Scroll vers le bas
+  chatArea.scrollTop = chatArea.scrollHeight;
+
   // Réinitialiser le champ
   userInput.value = "";
   sendButton.classList.remove("active");
   sendButton.disabled = true;
+
+  // Appel API robot (à intégrer plus tard)
+  // fetch('https://TON_N8N_ROUTE/api', {
+  //   method: 'POST',
+  //   headers: { 'Content-Type': 'application/json' },
+  //   body: JSON.stringify({ message })
+  // })
+  // .then(res => res.json())
+  // .then(data => {
+  //   // Afficher la réponse du robot ici
+  //   const botDiv = document.createElement("div");
+  //   botDiv.className = "chat-message";
+  //   botDiv.textContent = data.reply;
+  //   chatArea.appendChild(botDiv);
+  //   chatArea.scrollTop = chatArea.scrollHeight;
+  // });
 }
 
 // Gérer le clic sur le bouton envoyer
@@ -423,5 +449,8 @@ userInput.addEventListener("keydown", (e) => {
 });
 
     </script>
+    <style>
+      .hidden { display: none !important; }
+    </style>
   </body>
 </html>
