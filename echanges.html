@@ -1,10 +1,45 @@
+<?php
+// <?php
+// Exemple de backend PHP pour la route API IA (à placer dans api_ericka.php ou route similaire)
+
+/*
+<?php
+header('Content-Type: application/json');
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Récupérer le message envoyé par l'utilisateur
+    $data = json_decode(file_get_contents('php://input'), true);
+    $message = isset($data['message']) ? $data['message'] : '';
+
+    // On pourra appeler ici ton workflow n8n 
+    // Exemple de réponse statique (à remplacer par l'appel réel) :
+    echo json_encode([
+        'reply' => "Réponse automatique à: " . $message
+    ]);
+    exit;
+}
+
+http_response_code(405);
+echo json_encode(['error' => 'Méthode non autorisée']);
+?>
+*/  
+?>
 <!doctype html>
 <html lang="fr">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Interface Demo</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
     <style>
+      /* --- Global Styles --- */
       * {
         margin: 0;
         padding: 0;
@@ -18,6 +53,7 @@
         position: relative;
       }
 
+      /* --- Container and Layout --- */
       .container {
         background-color: #fff;
         border-radius: 30px;
@@ -32,6 +68,7 @@
         z-index: 1;
       }
 
+      /* --- Header --- */
       .header {
         display: flex;
         justify-content: space-between;
@@ -58,13 +95,16 @@
         width: 90px;
         margin: 20px auto;
         display: block;
+        transition: opacity 0.3s ease, height 0.3s ease; /* Animation pour cacher */
       }
 
+      /* --- Features Section --- */
       .features {
         display: flex;
         flex-direction: column;
         gap: 12px;
         margin-bottom: 20px;
+        transition: opacity 0.3s ease, height 0.3s ease; /* Animation pour cacher */
       }
 
       .feature-card {
@@ -76,6 +116,7 @@
         color: #1b1f26;
       }
 
+      /* --- Chat Area --- */
       .chat-area {
         flex: 1;
         overflow-y: auto;
@@ -85,6 +126,7 @@
         padding-bottom: 10px;
       }
 
+      /* --- Chat Message Styles --- */
       .chat-message {
         background-color: #e2e2e2;
         padding: 10px;
@@ -93,9 +135,126 @@
         font-size: 14px;
         color: #333;
         word-wrap: break-word;
-        align-self: flex-start;
+        align-self: flex-start; /* Default for AI messages */
+        position: relative; /* Crucial for absolute positioning of actions */
+        transition: background 0.2s;
+        min-height: 40px; /* Ensure enough space for content and actions */
+        padding-right: 40px; /* Space for hover actions */
+      }
+      /* Style for user messages, if different */
+      .chat-message.user {
+        align-self: flex-end; /* Align user messages to the right */
+        background-color: #4373d8;
+        color: #fff;
+        padding-left: 40px; /* Space for hover actions on user side */
+        padding-right: 10px;
       }
 
+      /* Hover state for chat message */
+      .chat-message:hover {
+        background-color: #d0e2ff;
+      }
+      .chat-message.user:hover {
+        background-color: #5a87e0; /* Darker blue on hover for user message */
+      }
+
+      /* --- Message Hover Actions (Copy, Like, Edit) --- */
+      .message-actions-hover {
+        display: flex;
+        position: absolute;
+        top: 50%;
+        /* Adjusted positioning for both AI and user messages */
+        right: 5px; /* Default for AI messages */
+        transform: translateY(-50%);
+        gap: 5px;
+        background: transparent;
+        opacity: 0; /* Hidden by default */
+        pointer-events: none; /* Do not intercept clicks when invisible */
+        transition: opacity 0.2s ease-in-out;
+        z-index: 2; /* Ensure buttons are above message text */
+        border-radius: 8px; /* Slight rounded corners */
+        background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent background */
+        padding: 2px 5px; /* Padding for the action bar itself */
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+      }
+      .chat-message.user .message-actions-hover {
+        left: 5px; /* For user messages, align to the left */
+        right: auto;
+      }
+
+      .chat-message:hover .message-actions-hover {
+        opacity: 1; /* Visible on message hover */
+        pointer-events: auto; /* Clickable on message hover */
+      }
+
+      /* --- Action Buttons (General Style) --- */
+      .action-btn {
+        background: none;
+        border: none;
+        cursor: pointer;
+        font-size: 14px; /* Smaller icons for a more subtle look */
+        color: #666; /* Softer color for icons */
+        padding: 4px; /* More padding for easier clicks */
+        border-radius: 4px;
+        transition: background 0.2s ease, color 0.2s ease;
+        line-height: 1; /* Ensure consistent icon sizing */
+      }
+
+      .action-btn:hover {
+        background: rgba(67, 115, 216, 0.2);
+        color: #4373d8;
+      }
+
+      .action-btn.liked {
+        color: #29b738 !important; /* Green for liked state */
+      }
+
+      /* --- Edit Mode Styles --- */
+      .chat-message.editing .message-text {
+        display: none; /* Hide original text when editing */
+      }
+      .chat-message.editing .message-actions-hover {
+        display: none; /* Hide hover actions when editing */
+      }
+
+      .edit-container {
+        display: flex;
+        flex-direction: column;
+        width: 100%; /* Take full width of the message bubble */
+        padding-bottom: 25px; /* Space for valider/annuler buttons */
+      }
+
+      .edit-input {
+        flex-grow: 1;
+        width: 100%;
+        min-height: 30px; /* Minimum height for textarea */
+        resize: vertical; /* Allow vertical resizing */
+        font-size: 14px;
+        padding: 5px 8px;
+        border-radius: 6px;
+        border: 1px solid #b0b0b0;
+        outline: none;
+        box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.05);
+        transition: border-color 0.2s ease, box-shadow 0.2s ease;
+      }
+
+      .edit-input:focus {
+        border-color: #4373d8;
+        box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.05), 0 0 0 3px rgba(67, 115, 216, 0.2);
+      }
+
+      .edit-actions {
+        position: absolute; /* Positioned relative to .chat-message */
+        bottom: 5px;
+        right: 5px;
+        display: flex;
+        gap: 5px;
+        align-items: center;
+        background: transparent; /* No background for these buttons */
+        z-index: 3; /* Ensure they are above other elements */
+      }
+
+      /* --- File Preview --- */
       .file-preview {
         background-color: #f0f0f0;
         padding: 10px;
@@ -119,6 +278,7 @@
         cursor: pointer;
       }
 
+      /* --- Input Section --- */
       .input-section {
         margin-top: 10px;
       }
@@ -139,6 +299,7 @@
         outline: none;
         font-size: 14px;
         color: #1b1f26;
+        padding: 0; /* Remove default padding */
       }
 
       .send-button {
@@ -167,12 +328,17 @@
         border: none;
         font-size: 20px;
         cursor: pointer;
+        color: #666; /* Softer color for these icons */
+      }
+      .action-icon:hover {
+        color: #4373d8; /* Hover effect */
       }
 
       #file-upload {
         display: none;
       }
 
+      /* --- Sidebar --- */
       .sidebar {
         position: fixed;
         top: 0;
@@ -218,6 +384,32 @@
         color: #4373d8;
       }
 
+      .button-deconnexion {
+        margin-top: 70px;
+        border: none;
+        cursor: pointer;
+        border-radius: 20px;
+        background-color: #090909;
+        min-height: 55px;
+        padding: 16px;
+        font-size: 18px;
+        color: #fff;
+        font-weight: 700;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+      }
+
+      /* --- Utility Classes --- */
+      .hidden {
+        opacity: 0 !important;
+        height: 0 !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        overflow: hidden;
+      }
+
+      /* --- Responsive Styles --- */
       @media (max-width: 480px) {
         .container {
           border-radius: 20px;
@@ -242,53 +434,36 @@
           font-size: 13px;
         }
       }
-      .button-deconnexion {
-        margin-top: 70px;
-        border: none;
-        cursor: pointer;
-        border-radius: 20px;
-        background-color: #090909;
-        min-height: 55px;
-        padding: 16px;
-        font-size: 18px;
-        color: #fff;
-        font-weight: 700;
-        text-align: center;
-        text-decoration: none;
-        display: inline-block;
-      }
     </style>
-
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
-    />
   </head>
   <body>
-    <!-- Sidebar -->
     <nav class="sidebar" id="sidebar">
-      <a href="echanges.html"><i class="fas fa-exchange-alt"></i> Échanger</a>
-      <a href="historiq.html"><i class="fas fa-clock-rotate-left"></i> Historique</a>
-      <a href="outils.html"><i class="fas fa-wrench"></i> Outils</a>
-      <a href="se_recharger.html"><i class="fas fa-wallet"></i> Se recharger</a>
-      <a href="notif.html"><i class="fas fa-bell"></i> Notifications</a>
-      <a href="code_promo.html"><i class="fas fa-ticket-alt"></i> Code promo</a>
-      <a href="parametres.html"><i class="fas fa-cog"></i> Paramètres</a>
+      <a href="echanges.php"><i class="fas fa-exchange-alt"></i> Échanger</a>
+      <a href="historiq.php"><i class="fas fa-clock-rotate-left"></i> Historique</a>
+      <a href="outils.php"><i class="fas fa-wrench"></i> Outils</a>
+      <a href="se_recharger.php"><i class="fas fa-wallet"></i> Se recharger</a>
+      <a href="notif.php"><i class="fas fa-bell"></i> Notifications</a>
+      <a href="code_promo.php"><i class="fas fa-ticket-alt"></i> Code promo</a>
+      <a href="parametres.php"><i class="fas fa-cog"></i> Paramètres</a>
       <button class="button-deconnexion">Deconnexion</button>
     </nav>
 
-    <!-- Main -->
     <main class="container" id="main">
       <header class="header">
         <button class="hamburger" id="hamburger"><i class="fas fa-bars"></i></button>
-        <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/e332f709bc54cd7b905ba438a1bf5c154160c423" alt="Settings" class="settings-icon" />
+        <img
+          src="https://cdn.builder.io/api/v1/image/assets/TEMP/e332f709bc54cd7b905ba438a1bf5c154160c423"
+          alt="Settings"
+          class="settings-icon"
+        />
       </header>
 
-      <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/1681d395f5dfaa65851af5951e0b242de322fdd0" alt="Main logo" class="main-logo" id="main-logo" />
+      <img
+        src="https://cdn.builder.io/api/v1/image/assets/TEMP/1681d395f5dfaa65851af5951e0b242de322fdd0"
+        alt="Main logo"
+        class="main-logo"
+        id="main-logo"
+      />
 
       <section class="features" id="features">
         <div class="feature-card">Se souvient de ce que l'utilisateur a dit plus tôt dans la conversation</div>
@@ -297,7 +472,7 @@
       </section>
 
       <div class="chat-area" id="chat-area"></div>
-      
+
       <footer class="input-section">
         <div id="file-preview" class="file-preview" style="display: none;">
           <span id="file-name" class="file-name"></span>
@@ -306,7 +481,7 @@
 
         <div class="input-container">
           <input type="text" class="user-input" placeholder="Tapez votre message..." id="user-input" />
-          <button class="send-button" id="send-button">
+          <button class="send-button" id="send-button" disabled>
             <i class="fas fa-paper-plane"></i>
           </button>
         </div>
@@ -320,6 +495,7 @@
     </main>
 
     <script>
+      // --- DOM Element References ---
       const sidebar = document.getElementById("sidebar");
       const hamburger = document.getElementById("hamburger");
       const fileUploadInput = document.getElementById("file-upload");
@@ -329,19 +505,23 @@
       const userInput = document.getElementById("user-input");
       const sendButton = document.getElementById("send-button");
       const chatArea = document.getElementById("chat-area");
+      const featuresSection = document.getElementById("features");
+      const mainLogo = document.getElementById("main-logo");
 
-      // Sidebar toggle
-      hamburger.addEventListener("click", () => {
+      // --- Sidebar Toggle Functionality ---
+      hamburger.addEventListener("click", (e) => {
+        e.stopPropagation(); // Prevent document click from closing it immediately
         sidebar.classList.toggle("open");
       });
 
       document.addEventListener("click", (e) => {
+        // Close sidebar if click is outside of sidebar and hamburger icon
         if (!sidebar.contains(e.target) && !hamburger.contains(e.target)) {
           sidebar.classList.remove("open");
         }
       });
 
-      // File preview
+      // --- File Upload Preview Functionality ---
       fileUploadInput.addEventListener("change", function () {
         const file = fileUploadInput.files[0];
         if (file) {
@@ -352,10 +532,10 @@
 
       removeFileButton.addEventListener("click", function () {
         filePreview.style.display = "none";
-        fileUploadInput.value = "";
+        fileUploadInput.value = ""; // Clear the selected file
       });
 
-      // Activate send button
+      // --- Send Button Activation (based on user input) ---
       userInput.addEventListener("input", function () {
         if (userInput.value.trim() !== "") {
           sendButton.classList.add("active");
@@ -366,91 +546,245 @@
         }
       });
 
-      // Send message
-      sendButton.addEventListener("click", function () {
-        const text = userInput.value.trim();
-        if (text !== "") {
-          const messageElement = document.createElement("div");
-          messageElement.classList.add("chat-message");
-          messageElement.textContent = text;
-          chatArea.appendChild(messageElement);
+      // --- Message Creation Utility Function ---
+      function createMessageElement(text, isUserMessage = true) {
+        const messageDiv = document.createElement("div");
+        messageDiv.classList.add("chat-message");
+        if (isUserMessage) {
+          messageDiv.classList.add("user"); // Add user class for user messages
+        }
+        messageDiv.tabIndex = 0; // Make focusable for accessibility/testing
+
+        const textContent = document.createElement("span");
+        textContent.className = "message-text";
+        textContent.textContent = text;
+        messageDiv.appendChild(textContent);
+
+        // Create hover actions (Copy, Edit, Like)
+        const actionsHoverDiv = document.createElement("div");
+        actionsHoverDiv.className = "message-actions-hover";
+
+        // Copy button
+        const copyBtn = document.createElement("button");
+        copyBtn.className = "action-btn copy-btn";
+        copyBtn.title = "Copier";
+        copyBtn.innerHTML = '<i class="fas fa-copy"></i>';
+        copyBtn.addEventListener("click", (e) => {
+          e.stopPropagation();
+          navigator.clipboard.writeText(textContent.textContent);
+          const originalIcon = copyBtn.innerHTML;
+          copyBtn.innerHTML = '<i class="fas fa-check"></i>'; // Show checkmark
+          setTimeout(() => {
+            copyBtn.innerHTML = originalIcon; // Revert icon after a delay
+          }, 1000);
+        });
+
+        // Edit button (only for user messages)
+        if (isUserMessage) {
+          const editBtn = document.createElement("button");
+          editBtn.className = "action-btn edit-btn";
+          editBtn.title = "Modifier";
+          editBtn.innerHTML = '<i class="fas fa-pen"></i>';
+          editBtn.addEventListener("click", (e) => {
+            e.stopPropagation();
+            startEditMessage(messageDiv, textContent);
+          });
+          actionsHoverDiv.appendChild(editBtn);
+        }
+
+        // Like button
+        const likeBtn = document.createElement("button");
+        likeBtn.className = "action-btn like-btn";
+        likeBtn.title = "Liker";
+        likeBtn.innerHTML = '<i class="fas fa-thumbs-up"></i>';
+        likeBtn.addEventListener("click", (e) => {
+          e.stopPropagation();
+          likeBtn.classList.toggle("liked");
+        });
+
+        actionsHoverDiv.appendChild(copyBtn);
+        // Edit button is conditionally added above
+        actionsHoverDiv.appendChild(likeBtn);
+        messageDiv.appendChild(actionsHoverDiv);
+
+        return messageDiv;
+      }
+
+      // --- Start Edit Message Function ---
+      function startEditMessage(messageDiv, textContentSpan) {
+        // Prevent starting edit if already editing
+        if (messageDiv.classList.contains("editing")) {
+          return;
+        }
+
+        messageDiv.classList.add("editing"); // Add editing class to message
+        const originalText = textContentSpan.textContent;
+
+        // Create edit container
+        const editContainer = document.createElement("div");
+        editContainer.className = "edit-container";
+
+        // Create textarea for editing
+        const textarea = document.createElement("textarea");
+        textarea.value = originalText;
+        textarea.className = "edit-input";
+        textarea.rows = 1; // Start with one row
+        editContainer.appendChild(textarea);
+
+        // Adjust textarea height on input
+        textarea.addEventListener("input", () => {
+          textarea.style.height = "auto"; // Reset height to recalculate
+          textarea.style.height = textarea.scrollHeight + "px"; // Set to scroll height
+        });
+        textarea.dispatchEvent(new Event("input")); // Trigger initial height adjustment
+
+        // Create edit actions (Save/Cancel)
+        const editActions = document.createElement("span");
+        editActions.className = "edit-actions";
+
+        const saveBtn = document.createElement("button");
+        saveBtn.className = "action-btn";
+        saveBtn.title = "Valider";
+        saveBtn.innerHTML = '<i class="fas fa-check"></i>';
+        saveBtn.addEventListener("click", (e) => {
+          e.stopPropagation();
+          textContentSpan.textContent = textarea.value;
+          endEditMessage(messageDiv, editContainer);
+        });
+
+        const cancelBtn = document.createElement("button");
+        cancelBtn.className = "action-btn";
+        cancelBtn.title = "Annuler";
+        cancelBtn.innerHTML = '<i class="fas fa-times"></i>';
+        cancelBtn.addEventListener("click", (e) => {
+          e.stopPropagation();
+          endEditMessage(messageDiv, editContainer, originalText); // Revert to original text
+        });
+
+        editActions.appendChild(saveBtn);
+        editActions.appendChild(cancelBtn);
+        editContainer.appendChild(editActions);
+
+        // Append edit container to message div
+        messageDiv.appendChild(editContainer);
+        textarea.focus();
+
+        // Handle blur event for textarea to auto-cancel if focus is lost
+        textarea.addEventListener("blur", (e) => {
+          // Check if the relatedTarget (where focus is going) is one of the edit action buttons
+          if (!editActions.contains(e.relatedTarget)) {
+            endEditMessage(messageDiv, editContainer, originalText);
+          }
+        });
+      }
+
+      // --- End Edit Message Function ---
+      function endEditMessage(messageDiv, editContainer, originalText = null) {
+        if (originalText !== null) {
+          messageDiv.querySelector(".message-text").textContent = originalText;
+        }
+        messageDiv.classList.remove("editing");
+        // Re-display the original text content
+        messageDiv.querySelector(".message-text").style.display = "";
+        editContainer.remove(); // Remove the editing input and buttons
+      }
+
+      // --- Send Message Function ---
+      function sendMessage() {
+        const message = userInput.value.trim();
+        if (message === "") return;
+
+        // Hide features and logo on first message
+        if (!featuresSection.classList.contains("hidden")) {
+          featuresSection.classList.add("hidden");
+          mainLogo.classList.add("hidden");
+        }
+
+        // Create and append user message
+        const userMessageDiv = createMessageElement(message, true); // true for user message
+        chatArea.appendChild(userMessageDiv);
+
+        // Scroll to bottom
+        chatArea.scrollTop = chatArea.scrollHeight;
+
+        // Reset input field
+        userInput.value = "";
+        sendButton.classList.remove("active");
+        sendButton.disabled = true;
+
+        // Simulate AI response (replace with actual API call)
+        setTimeout(() => {
+          const botReply = "Je suis Ericka, une IA conçue pour vous aider."; // Example reply
+          const botMessageDiv = createMessageElement(botReply, false); // false for bot message
+          chatArea.appendChild(botMessageDiv);
           chatArea.scrollTop = chatArea.scrollHeight;
-          userInput.value = "";
-          sendButton.classList.remove("active");
-          sendButton.disabled = true;
+        }, 1000); // Simulate API delay
+      }
+
+      // --- Event Listeners for Sending Messages ---
+      sendButton.addEventListener("click", sendMessage);
+
+      userInput.addEventListener("keydown", (e) => {
+        if (e.key === "Enter" && !e.shiftKey) {
+          // Allow Shift+Enter for new line in input
+          e.preventDefault();
+          sendMessage();
         }
       });
-      // Activer/désactiver le bouton envoyer selon si l'input est vide
-userInput.addEventListener("input", () => {
-  if (userInput.value.trim() !== "") {
-    sendButton.classList.add("active");
-    sendButton.disabled = false;
-  } else {
-    sendButton.classList.remove("active");
-    sendButton.disabled = true;
-  }
-});
 
-// Fonction d'envoi du message
-function sendMessage() {
-  const message = userInput.value.trim();
-  if (message === "") return;
+      // Ajoute ce code dans ta balise <script> après la déclaration des variables DOM
 
-  // Au premier message, cacher les features et le logo
-  const features = document.getElementById("features");
-  const mainLogo = document.getElementById("main-logo");
-  if (features && !features.classList.contains("hidden")) {
-    features.classList.add("hidden");
-  }
-  if (mainLogo && !mainLogo.classList.contains("hidden")) {
-    mainLogo.classList.add("hidden");
-  }
+      const micButton = document.querySelector('.action-bar .action-icon:last-child');
+      let recognition;
+      let isRecording = false;
 
-  // Créer et ajouter le nouveau message
-  const messageDiv = document.createElement("div");
-  messageDiv.className = "chat-message";
-  messageDiv.textContent = message;
-  chatArea.appendChild(messageDiv);
+      // Vérifie la compatibilité navigateur
+      if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
+        const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+        recognition = new SpeechRecognition();
+        recognition.lang = 'fr-FR';
+        recognition.interimResults = false;
+        recognition.maxAlternatives = 1;
 
-  // Scroll vers le bas
-  chatArea.scrollTop = chatArea.scrollHeight;
+        micButton.addEventListener('click', function (e) {
+          e.preventDefault();
+          if (!isRecording) {
+            recognition.start();
+            isRecording = true;
+            micButton.classList.add('active');
+            micButton.innerHTML = '<i class="fas fa-circle-notch fa-spin"></i>';
+          } else {
+            recognition.stop();
+            isRecording = false;
+            micButton.classList.remove('active');
+            micButton.innerHTML = '<i class="fas fa-microphone"></i>';
+          }
+        });
 
-  // Réinitialiser le champ
-  userInput.value = "";
-  sendButton.classList.remove("active");
-  sendButton.disabled = true;
+        recognition.onresult = function (event) {
+          const transcript = event.results[0][0].transcript;
+          userInput.value = userInput.value
+            ? userInput.value + ' ' + transcript
+            : transcript;
+          sendButton.classList.add("active");
+          sendButton.disabled = false;
+        };
 
-  // Appel API robot (à intégrer plus tard)
-  // fetch('https://TON_N8N_ROUTE/api', {
-  //   method: 'POST',
-  //   headers: { 'Content-Type': 'application/json' },
-  //   body: JSON.stringify({ message })
-  // })
-  // .then(res => res.json())
-  // .then(data => {
-  //   // Afficher la réponse du robot ici
-  //   const botDiv = document.createElement("div");
-  //   botDiv.className = "chat-message";
-  //   botDiv.textContent = data.reply;
-  //   chatArea.appendChild(botDiv);
-  //   chatArea.scrollTop = chatArea.scrollHeight;
-  // });
-}
+        recognition.onend = function () {
+          isRecording = false;
+          micButton.classList.remove('active');
+          micButton.innerHTML = '<i class="fas fa-microphone"></i>';
+        };
 
-// Gérer le clic sur le bouton envoyer
-sendButton.addEventListener("click", sendMessage);
-
-// Gérer la touche Entrée
-userInput.addEventListener("keydown", (e) => {
-  if (e.key === "Enter") {
-    e.preventDefault();
-    sendMessage();
-  }
-});
-
+        recognition.onerror = function () {
+          isRecording = false;
+          micButton.classList.remove('active');
+          micButton.innerHTML = '<i class="fas fa-microphone"></i>';
+        };
+      } else {
+        micButton.disabled = true;
+        micButton.title = "La reconnaissance vocale n'est pas supportée sur ce navigateur.";
+      }
     </script>
-    <style>
-      .hidden { display: none !important; }
-    </style>
   </body>
 </html>
