@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Wallet Balance</title>
   <style>
     * {
@@ -12,23 +12,27 @@
     }
 
     html, body {
+      height: 100%;
+      overflow: hidden; /* empêche le scroll */
+    }
+
+    body {
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
       background-color: #f5f5f5;
-      width: 100%;
-      min-height: 100vh;
-      overflow: auto;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
     }
 
     .wallet-content {
-      border-radius: 30px;
-      background-color: #ffffff;
+      width: 100%;
       max-width: 420px;
-      margin: 0 auto;
       padding: 20px;
+      background-color: #ffffff;
       display: flex;
       flex-direction: column;
       align-items: center;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
     }
 
     .balance-title {
@@ -186,6 +190,14 @@
     .back-button:hover {
       background-color: #b3b3b3;
     }
+
+    /* Media query pour mobile uniquement */
+    @media (max-width: 768px) {
+      .wallet-content {
+        border-radius: 30px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+      }
+    }
   </style>
 </head>
 <body>
@@ -193,11 +205,12 @@
     <div class="back-button-container">
       <button class="back-button"><a href="creation_passwd.html" style="text-decoration: none; color: inherit;"><</a></button>
     </div>
+
     <h1 class="balance-title">Votre solde</h1>
 
     <section class="balance-card">
       <div class="balance-amount-container">
-        <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/fbdb6c9d114cc4a55fb6195df179e5e55c70a104?placeholderIfAbsent=true" class="currency-icon" alt="Currency">
+        <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/fbdb6c9d114cc4a55fb6195df179e5e55c70a104?placeholderIfAbsent=true" class="currency-icon" alt="Currency" />
         <span class="balance-amount">0,00 F</span>
       </div>
       <div class="user-info">
@@ -208,23 +221,23 @@
 
     <section class="action-buttons">
       <a href="se_recharger.html" class="action-button recharge-button">
-        <img src="https://cdn-icons-png.flaticon.com/512/857/857681.png" alt="wallet">
+        <img src="https://cdn-icons-png.flaticon.com/512/857/857681.png" alt="wallet" />
         Recharger votre compte
       </a>
       <a href="formule.html" class="action-button plan-button">
-        <img src="https://cdn-icons-png.flaticon.com/512/190/190411.png" alt="validé">
+        <img src="https://cdn-icons-png.flaticon.com/512/190/190411.png" alt="validé" />
         Choisir une formule
       </a>
     </section>
 
     <section class="transaction-history">
-      <h2 class="history-title">Historiques</h2><br>
+      <h2 class="history-title">Historiques</h2><br />
       <div class="history-image">
-        <img src="images/history_box.png" alt="Historique des transactions">
+        <img src="images/history_box.png" alt="Historique des transactions" />
       </div>
       <p class="no-transactions">Aucune transaction pour le moment</p>
     </section>
-    <br>
+    <br />
     <a href="echanges.html" class="return-button">Retourner à l'accueil</a>
   </main>
 </body>
