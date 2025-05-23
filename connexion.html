@@ -1,10 +1,11 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Connectez-vous</title> <link
+    <title>Document</title>
+    <link
         href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=SF+Pro+Display:wght@700&display=swap"
         rel="stylesheet"
     />
@@ -12,44 +13,41 @@
         body {
             font-family: "Inter", sans-serif;
             display: flex;
-            justify-content: center; /* Centre horizontalement le conteneur */
-            align-items: center; /* Centre verticalement le conteneur */
-            height: 100vh; /* S'assure que le body occupe toute la hauteur de la fenêtre */
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
             background-color: #f5f5f5;
-            margin: 0; /* Réinitialise la marge par défaut du body */
-            padding: 0; /* Supprime le padding du body pour éviter les barres de défilement indésirables */
-            overflow: hidden; /* Empêche le défilement du body */
-            box-sizing: border-box; /* Inclut le padding dans la largeur/hauteur totale du body (même si 0 ici) */
+            margin: 0; /* Reset default body margin */
+            padding: 20px; /* Add padding for overall body */
+            box-sizing: border-box; /* Include padding in body's total width/height */
         }
 
         .login-card {
-            background-color: #fff;
+            width: 100%; /* Make login card take up full width of its container */
+            max-width: 360px; /* But don't let it get wider than 360px */
             border-radius: 27px;
             box-shadow: 0px 13.316px 55.484px 0px rgba(37, 31, 48, 0.05);
             display: flex;
             flex-direction: column;
             align-items: center;
             padding: 30px;
-            max-width: 360px; /* Largeur maximale du conteneur */
-            width: calc(100% - 40px); /* Prend 100% de la largeur de la fenêtre moins un padding virtuel de 20px de chaque côté */
-            height: calc(100vh - 40px); /* Prend 100% de la hauteur de la fenêtre moins un padding virtuel de 20px en haut et en bas */
-            box-sizing: border-box; /* Inclut le padding dans la largeur/hauteur du card */
-            overflow-y: auto; /* Permet le défilement interne si le contenu dépasse */
-            gap: 20px; /* Espacement entre les éléments flex du conteneur */
+            background-color: #fff;
+            gap: 20px;
+            box-sizing: border-box; /* Include padding in card's total width/height */
         }
 
         .back-button-container {
             width: 100%;
             display: flex;
             justify-content: flex-start;
-            /* margin-bottom: 20px; <-- Ce margin peut être géré par le 'gap' du parent ou si besoin pour un espacement spécifique */
+            margin-bottom: 20px;
         }
 
         .back-button {
             border-radius: 20px;
             background-color: #e0e0e0;
             padding: 10px 15px;
-            /* gap: 10px; <-- Ce gap est pour les éléments internes si le bouton était un flex container lui-même */
+            gap: 10px;
             font-family: "Inter", sans-serif;
             font-size: 16px;
             color: #090909;
@@ -59,7 +57,7 @@
             cursor: pointer;
             text-decoration: none;
             transition: background-color 0.2s ease;
-            display: inline-flex;
+            display: inline-flex; /* Use inline-flex for better alignment of icon and text */
             align-items: center;
         }
 
@@ -68,33 +66,39 @@
         }
 
         .logo-container {
-            /* margin-bottom: 30px; <-- Ce margin peut être géré par le 'gap' du parent */
-            width: 100%;
+            margin-bottom: 30px;
+            width: 100%; /* Ensure logo container takes full width */
             display: flex;
-            justify-content: center;
+            justify-content: center; /* Center the logo horizontally */
         }
 
         .logo-container img {
-            max-width: 100%; /* S'assure que le logo ne dépasse pas son conteneur */
-            height: auto;
+            max-width: 100%; /* Make sure logo doesn't exceed its container */
+            height: auto; /* Maintain aspect ratio */
         }
 
+
         .login-title {
-            font-family: "SF Pro Display", -apple-system, Roboto, Helvetica, sans-serif;
+            font-family:
+                "SF Pro Display",
+                -apple-system,
+                Roboto,
+                Helvetica,
+                sans-serif;
             font-size: 24px;
             color: #090909;
             font-weight: 700;
             letter-spacing: -0.48px;
             line-height: 1;
             text-align: center;
-            /* margin-bottom: 20px; <-- Ce margin peut être géré par le 'gap' du parent */
-            width: 100%;
+            margin-bottom: 20px;
+            width: 100%; /* Ensure title takes full width */
         }
 
         .login-form {
             display: flex;
             flex-direction: column;
-            gap: 15px; /* Espacement entre les champs du formulaire */
+            gap: 15px;
             width: 100%;
         }
 
@@ -111,8 +115,8 @@
             line-height: 1.6;
             letter-spacing: 0.2px;
             width: 100%;
-            text-align: left;
-            box-sizing: border-box; /* Inclut le padding dans la largeur */
+            text-align: left; /* Changed to left alignment */
+            box-sizing: border-box; /* Ensure padding doesn't affect width */
         }
 
         .input-field::placeholder {
@@ -127,7 +131,12 @@
             border-radius: 15px;
             background-color: #090909;
             padding: 0 15px;
-            font-family: "Inter", -apple-system, Roboto, Helvetica, sans-serif;
+            font-family:
+                "Inter",
+                -apple-system,
+                Roboto,
+                Helvetica,
+                sans-serif;
             font-size: 18px;
             color: #fff;
             font-weight: 700;
@@ -139,8 +148,8 @@
             cursor: pointer;
             text-decoration: none;
             transition: background-color 0.2s ease;
-            width: 100%; /* Le bouton prend toute la largeur disponible */
-            box-sizing: border-box; /* Inclut le padding dans la largeur */
+            width: 100%; /* Make button take full width */
+            box-sizing: border-box; /* Ensure padding doesn't affect width */
         }
 
         .primary-button:hover {
@@ -153,36 +162,28 @@
         }
 
         /* Responsive adjustments for smaller screens */
-        @media (max-width: 600px) { /* Utilisation de 600px comme breakpoint pour mobile */
+        @media (max-width: 400px) {
             .login-card {
-                padding: 25px; /* Ajuster le padding pour les écrans mobiles */
-                width: calc(100% - 30px); /* Ajuste la largeur pour laisser plus d'espace sur les bords */
-                height: calc(100vh - 30px); /* Ajuste la hauteur pour laisser plus d'espace sur les bords */
+                padding: 20px; /* Adjust padding for very small screens */
             }
 
             .login-title {
-                font-size: 20px;
+                font-size: 20px; /* Smaller title on very small screens */
             }
 
             .input-field {
-                font-size: 15px;
-                height: 48px;
+                font-size: 14px; /* Smaller input field text */
+                height: 45px; /* Adjust input height */
             }
 
             .primary-button {
-                font-size: 17px;
-                height: 48px;
+                font-size: 16px; /* Smaller button text */
+                height: 45px; /* Adjust button height */
             }
 
             .back-button {
-                font-size: 15px;
-                padding: 9px 14px;
-            }
-        }
-
-        @media (min-width: 601px) { /* Media query pour les écrans plus grands */
-            .login-card {
-                padding: 30px;
+                font-size: 14px;
+                padding: 8px 12px;
             }
         }
     </style>
@@ -193,13 +194,15 @@
             <a href="accueil.html" class="back-button"><</a>
         </div>
         <div class="logo-container">
-            <img src="images/Group 5.png" alt="Logo"> </div>
+            <img src="images/Group 5.png" alt="">
+        </div>
         <div>
             <p class="login-title">Connectez-vous à votre compte</p>
         </div>
-        <form class="login-form"> <input type="email" name="email" id="email" class="input-field" placeholder="Entrez votre adresse email" required>
+        <div class="login-form">
+            <input type="email" name="email" id="email" class="input-field" placeholder="Entrez votre adresse email" required>
             <a href="connexion_passwd.html" class="primary-button">Continuer</a>
-        </form>
+        </div>
     </div>
 </body>
 </html>
