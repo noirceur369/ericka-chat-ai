@@ -1,48 +1,228 @@
 <!DOCTYPE html>
 <html lang="fr">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Entrer le montant</title>
-  <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-  />
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Entrer le montant</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
 
-    html, body {
-      height: 100%;
-      width: 100%;
-      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro",
-        "Helvetica Neue", Helvetica, Arial, sans-serif;
-      background-color: #f5f5f5;
-      overflow: hidden; /* Supprime le scroll */
-    }
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro",
+          "Helvetica Neue", Helvetica, Arial, sans-serif;
+        background-color: #f5f5f5;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        padding: 20px;
+        position: relative;
+      }
 
-    body {
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      /* On utilise tout l'espace vertical */
-      height: 100vh;
-      width: 100vw;
-      padding: 20px;
-    }
+      .container {
+        background-color: white;
+        border-radius: 24px;
+        width: 100%;
+        max-width: 500px;
+        padding: 40px 25px;
+        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        position: relative;
+      }
 
-    .top-bar {
-      display: flex;
-      align-items: center;
-      gap: 15px;
-    }
+      .menu-toggle {
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        background: none;
+        border: none;
+        font-size: 24px;
+        cursor: pointer;
+        z-index: 1100;
+        color: #4373d8;
+      }
 
-    .back-button {
-      background: none;
-      border: none;
-      font-size: 24px;
-      cursor: pointer;
-      color:
+      .page-title {
+        color: #090909;
+        font-size: 30px;
+        font-weight: 700;
+        margin: 50px 0 35px;
+        text-align: left;
+      }
+
+      .amount-display {
+        border-radius: 20px;
+        background-color: #ebedf0;
+        min-height: 100px;
+        width: 100%;
+        padding: 25px;
+        font-size: 30px;
+        color: #090909;
+        font-weight: 700;
+        text-align: center;
+        border: none;
+        outline: none;
+      }
+
+      .continue-button {
+        margin-top: 70px;
+        border: none;
+        cursor: pointer;
+        border-radius: 20px;
+        background-color: #090909;
+        min-height: 55px;
+        padding: 16px;
+        font-size: 18px;
+        color: #fff;
+        font-weight: 700;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+      }
+
+      .sidebar {
+        position: fixed;
+        top: 0;
+        left: -260px;
+        width: 250px;
+        height: 100%;
+        background-color: #fff;
+        box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+        padding: 20px 15px;
+        border-radius: 0 30px 30px 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        z-index: 1000;
+        transition: left 0.3s ease;
+      }
+
+      .sidebar.open {
+        left: 0;
+      }
+
+      .sidebar a {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 10px 0;
+        font-size: 14px;
+        color: #333;
+        text-decoration: none;
+        font-weight: 500;
+        transition: background-color 0.2s ease, color 0.2s ease;
+        border-radius: 10px;
+      }
+
+      .sidebar a i {
+        color: #4373d8;
+        width: 20px;
+        text-align: center;
+      }
+
+      .sidebar a:hover {
+        background-color: #f0f4ff;
+        color: #4373d8;
+      }
+
+      .button-deconnexion {
+        margin-top: 70px;
+        border: none;
+        cursor: pointer;
+        border-radius: 20px;
+        background-color: #090909;
+        min-height: 55px;
+        padding: 16px;
+        font-size: 18px;
+        color: #fff;
+        font-weight: 700;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+      }
+
+      /* Responsive Design */
+      @media (max-width: 480px) {
+        .container {
+          padding: 30px 15px;
+        }
+
+        .page-title {
+          font-size: 24px;
+          margin: 40px 0 25px;
+        }
+
+        .amount-display {
+          font-size: 24px;
+          min-height: 80px;
+          padding: 20px;
+        }
+
+        .continue-button,
+        .button-deconnexion {
+          font-size: 16px;
+          padding: 14px;
+          min-height: 50px;
+        }
+
+        .menu-toggle {
+          font-size: 20px;
+          top: 15px;
+          left: 15px;
+        }
+
+        .sidebar {
+          width: 220px;
+          padding: 15px 10px;
+        }
+
+        .sidebar a {
+          font-size: 13px;
+          padding: 8px 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Sidebar -->
+    <nav class="sidebar" id="sidebar">
+      <p>Desire Ange <br>Pro</p>
+      <a href="echanges.html"><i class="fas fa-exchange-alt"></i> Échanger</a>
+      <a href="historiq.html"><i class="fas fa-clock-rotate-left"></i> Historique</a>
+      <a href="outils.html"><i class="fas fa-wrench"></i> Outils</a>
+      <a href="se_recharger.html"><i class="fas fa-wallet"></i> Se recharger</a>
+      <a href="notif.html"><i class="fas fa-bell"></i> Notifications</a>
+      <a href="code_promo.html"><i class="fas fa-ticket-alt"></i> Code promo</a>
+      <a href="parametres.html"><i class="fas fa-cog"></i> Paramètres</a>
+      
+      <button class="button-deconnexion">Deconnexion</button>
+    </nav>
+
+    <!-- Contenu principal -->
+    <div class="container">
+      <button class="menu-toggle" id="menuToggle"><i class="fas fa-bars"></i></button>
+      <div class="page-title">Entrer le montant</div>
+      <input type="number" class="amount-display" placeholder="0" />
+      <a href="mode_paiement.html" class="continue-button">Continuer</a>
+    </div>
+
+    <script>
+      const menuToggle = document.getElementById("menuToggle");
+      const sidebar = document.getElementById("sidebar");
+
+      menuToggle.addEventListener("click", () => {
+        sidebar.classList.toggle("open");
+      });
+    </script>
+  </body>
+</html>
