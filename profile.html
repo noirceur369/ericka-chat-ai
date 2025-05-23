@@ -230,46 +230,79 @@
   </div>
   <input type="file" id="profileImageInput" accept="image/*" onchange="loadFile(event)">
 
-  <form class="form-container">
-    <div class="form-field">
-      <label for="name" class="field-label">Nom et prénom(s)</label>
-      <input type="text" id="name" class="input-field" />
-    </div>
+          <form class="form-container">
+            <div class="form-field">
+                <label for="name" class="field-label">Nom et prénom(s)</label>
+                <input
+                    type="text"
+                    id="name"
+                    class="input-field"
+                    aria-label="Nom et prénom(s)"
+                />
+            </div>
 
-    <div class="form-field">
-      <label for="email" class="field-label disabled">Email</label>
-      <input type="email" id="email" class="input-field" value="email@gmail.com" disabled />
-    </div>
+            <div class="form-field">
+                <label for="email" class="field-label disabled">Email</label>
+                <input
+                    type="email"
+                    id="email"
+                    class="input-field"
+                    value="email@gmail.com"
+                    aria-label="Email"
+                    disabled
+                />
+            </div>
 
-    <div class="form-field">
-      <label for="birthdate" class="field-label">Date de naissance</label>
-      <div class="input-field date-field-container">
-        <input type="date" id="birthdate" class="input-field" />
-        <div class="arrow-container">
-          <svg class="arrow-svg" viewBox="0 0 24 24">
-            <path fill="currentColor" d="M7 10l5 5 5-5H7z" />
-          </svg>
-        </div>
-      </div>
-    </div>
-    <div class="form-field">
+            <div class="form-field">
+                <label for="birthdate" class="field-label">Date de naissance</label>
+                <div class="input-field date-field-container">
+                    <input
+                        type="date"
+                        id="birthdate"
+                        class="input-field"
+                        aria-label="Date de naissance"
+                    />
+                    <div class="arrow-container">
+                        <div>
+                            <div>
+                                <svg
+                                    class="arrow-svg"
+                                    viewBox="0 0 24 24"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                >
+                                    <path
+                                        d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"
+                                        fill="currentColor"
+                                    />
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-field">
                 <label for="whatsapp" class="field-label">Numéro WhatsApp</label>
                 <input
-                    type="numeric"
+                    type="tel"
                     id="whatsapp"
                     class="input-field"
                     placeholder="00 |"
                     aria-label="Numéro WhatsApp"
-                    name="whatsapp"
                 />
             </div>
+        </form>
 
-    <div class="privacy-notice-container">
-      <p class="privacy-notice-text">Nous ne partagerons jamais vos informations personnelles sans votre consentement.</p>
+        <section class="privacy-notice-container">
+            <p class="privacy-notice-text">
+                Ne vous inquiétez pas, vous seul pouvez voir vos données personnelles.
+                Personne d'autre ne pourra les consulter. Vous pouvez également ignorer
+                cette étape pour le moment.
+            </p>
+        </section>
+
+        <a href="invitation.html" class="primary-button">Continuer</a>
     </div>
-
-    <button type="submit" class="primary-button">Créer mon profil</button>
-  </form>
 
   <script>
     function loadFile(event) {
