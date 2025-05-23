@@ -16,47 +16,38 @@
     }
 
     html, body {
-      width: 100%;
       height: 100%;
-      overflow: hidden; /* Désactive le scroll */
-      touch-action: none; /* Empêche les gestes tactiles */
-    }
-
-    body {
       font-family: "Inter", sans-serif;
       display: flex;
       justify-content: center;
       align-items: center;
       background-color: #f5f5f5;
-      padding: 5vw;
+      padding: 20px;
+      overscroll-behavior: none;
     }
 
-    .container {
-      background-color: #fff;
-      border-radius: 27px;
-      box-shadow: 0 13px 55px rgba(37, 31, 48, 0.05);
-      padding: 6vw;
-      width: 100%;
-      max-width: 400px;
+    .content {
       display: flex;
       flex-direction: column;
       align-items: center;
+      width: 100%;
+      max-width: 400px;
     }
 
     .back-button-container {
       width: 100%;
       display: flex;
       justify-content: flex-start;
-      margin-bottom: 5vw;
+      margin-bottom: 20px;
     }
 
     .back-button {
       background-color: #e0e0e0;
       border: none;
       border-radius: 50%;
-      width: 50px;
-      height: 50px;
-      font-size: 24px;
+      width: 45px;
+      height: 45px;
+      font-size: 20px;
       font-weight: 700;
       color: #090909;
       display: flex;
@@ -82,7 +73,7 @@
       font-weight: 700;
       color: #090909;
       text-align: center;
-      margin-bottom: 6vw;
+      margin-bottom: 30px;
     }
 
     .button-container {
@@ -93,12 +84,10 @@
     }
 
     .primary-button {
-      display: block;
       width: 100%;
       height: 50px;
       border-radius: 15px;
       font-size: 16px;
-      font-family: "Inter", sans-serif;
       padding: 0 15px;
       text-align: center;
       cursor: pointer;
@@ -126,11 +115,6 @@
     }
 
     @media (max-width: 480px) {
-      .container {
-        padding: 8vw;
-        border-radius: 20px;
-      }
-
       .create-account-text {
         font-size: 20px;
       }
@@ -140,37 +124,21 @@
         height: 45px;
       }
 
-      .back-button {
-        width: 45px;
-        height: 45px;
-        font-size: 20px;
-      }
-
       .input-field {
         font-size: 17px;
         padding: 10px;
       }
     }
   </style>
-  <script>
-    // Bloque le scroll même via les touches ou gestes
-    document.addEventListener('touchmove', function(e) {
-      e.preventDefault();
-    }, { passive: false });
-    document.addEventListener('wheel', function(e) {
-      e.preventDefault();
-    }, { passive: false });
-  </script>
 </head>
 <body>
-  <div class="container">
+  <div class="content">
     <div class="back-button-container">
       <a href="accueil.php" class="back-button">&lt;</a>
     </div>
     <img src="images/Component 2.png" alt="Logo Ericka" />
     <p class="create-account-text">Créer votre compte</p>
 
-    <!-- Formulaire de saisie -->
     <form action="otp-verification.html" method="GET">
       <input type="email" class="input-field" placeholder="Saisir l'email" required />
       <div class="button-container">
