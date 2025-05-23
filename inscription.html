@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>Créer un compte</title>
   <link
     href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=SF+Pro+Display:wght@700&display=swap"
@@ -15,6 +15,11 @@
       padding: 0;
     }
 
+    html, body {
+      scroll-behavior: smooth;
+      -webkit-overflow-scrolling: touch;
+    }
+
     body {
       font-family: "Inter", sans-serif;
       display: flex;
@@ -23,6 +28,7 @@
       min-height: 100vh;
       background-color: #f5f5f5;
       padding: 5vw;
+      overscroll-behavior: none;
     }
 
     .container {
@@ -101,6 +107,7 @@
       color: white;
       font-weight: 700;
       transition: background-color 0.2s ease;
+      border: none;
     }
 
     .primary-button:hover {
@@ -111,10 +118,11 @@
       width: 100%;
       padding: 12px;
       margin-bottom: 15px;
-      border-radius: 15px; /* Arrondir les bords */
+      border-radius: 15px;
       border: 1px solid #ccc;
-      font-size: 16px;
-      height: 50px; /* La même hauteur que le bouton */
+      font-size: 17px; /* ≥ 16px pour éviter le zoom sur iOS */
+      height: 50px;
+      outline: none; /* Supprime le cadre de focus */
     }
 
     @media (max-width: 480px) {
@@ -139,7 +147,7 @@
       }
 
       .input-field {
-        font-size: 14px;
+        font-size: 17px;
         padding: 10px;
       }
     }
@@ -152,11 +160,10 @@
     </div>
     <img src="images/Component 2.png" alt="Logo Ericka" />
     <p class="create-account-text">Créer votre compte</p>
-    
+
     <!-- Formulaire de saisie -->
     <form action="otp-verification.html" method="GET">
       <input type="email" class="input-field" placeholder="Saisir l'email" required />
-      
       <div class="button-container">
         <button type="submit" class="primary-button">Continuer</button>
       </div>
