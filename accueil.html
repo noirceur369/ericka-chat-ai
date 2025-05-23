@@ -14,12 +14,12 @@
             font-family: "Inter", sans-serif;
             display: flex;
             flex-direction: column; /* Empile les éléments verticalement */
-            justify-content: space-between; /* Important: Espace les éléments du body (contenu principal et footer) */
+            justify-content: space-between; /* Espace le contenu principal et le footer */
             align-items: center; /* Centre le contenu horizontalement */
             height: 100vh; /* La page occupe toute la hauteur de la fenêtre */
             background-color: #f5f5f5;
             margin: 0;
-            padding: 20px; /* Ajoute un espace autour du contenu */
+            padding: 20px; /* Espace autour du contenu */
             overflow: hidden; /* Empêche tout défilement de la page */
             box-sizing: border-box; /* Inclut le padding dans la hauteur/largeur totale */
         }
@@ -31,10 +31,9 @@
             align-items: center;
             width: 100%; /* Permet au contenu de s'adapter à la largeur */
             max-width: 360px; /* Limite la largeur du contenu principal sur les grands écrans */
-            /* Flex-grow pour que le contenu principal prenne l'espace disponible */
-            flex-grow: 1; /* Permet au contenu principal de prendre tout l'espace disponible */
+            flex-grow: 1; /* Permet au contenu principal de prendre l'espace disponible */
             flex-shrink: 1; /* Permet au contenu principal de se réduire si nécessaire */
-            min-height: 0; /* Important pour que le contenu ne déborde pas si très compact */
+            min-height: 0; /* Permet au contenu de se contracter sans forcer de défilement */
         }
 
         img {
@@ -69,7 +68,7 @@
             gap: 15px; /* Espacement entre les boutons */
             width: 100%;
             max-width: 320px; /* Largeur maximale pour les boutons */
-            margin-bottom: 0; /* Le gap gère l'espace avec le footer via le parent */
+            margin-bottom: 0; /* Pas de marge en bas, géré par l'espacement du body */
             flex-shrink: 0;
         }
 
@@ -121,23 +120,23 @@
             font-size: 0.75em;
             color: #777;
             text-align: center;
-            margin-top: 20px; /* Ajoute un peu d'espace entre le contenu et le footer */
+            margin-top: 20px; /* Espace entre le contenu principal et le footer */
             flex-shrink: 0; /* Empêche le footer de se réduire */
-            padding-bottom: 0; /* Assurez-vous qu'il n'y a pas de padding supplémentaire en bas */
+            padding-bottom: 0; /* S'assurer qu'il n'y a pas de padding supplémentaire en bas du footer */
         }
 
         /* Responsive design pour petits écrans */
         @media (max-width: 600px) {
             body {
-                padding: 15px;
+                padding: 15px; /* Réduit le padding du body sur mobile */
             }
 
             img {
-                margin-bottom: 20px;
+                margin-bottom: 20px; /* Réduit l'espace entre les images sur mobile */
             }
 
             img[alt="Logo Ericka"] {
-                margin-bottom: 30px;
+                margin-bottom: 30px; /* Ajuste l'espace après le logo sur mobile */
             }
 
             .welcome-text {
