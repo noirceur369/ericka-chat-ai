@@ -1,136 +1,118 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Découvrez Ericka</title>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=SF+Pro+Display:wght@700&display=swap"
-        rel="stylesheet"
-    />
-    <style>
-        body {
-            font-family: 'Inter', sans-serif; /* Utilisation de la police Inter si présente */
-            display: flex;
-            flex-direction: column; /* Organise les éléments en colonne */
-            justify-content: space-between; /* Espace le contenu principal et le footer */
-            align-items: center; /* Centre le contenu horizontalement */
-            height: 100vh; /* Le body occupe toute la hauteur de la fenêtre */
-            background-color: #f5f5f5;
-            margin: 0;
-            padding: 20px; /* Un padding général pour éviter que le contenu ne touche les bords */
-            overflow: hidden; /* Empêche tout défilement de la page */
-            box-sizing: border-box; /* Inclut le padding dans la hauteur/largeur totale */
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Découvrez Ericka</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=SF+Pro+Display:wght@700&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f5f5f5;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      box-sizing: border-box;
+    }
 
-        .main-content {
-            display: flex;
-            flex-direction: column;
-            justify-content: center; /* Centre les éléments du contenu principal verticalement */
-            align-items: center;
-            width: 100%;
-            max-width: 360px; /* Limite la largeur du contenu sur les grands écrans */
-            flex-grow: 1; /* Permet au contenu principal de prendre l'espace disponible */
-            flex-shrink: 1; /* Permet au contenu principal de se réduire si nécessaire */
-            min-height: 0; /* Assure que le contenu peut se contracter sans forcer de défilement */
-            text-align: center; /* Pour centrer le texte dans le h1 */
-        }
+    .main-content {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      width: 100%;
+      max-width: 360px;
+      padding: 20px;
+    }
 
-        img {
-            max-width: 100%; /* S'assure que les images ne débordent pas */
-            height: auto;
-            display: block; /* Supprime l'espace sous les images */
-            margin-bottom: 25px; /* Espace après chaque image par défaut */
-            object-fit: contain; /* Assure que l'image est entièrement visible */
-            border-radius: 8px; /* Conserve le border-radius de vos images */
-            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.02); /* Conserve l'ombre */
-            flex-shrink: 0; /* Empêche les images de se réduire au-delà de leur taille de contenu */
-        }
+    img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+      margin-bottom: 25px;
+      object-fit: contain;
+      border-radius: 8px;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.02);
+    }
 
-        /* Ajustement spécifique pour l'image "Pourquoi l’utiliser" */
-        img[alt="Pourquoi l’utiliser"] {
-            max-width: 70%; /* Définit la taille maximale de cette image */
-            margin-bottom: 25px; /* Espace après cette image */
-        }
+    img[alt="Pourquoi l’utiliser"] {
+      max-width: 70%;
+      margin-bottom: 25px;
+    }
 
-        h1 {
-            font-family: "SF Pro Display", -apple-system, Roboto, Helvetica, sans-serif; /* Utilise la police SF Pro Display */
-            color: #090909;
-            font-size: 16px;
-            line-height: 1.5; /* Légèrement augmenté pour une meilleure lisibilité */
-            text-align: center;
-            margin-bottom: 30px; /* Espace après le titre avant le footer */
-            padding: 0 10px; /* Padding horizontal pour le texte */
-            flex-shrink: 0;
-        }
+    h1 {
+      font-family: "SF Pro Display", -apple-system, Roboto, Helvetica, sans-serif;
+      color: #090909;
+      font-size: 16px;
+      line-height: 1.5;
+      padding: 0 10px;
+      margin-bottom: 20px;
+    }
 
-        footer {
-            display: flex;
-            justify-content: center;
-            align-items: center; /* Centre le bouton de navigation verticalement dans le footer */
-            width: 100%;
-            padding-top: 20px; /* Espace entre le contenu et le footer */
-            flex-shrink: 0; /* Empêche le footer de rétrécir */
-        }
+    footer {
+      margin-top: 20px;
+      display: flex;
+      justify-content: center;
+      width: 100%;
+    }
 
-        .navigation-button {
-            background: none;
-            border: none;
-            padding: 0; /* Supprime le padding du bouton pour que l'image gère son propre espacement */
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
+    .navigation-button {
+      background: none;
+      border: none;
+      padding: 0;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
 
-        .navigation-button img {
-            width: 140px; /* Taille fixe pour le bouton de navigation */
-            height: auto;
-            margin-bottom: 0; /* Annule le margin-bottom générique pour cette image */
-        }
+    .navigation-button img {
+      width: 140px;
+      height: auto;
+    }
 
-        /* Media queries pour la responsivité */
-        @media (max-width: 600px) { /* Appliqué aux écrans de 600px de large ou moins (typiquement mobiles) */
-            body {
-                padding: 15px; /* Réduit le padding du body sur mobile */
-            }
+    @media (max-width: 600px) {
+      .main-content {
+        padding: 15px;
+      }
 
-            img {
-                margin-bottom: 20px; /* Réduit l'espace entre les images sur mobile */
-            }
+      img {
+        margin-bottom: 20px;
+      }
 
-            img[alt="Pourquoi l’utiliser"] {
-                margin-bottom: 20px; /* Ajuste l'espace après l'image sur mobile */
-            }
+      h1 {
+        font-size: 14px;
+        margin-bottom: 15px;
+      }
 
-            h1 {
-                font-size: 14px; /* Réduit la taille du texte du h1 sur mobile */
-                margin-bottom: 25px; /* Ajuste l'espace après le h1 sur mobile */
-            }
+      footer {
+        margin-top: 15px;
+      }
 
-            footer {
-                padding-top: 15px; /* Ajuste l'espace du footer sur mobile */
-            }
-
-            .navigation-button img {
-                width: 140px; /* Réduit légèrement la taille du bouton sur mobile */
-            }
-        }
-    </style>
+      .navigation-button img {
+        width: 130px;
+      }
+    }
+  </style>
 </head>
 <body>
-    <div class="main-content">
-        <img src="images/Rectangle 3538.jpg" alt="Image principale">
-        <img src="images/Slider3.png" alt="Slider image">
-        <img src="images/Pourquoi l’utiliser _.png" alt="Pourquoi l’utiliser">
-        <h1>
-            Disponible à tout moment, ERICKA t’aide à progresser, à gagner en autonomie et à réussir tes examens ou projets d’études.
-        </h1>
-    </div>
+  <div class="main-content">
+    <img src="images/Rectangle 3538.jpg" alt="Image principale" />
+    <img src="images/Slider3.png" alt="Slider image" />
+    <img src="images/Pourquoi l’utiliser _.png" alt="Pourquoi l’utiliser" />
+    <h1>
+      Disponible à tout moment, ERICKA t’aide à progresser, à gagner en autonomie et à réussir tes examens ou projets d’études.
+    </h1>
+
     <footer>
-        <button class="navigation-button" onclick="window.location.href = 'accueil.html';">
-            <img src="images/nagigator.png" alt="Navigateur">
-        </button>
+      <button class="navigation-button" onclick="window.location.href = 'accueil.html';">
+        <img src="images/nagigator.png" alt="Navigateur" />
+      </button>
     </footer>
+  </div>
 </body>
 </html>
