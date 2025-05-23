@@ -7,16 +7,19 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
   <style>
     html, body {
-      height: 100%;
-      margin: 0;
-      padding: 0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background-color: #fff;
-      font-family: 'Poppins', sans-serif;
-      overflow: hidden;
-    }
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: 'Poppins', sans-serif;
+  background-color: #fff;
+  display: flex;
+  justify-content: center;     /* Centrage horizontal */
+  align-items: center;         /* Centrage vertical */
+}
+
+body {
+  overflow: auto; /* permet de scroller si nécessaire */
+}
 
     .screen-wrapper {
       max-width: 360px;
@@ -136,6 +139,18 @@
     }
 
     @media (max-width: 400px) {
+      html, body {
+    flex-direction: column;
+    padding: 16px;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .screen-wrapper {
+    width: 100%;
+    max-width: 360px;
+  }
+}
       .main-heading {
         font-size: 28px;
         line-height: 36px;
