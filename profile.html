@@ -305,11 +305,29 @@
     </div>
 
   <script>
-    function loadFile(event) {
-      const image = document.getElementById('uploadedProfileImage');
-      image.src = URL.createObjectURL(event.target.files[0]);
-      image.style.display = 'block';
-    }
+            const profileImageInput = document.getElementById('profileImageInput');
+        const uploadedProfileImage = document.getElementById('uploadedProfileImage');
+        const uploadContainer = document.querySelector('.upload-container');
+
+        uploadContainer.addEventListener('click', () => {
+            profileImageInput.click();
+        });
+
+        function loadFile(event) {
+            if (event.target.files && event.target.files[0]) {
+                uploadedProfileImage.src = URL.createObjectURL(event.target.files[0]);
+                uploadedProfileImage.style.display = 'block';
+                uploadedProfileImage.onload = function() {
+                    URL.revokeObjectURL(uploadedProfileImage.src) // free memory
+                }
+                // Hide the avatar placeholder when an image is uploaded
+                document.querySelector('.avatar-placeholder svg').style.display = 'none';
+            } else {
+                // If no file is selected (e.g., user cancels), show the placeholder again
+                uploadedProfileImage.style.display = 'none';
+                document.querySelector('.avatar-placeholder svg').style.display = 'block';
+            }
+        }
   </script>
 </body>
 </html>
