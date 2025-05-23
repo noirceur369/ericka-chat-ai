@@ -8,28 +8,32 @@
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
+            justify-content: center; /* Centre horizontalement le conteneur */
+            align-items: center; /* Centre verticalement le conteneur */
+            height: 100vh; /* S'assure que le body occupe toute la hauteur de la fenêtre */
             background-color: #f5f5f5;
             margin: 0;
-            padding: 15px;
+            padding: 0; /* Supprime le padding du body pour éviter les barres de défilement indésirables */
+            overflow: hidden; /* Empêche le défilement du body */
         }
 
         .page-container {
             background-color: #fff;
             border-radius: 15px;
-            padding: 15px;
+            padding: 20px; /* Padding interne du conteneur */
             box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
             display: flex;
             flex-direction: column;
             align-items: center;
-            max-width: 320px;
-            width: 100%;
+            max-width: 360px; /* Largeur maximale du conteneur sur les écrans plus grands */
+            width: calc(100% - 30px); /* Prend 100% de la largeur de la fenêtre moins un padding virtuel de 15px de chaque côté */
+            height: calc(100vh - 30px); /* Prend 100% de la hauteur de la fenêtre moins un padding virtuel de 15px en haut et en bas */
+            box-sizing: border-box; /* Inclut le padding dans les calculs de largeur et de hauteur */
+            overflow-y: auto; /* Permet le défilement interne si le contenu dépasse */
         }
 
         img {
-            max-width: 70%;
+            max-width: 100%; /* S'assure que toutes les images sont responsives et ne dépassent pas leur conteneur */
             height: auto;
             display: block;
             margin-bottom: 10px;
@@ -46,7 +50,7 @@
             padding: 0 10px;
         }
 
-        div {
+        .image-wrapper { /* Classe pour le div contenant l'image "Pourquoi l’utiliser" */
             text-align: center;
             margin-bottom: 10px;
             width: 100%;
@@ -54,44 +58,51 @@
             justify-content: center;
         }
 
-        div img { /* Style pour l'image "Qui est ERICKA ?" */
-            max-width: 45%;
+        .image-wrapper img { /* Style spécifique pour l'image "Pourquoi l’utiliser" */
+            max-width: 70%; /* Définit la taille maximale de cette image dans son wrapper */
             margin-bottom: 8px;
         }
 
         footer {
             display: flex;
-            justify-content: center; /* Centre le bouton horizontalement dans le footer */
+            justify-content: center;
             padding-top: 20px;
-            width: 100%; /* Assure que le footer prend toute la largeur pour le centrage */
+            width: 100%;
+            flex-shrink: 0; /* Empêche le footer de rétrécir si le contenu dépasse */
         }
 
         .navigation-button {
             background: none;
             border: none;
-            padding: 10px;
+            padding: 10px 20px; /* Ajoute un padding autour de l'image pour une zone de clic plus grande */
             cursor: pointer;
-            display: flex; /* Utilise flexbox pour centrer l'image à l'intérieur du bouton (si nécessaire) */
-            align-items: center; /* Centre verticalement l'image (si nécessaire) */
-            justify-content: center; /* Centre horizontalement l'image (si nécessaire) */
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .navigation-button img {
-            width: 60px;
+            width: 60px; /* Taille par défaut du bouton */
             height: auto;
-            margin-bottom: 0;
+            margin-bottom: 0; /* Annule le margin-bottom générique pour cette image */
         }
 
-        /* Media query pour les écrans plus grands */
-        @media (min-width: 400px) {
+        /* Media query pour les écrans mobiles (max-width de 600px) */
+        @media (max-width: 600px) {
+            .navigation-button img {
+                width: 100px; /* Taille du bouton augmentée pour mobile */
+            }
+        }
+
+        /* Media query pour les écrans légèrement plus grands que les mobiles */
+        @media (min-width: 601px) {
             .page-container {
                 border-radius: 20px;
-                padding: 20px;
-                max-width: 360px;
+                padding: 25px; /* Augmente légèrement le padding interne pour les écrans plus grands */
+                max-width: 400px; /* Augmente la largeur maximale du conteneur */
             }
 
             img {
-                max-width: 80%;
                 margin-bottom: 15px;
                 border-radius: 10px;
             }
@@ -102,17 +113,17 @@
                 padding: 0 15px;
             }
 
-            div {
+            .image-wrapper {
                 margin-bottom: 15px;
             }
 
-            div img {
-                max-width: 50%;
+            .image-wrapper img {
+                max-width: 50%; /* Ajuste la taille de l'image "Pourquoi l’utiliser" pour les écrans plus grands */
                 margin-bottom: 10px;
             }
 
             .navigation-button img {
-                width: 200px;
+                width: 150px; /* Taille du bouton pour les écrans plus grands */
             }
         }
     </style>
@@ -121,7 +132,7 @@
     <div class="page-container">
         <img src="images/Rectangle 3538.jpg" alt="Image principale">
         <img src="images/Slider3.png" alt="Slider image">
-        <div>
+        <div class="image-wrapper">
             <img src="images/Pourquoi l’utiliser _.png" alt="Pourquoi l’utiliser">
         </div>
         <div>
