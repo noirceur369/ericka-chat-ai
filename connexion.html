@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, maximum-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover" />
   <title>Connexion</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=SF+Pro+Display:wght@700&display=swap" rel="stylesheet" />
   <style>
@@ -10,12 +10,18 @@
       margin: 0;
       padding: 0;
       height: 100%;
-      overflow: hidden; /* empêche tout scroll */
+      overflow: hidden;
       font-family: "Inter", sans-serif;
       background-color: #f5f5f5;
       display: flex;
       justify-content: center;
       align-items: center;
+      -webkit-overflow-scrolling: auto;
+      touch-action: manipulation;
+    }
+
+    * {
+      box-sizing: border-box;
     }
 
     .login-card {
@@ -28,15 +34,13 @@
       flex-direction: column;
       align-items: center;
       gap: 20px;
-      box-sizing: border-box;
-      /* suppression du cadre / ombre */
     }
 
     .back-button-container {
       width: 100%;
       display: flex;
       justify-content: flex-start;
-      margin-bottom: 20px;
+      margin-bottom: 10px;
     }
 
     .back-button {
@@ -46,9 +50,7 @@
       font-size: 16px;
       color: #090909;
       font-weight: 500;
-      text-decoration: none; /* pas de soulignement */
-      display: inline-flex;
-      align-items: center;
+      text-decoration: none;
       border: none;
       cursor: pointer;
       transition: background-color 0.2s ease;
@@ -59,9 +61,9 @@
     }
 
     .logo-container {
-      width: 100%;
       display: flex;
       justify-content: center;
+      width: 100%;
     }
 
     .logo-container img {
@@ -75,7 +77,6 @@
       color: #090909;
       font-weight: 700;
       text-align: center;
-      margin-bottom: 20px;
       width: 100%;
     }
 
@@ -94,7 +95,7 @@
       font-size: 16px;
       color: #090909;
       width: 100%;
-      box-sizing: border-box;
+      background-color: #fff;
     }
 
     .input-field::placeholder {
@@ -108,14 +109,13 @@
       font-size: 18px;
       color: #fff;
       font-weight: 700;
-      text-align: center;
       border: none;
       cursor: pointer;
       width: 100%;
       display: flex;
       justify-content: center;
       align-items: center;
-      text-decoration: none; /* NE PAS souligner */
+      text-decoration: none;
     }
 
     .primary-button:hover {
