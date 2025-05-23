@@ -13,28 +13,29 @@
         box-sizing: border-box;
       }
 
-      html, body {
-        height: 100%;
+      body {
         font-family: "Inter", -apple-system, Roboto, Helvetica, sans-serif;
         font-weight: 700;
         line-height: 1.6;
         display: flex;
         justify-content: center;
         align-items: center;
+        min-height: 100vh;
         background-color: #f5f5f5;
-        overflow: hidden; /* Empêche le scroll */
+        padding: 20px; /* pour un peu d'espace sur mobile */
       }
 
-      .invitation-container {
+      main.invitation-container {
         display: flex;
-        width: 100%;
-        max-width: none;
-        padding: 10px 20px;
         flex-direction: column;
         align-items: center;
-        background-color: transparent; /* Pas de fond */
-        border-radius: 0; /* Pas d'arrondi */
-        box-shadow: none; /* Pas d'ombre */
+        width: 100%;
+        max-width: 390px;
+        /* Suppression du cadre et ombre : */
+        border-radius: 0;
+        background-color: transparent;
+        box-shadow: none;
+        padding: 0;
       }
 
       .invitation-title {
@@ -45,14 +46,13 @@
         line-height: 1;
         letter-spacing: -0.64px;
         font-weight: 700;
-        text-align: center;
       }
 
       .input-section {
         display: flex;
         margin-top: 25px;
         width: 100%;
-        max-width: none;
+        max-width: 360px;
         flex-direction: column;
         align-items: stretch;
         font-size: 11px;
@@ -63,8 +63,8 @@
       }
 
       .input-label {
-        align-self: center;
-        text-align: center;
+        align-self: flex-start;
+        text-align: left;
       }
 
       .code-input {
@@ -74,7 +74,6 @@
         min-height: 50px;
         margin-top: 10px;
         width: 100%;
-        max-width: 360px;
         padding: 0 15px;
         font-family: "Inter", -apple-system, Roboto, Helvetica, sans-serif;
         font-size: 16px;
@@ -86,7 +85,7 @@
       }
 
       .continue-button {
-        align-self: center;
+        align-self: stretch;
         border: none;
         border-radius: 20px;
         opacity: 0.4;
@@ -94,7 +93,6 @@
         margin-top: 25px;
         min-height: 55px;
         width: 100%;
-        max-width: 360px;
         padding: 13px 15px;
         font-size: 18px;
         color: #fff;
@@ -112,14 +110,13 @@
       }
 
       .no-code-button {
-        align-self: center;
+        align-self: stretch;
         border: none;
         background: transparent;
         border-radius: 20px;
         margin-top: 25px;
         min-height: 55px;
         width: 100%;
-        max-width: 360px;
         padding: 18px 15px;
         font-size: 14px;
         color: #4373d8;
@@ -172,7 +169,7 @@
 
       noCodeButton.addEventListener("click", function () {
         continueButton.disabled = false;
-        continueButton.focus();
+        continueButton.focus(); // optionnel : donne un effet visuel
       });
     </script>
   </body>
