@@ -12,33 +12,25 @@
         padding: 0;
       }
 
-      html, body {
-        height: 100%;
-        margin: 0;
-      }
-
       body {
         font-family: 'Poppins', sans-serif;
         background-color: #ffffff;
         color: #111111;
         width: 100%;
-        height: 100vh;
-        overflow: hidden; /* Pas de scroll sur PC */
-        display: flex;
-        justify-content: center;
-        align-items: center;
+        min-height: 100vh;
+        padding: 24px;
+        /* évite scroll horizontal */
+        overflow-x: hidden;
       }
 
       .screen-wrapper {
-        width: 100%;
         max-width: 360px;
-        padding: 24px;
-        background: #f8f8f8;
+        margin: 0 auto; /* centrage horizontal */
+        /* pas de hauteur fixe ni bordure, pas de box-shadow */
         display: flex;
         flex-direction: column;
         justify-content: flex-start;
-        cursor: pointer;
-        /* Suppression du cadre arrondi et ombre pour effet "direct" */
+        /* plus besoin de background ou border-radius ici */
       }
 
       .main-heading {
@@ -149,19 +141,19 @@
         background-color: #b3b3b3;
       }
 
-      /* Media queries pour mobiles */
+      /* Retirer scroll vertical sur PC et mobile */
+      html, body {
+        overflow-y: hidden;
+      }
+
+      /* Media queries pour mobile */
       @media (max-width: 400px) {
         body {
-          overflow: hidden; /* Pas de scroll sur mobile */
+          padding: 16px;
         }
-
         .screen-wrapper {
           max-width: 100%;
-          padding: 16px;
-          height: 100vh;
-          box-sizing: border-box;
-          justify-content: flex-start;
-          overflow-y: hidden; /* empêcher scroll sur mobile */
+          margin: 0 8px;
         }
 
         .main-heading {
@@ -172,42 +164,38 @@
 
         .info-box {
           font-size: 10px;
-          min-height: auto;
           padding: 16px;
-          margin-top: 16px;
+          min-height: 70px;
         }
 
-        .pin-dots-container {
-          margin-top: 24px;
-          gap: 12px;
+        .continue-button {
+          font-size: 14px;
+          padding: 10px 24px;
         }
 
         .pin-dot {
           width: 14px;
           height: 14px;
-          border-width: 1.8px;
         }
 
-        .continue-button {
-          padding: 10px 28px;
-          font-size: 14px;
-          border-radius: 28px;
+        .pin-dots-container {
+          gap: 12px;
+          margin-top: 24px;
         }
       }
     </style>
   </head>
   <body>
-    <div class="screen-wrapper" id="pin-wrapper">
+    <main class="screen-wrapper" id="pin-wrapper">
       <div class="back-button-container">
-        <button class="back-button">
-          <a href="invitation.html" style="text-decoration: none; color: inherit;">&lt;</a>
-        </button>
+        <button class="back-button"><a href="invitation.html" style="text-decoration: none; color: inherit;">&lt;</a></button>
       </div>
       <h1 class="main-heading">Créez un code secret de votre compte</h1>
 
       <section class="info-box">
         <p>
-          Ce code secret vous permet d'accéder à votre compte virtuel.<br />
+          Ce code secret vous permet d'accéder à votre compte virtuel.
+          <br />
           Ce compte vous permet d'effectuer tout achat dans l'application.
         </p>
       </section>
@@ -224,7 +212,7 @@
       <div class="continue-button-container">
         <button class="continue-button" id="continue-button">Continuer</button>
       </div>
-    </div>
+    </main>
 
     <script>
       const pinInput = document.getElementById("pin-input");
