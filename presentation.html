@@ -10,30 +10,29 @@
     />
     <style>
         body {
-            font-family: 'Inter', sans-serif; /* Utilisation de la police Inter si présente */
+            font-family: 'Inter', sans-serif;
             display: flex;
-            flex-direction: column; /* Organise les éléments en colonne */
-            justify-content: space-between; /* Espace le contenu principal et le footer */
-            align-items: center; /* Centre le contenu horizontalement */
-            height: 100vh; /* Le body occupe toute la hauteur de la fenêtre */
+            flex-direction: column; /* Empile les éléments verticalement */
+            justify-content: center; /* **Centre l'ensemble du contenu verticalement** */
+            align-items: center; /* Centre l'ensemble du contenu horizontalement */
+            height: 100vh; /* La page occupe toute la hauteur de la fenêtre */
             background-color: #f5f5f5;
             margin: 0;
-            padding: 20px; /* Un padding général pour éviter que le contenu ne touche les bords */
+            padding: 20px; /* Ajoute un espace autour du contenu */
             overflow: hidden; /* Empêche tout défilement de la page */
             box-sizing: border-box; /* Inclut le padding dans la hauteur/largeur totale */
         }
 
-        .main-content {
+        .page-content-wrapper { /* Nouveau conteneur pour tout le contenu centré */
             display: flex;
             flex-direction: column;
-            justify-content: center; /* Centre les éléments du contenu principal verticalement */
-            align-items: center;
+            justify-content: center; /* Centre les éléments à l'intérieur verticalement */
+            align-items: center; /* Centre les éléments à l'intérieur horizontalement */
             width: 100%;
             max-width: 360px; /* Limite la largeur du contenu sur les grands écrans */
-            flex-grow: 1; /* Permet au contenu principal de prendre l'espace disponible */
-            flex-shrink: 1; /* Permet au contenu principal de se réduire si nécessaire */
-            min-height: 0; /* Assure que le contenu peut se contracter sans forcer de défilement */
-            text-align: center; /* Pour centrer le texte dans le h1 */
+            flex-shrink: 1; /* Permet au contenu de se réduire si nécessaire */
+            min-height: 0; /* Assure que le contenu peut se contracter */
+            text-align: center; /* Centre le texte */
         }
 
         img {
@@ -47,32 +46,21 @@
             flex-shrink: 0; /* Empêche les images de se réduire au-delà de leur taille de contenu */
         }
 
-        /* Ajustement spécifique pour l'image "Qui est ERICKA ?" qui n'est pas un slider */
-        /* Note: Vous n'avez plus besoin de .image-wrapper si vous retirez le cadre */
+        /* Ajustement spécifique pour l'image "Qui est ERICKA ?" */
         img[alt="Qui est ERICKA ?"] {
             max-width: 70%; /* Ajusté pour qu'elle puisse être plus grande si nécessaire */
             margin-bottom: 25px; /* Espace après cette image */
-            /* Retirez les styles de text-align si vous n'avez plus de wrapper div */
         }
 
         h1 {
-            font-family: "SF Pro Display", -apple-system, Roboto, Helvetica, sans-serif; /* Utilise la police SF Pro Display */
+            font-family: "SF Pro Display", -apple-system, Roboto, Helvetica, sans-serif;
             color: #090909;
             font-size: 16px;
             line-height: 1.5; /* Légèrement augmenté pour une meilleure lisibilité */
             text-align: center;
-            margin-bottom: 30px; /* Espace après le titre avant le footer */
+            margin-bottom: 30px; /* Espace après le titre */
             padding: 0 10px; /* Padding horizontal pour le texte */
             flex-shrink: 0;
-        }
-
-        footer {
-            display: flex;
-            justify-content: center;
-            align-items: center; /* Centre le bouton de navigation verticalement dans le footer */
-            width: 100%;
-            padding-top: 20px; /* Espace entre le contenu et le footer */
-            flex-shrink: 0; /* Empêche le footer de rétrécir */
         }
 
         .navigation-button {
@@ -83,6 +71,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            flex-shrink: 0;
         }
 
         .navigation-button img {
@@ -110,29 +99,25 @@
                 margin-bottom: 25px; /* Ajuste l'espace après le h1 sur mobile */
             }
 
-            footer {
-                padding-top: 15px; /* Ajuste l'espace du footer sur mobile */
-            }
-
             .navigation-button img {
-                width: 150px; /* Réduit légèrement la taille du bouton sur mobile */
+                width: 50px; /* Réduit la taille du bouton sur mobile */
             }
         }
     </style>
 </head>
 <body>
-    <div class="main-content">
+    <div class="page-content-wrapper">
         <img src="images/Rectangle 3538.jpg" alt="Image principale">
         <img src="images/Slider.png" alt="Slider image">
         <img src="images/Qui est ERICKA _.png" alt="Qui est ERICKA ?">
         <h1>
             Un assistant virtuel éducatif, pensé pour les étudiants et lycéens de Côte d'Ivoire, aligné sur les programmes officiels
         </h1>
+        <footer>
+            <button class="navigation-button" onclick="window.location.href = 'page3.html';">
+                <img src="images/nagigator.png" alt="Navigateur">
+            </button>
+        </footer>
     </div>
-    <footer>
-        <button class="navigation-button" onclick="window.location.href = 'page3.html';">
-            <img src="images/nagigator.png" alt="Navigateur">
-        </button>
-    </footer>
 </body>
 </html>
