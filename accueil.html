@@ -19,8 +19,8 @@
             background-color: #f5f5f5;
             margin: 0; /* Réinitialise la marge par défaut du body */
             padding: 0; /* Supprime le padding du body pour éviter les barres de défilement indésirables */
-            overflow: hidden; /* Empêche le défilement du body */
-            box-sizing: border-box; /* Inclut le padding dans la largeur/hauteur totale du body (même si 0 ici) */
+            overflow: hidden; /* Empêche le défilement du body et donc de la page entière */
+            box-sizing: border-box;
         }
 
         .container {
@@ -30,19 +30,21 @@
             padding: 30px 20px; /* Padding interne du conteneur */
             display: flex;
             flex-direction: column;
-            align-items: center;
+            justify-content: center; /* Centre les éléments enfants verticalement */
+            align-items: center; /* Centre les éléments enfants horizontalement */
             gap: 25px; /* Espacement entre les éléments flex du conteneur */
             max-width: 360px; /* Largeur maximale du conteneur */
-            width: calc(100% - 40px); /* Prend 100% de la largeur de la fenêtre moins un padding virtuel de 20px de chaque côté */
-            height: calc(100vh - 40px); /* Prend 100% de la hauteur de la fenêtre moins un padding virtuel de 20px en haut et en bas */
-            box-sizing: border-box; /* Inclut le padding dans la largeur/hauteur du card */
-            overflow-y: auto; /* Permet le défilement interne si le contenu dépasse */
+            width: calc(100% - 40px); /* Prend 100% de la largeur de la fenêtre moins 40px de marge latérale */
+            height: calc(100vh - 40px); /* Prend 100% de la hauteur de la fenêtre moins 40px de marge verticale */
+            box-sizing: border-box;
+            /* overflow-y: auto; */ /* Supprimez ceci pour empêcher le défilement interne du conteneur */
+            flex-shrink: 0; /* Empêche le conteneur de se contracter */
         }
 
         img {
-            max-width: 100%; /* S'assure que toutes les images sont responsives et ne dépassent pas leur conteneur */
+            max-width: 100%;
             height: auto;
-            display: block; /* Pour éviter les espaces indésirables en dessous des images */
+            display: block;
         }
 
         .welcome-text {
@@ -68,9 +70,10 @@
             line-height: 1.6;
             border: none;
             cursor: pointer;
-            text-decoration: none; /* Pour les liens, bien que ce soient des boutons ici */
+            text-decoration: none;
             transition: background-color 0.2s ease;
-            box-sizing: border-box; /* Inclut le padding dans la largeur/hauteur des boutons */
+            box-sizing: border-box;
+            flex-shrink: 0; /* Empêche les boutons de se contracter */
         }
 
         .connexion-button {
@@ -91,28 +94,27 @@
 
         .connexion-button a,
         .inscription-button a {
-            color: inherit; /* Hérite la couleur du texte du bouton parent */
+            color: inherit;
             text-decoration: none;
-            display: block; /* Rend le lien cliquable sur toute la surface du bouton */
+            display: block;
             width: 100%;
             height: 100%;
         }
 
         footer {
-            /* margin-top: 10px; <-- Ce margin peut être géré par le 'gap' du parent si le footer fait partie du flux flex */
             font-size: 0.75em;
             color: #777;
             text-align: center;
-            flex-shrink: 0; /* Empêche le footer de se contracter si le contenu dépasse */
+            flex-shrink: 0; /* Empêche le footer de se contracter */
         }
 
         /* Responsive design pour petits écrans */
-        @media (max-width: 600px) { /* Utilisation de 600px comme breakpoint pour mobile */
+        @media (max-width: 600px) {
             .container {
-                padding: 25px 20px; /* Ajuster le padding pour les écrans mobiles */
-                width: calc(100% - 30px); /* Ajuste la largeur pour laisser plus d'espace sur les bords */
-                height: calc(100vh - 30px); /* Ajuste la hauteur pour laisser plus d'espace sur les bords */
-                border-radius: 20px; /* Un peu moins arrondi sur mobile pour un look plus compact */
+                padding: 25px 20px;
+                width: calc(100% - 30px);
+                height: calc(100vh - 30px);
+                border-radius: 20px;
             }
 
             .welcome-text {
@@ -130,7 +132,7 @@
             }
         }
 
-        @media (min-width: 601px) { /* Media query pour les écrans plus grands */
+        @media (min-width: 601px) {
             .container {
                 padding: 30px 20px;
             }
