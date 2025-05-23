@@ -1,208 +1,157 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=SF+Pro+Display:wght@700&display=swap"
-        rel="stylesheet"
-    />
-    <style>
-        body {
-            font-family: "Inter", sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            background-color: #f5f5f5;
-            margin: 0; /* Reset default body margin */
-            padding: 20px; /* Add padding for overall body */
-            box-sizing: border-box; /* Include padding in body's total width/height */
-        }
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Connexion</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=SF+Pro+Display:wght@700&display=swap"
+    rel="stylesheet"
+  />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-        .login-card {
-            width: 100%; /* Make login card take up full width of its container */
-            max-width: 360px; /* But don't let it get wider than 360px */
-            border-radius: 27px;
-            box-shadow: 0px 13.316px 55.484px 0px rgba(37, 31, 48, 0.05);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 30px;
-            background-color: #fff;
-            gap: 20px;
-            box-sizing: border-box; /* Include padding in card's total width/height */
-        }
+    html, body {
+      height: 100vh;
+      overflow: hidden; /* Empêche le scroll */
+      font-family: "Inter", sans-serif;
+      background-color: #f5f5f5;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
 
-        .back-button-container {
-            width: 100%;
-            display: flex;
-            justify-content: flex-start;
-            margin-bottom: 20px;
-        }
+    .login-card {
+      width: 100%;
+      max-width: 360px;
+      border-radius: 27px;
+      box-shadow: 0px 13px 55px rgba(37, 31, 48, 0.05);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 30px;
+      background-color: #fff;
+      gap: 20px;
+    }
 
-        .back-button {
-            border-radius: 20px;
-            background-color: #e0e0e0;
-            padding: 10px 15px;
-            gap: 10px;
-            font-family: "Inter", sans-serif;
-            font-size: 16px;
-            color: #090909;
-            font-weight: 500;
-            text-align: center;
-            border: none;
-            cursor: pointer;
-            text-decoration: none;
-            transition: background-color 0.2s ease;
-            display: inline-flex; /* Use inline-flex for better alignment of icon and text */
-            align-items: center;
-        }
+    .back-button-container {
+      width: 100%;
+      display: flex;
+      justify-content: flex-start;
+    }
 
-        .back-button:hover {
-            background-color: #b3b3b3;
-        }
+    .back-button {
+      border-radius: 20px;
+      background-color: #e0e0e0;
+      padding: 10px 15px;
+      font-size: 16px;
+      color: #090909;
+      font-weight: 500;
+      border: none;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+    }
 
-        .logo-container {
-            margin-bottom: 30px;
-            width: 100%; /* Ensure logo container takes full width */
-            display: flex;
-            justify-content: center; /* Center the logo horizontally */
-        }
+    .logo-container {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+    }
 
-        .logo-container img {
-            max-width: 100%; /* Make sure logo doesn't exceed its container */
-            height: auto; /* Maintain aspect ratio */
-        }
+    .logo-container img {
+      max-width: 100%;
+      height: auto;
+    }
 
+    .login-title {
+      font-family: "SF Pro Display", sans-serif;
+      font-size: 24px;
+      color: #090909;
+      font-weight: 700;
+      text-align: center;
+    }
 
-        .login-title {
-            font-family:
-                "SF Pro Display",
-                -apple-system,
-                Roboto,
-                Helvetica,
-                sans-serif;
-            font-size: 24px;
-            color: #090909;
-            font-weight: 700;
-            letter-spacing: -0.48px;
-            line-height: 1;
-            text-align: center;
-            margin-bottom: 20px;
-            width: 100%; /* Ensure title takes full width */
-        }
+    .login-form {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      width: 100%;
+    }
 
-        .login-form {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            width: 100%;
-        }
+    .input-field {
+      height: 50px;
+      padding: 0 15px;
+      border: 1px solid rgba(0, 0, 0, 0.12);
+      border-radius: 15px;
+      font-size: 16px;
+      width: 100%;
+    }
 
-        .input-field {
-            display: flex;
-            align-items: center;
-            height: 50px;
-            padding: 0 15px;
-            border: 1px solid rgba(0, 0, 0, 0.12);
-            border-radius: 15px;
-            font-family: "Inter", sans-serif;
-            font-size: 16px;
-            color: rgba(9, 9, 9, 1);
-            line-height: 1.6;
-            letter-spacing: 0.2px;
-            width: 100%;
-            text-align: left; /* Changed to left alignment */
-            box-sizing: border-box; /* Ensure padding doesn't affect width */
-        }
+    .input-field::placeholder {
+      color: rgba(76, 83, 89, 0.6);
+    }
 
-        .input-field::placeholder {
-            color: rgba(76, 83, 89, 0.6);
-        }
+    .primary-button {
+      height: 50px;
+      border-radius: 15px;
+      background-color: #090909;
+      font-size: 18px;
+      color: #fff;
+      font-weight: 700;
+      border: none;
+      cursor: pointer;
+      width: 100%;
+      text-align: center;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
 
-        .primary-button {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 50px;
-            border-radius: 15px;
-            background-color: #090909;
-            padding: 0 15px;
-            font-family:
-                "Inter",
-                -apple-system,
-                Roboto,
-                Helvetica,
-                sans-serif;
-            font-size: 18px;
-            color: #fff;
-            font-weight: 700;
-            white-space: nowrap;
-            text-align: center;
-            letter-spacing: 0.2px;
-            line-height: 1.6;
-            border: none;
-            cursor: pointer;
-            text-decoration: none;
-            transition: background-color 0.2s ease;
-            width: 100%; /* Make button take full width */
-            box-sizing: border-box; /* Ensure padding doesn't affect width */
-        }
+    @media (max-width: 400px) {
+      .login-card {
+        padding: 20px;
+      }
 
-        .primary-button:hover {
-            background-color: #333333;
-        }
+      .login-title {
+        font-size: 20px;
+      }
 
-        .primary-button:focus {
-            outline: 2px solid #4d90fe;
-            outline-offset: 2px;
-        }
+      .input-field {
+        font-size: 14px;
+        height: 45px;
+      }
 
-        /* Responsive adjustments for smaller screens */
-        @media (max-width: 400px) {
-            .login-card {
-                padding: 20px; /* Adjust padding for very small screens */
-            }
+      .primary-button {
+        font-size: 16px;
+        height: 45px;
+      }
 
-            .login-title {
-                font-size: 20px; /* Smaller title on very small screens */
-            }
-
-            .input-field {
-                font-size: 14px; /* Smaller input field text */
-                height: 45px; /* Adjust input height */
-            }
-
-            .primary-button {
-                font-size: 16px; /* Smaller button text */
-                height: 45px; /* Adjust button height */
-            }
-
-            .back-button {
-                font-size: 14px;
-                padding: 8px 12px;
-            }
-        }
-    </style>
+      .back-button {
+        font-size: 14px;
+        padding: 8px 12px;
+      }
+    }
+  </style>
 </head>
 <body>
-    <div class="login-card">
-        <div class="back-button-container">
-            <a href="accueil.html" class="back-button"><</a>
-        </div>
-        <div class="logo-container">
-            <img src="images/Group 5.png" alt="">
-        </div>
-        <div>
-            <p class="login-title">Connectez-vous à votre compte</p>
-        </div>
-        <div class="login-form">
-            <input type="email" name="email" id="email" class="input-field" placeholder="Entrez votre adresse email" required>
-            <a href="connexion_passwd.html" class="primary-button">Continuer</a>
-        </div>
+  <div class="login-card">
+    <div class="back-button-container">
+      <a href="accueil.html" class="back-button"><</a>
     </div>
+    <div class="logo-container">
+      <img src="images/Group 5.png" alt="Logo" />
+    </div>
+    <p class="login-title">Connectez-vous à votre compte</p>
+    <div class="login-form">
+      <input type="email" name="email" class="input-field" placeholder="Entrez votre adresse email" required />
+      <a href="connexion_passwd.html" class="primary-button">Continuer</a>
+    </div>
+  </div>
 </body>
 </html>
