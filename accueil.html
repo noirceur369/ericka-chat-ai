@@ -13,45 +13,31 @@
         body {
             font-family: "Inter", sans-serif;
             display: flex;
-            flex-direction: column; /* Stacks content vertically */
-            justify-content: space-between; /* Pushes main content up and footer down */
-            align-items: center; /* Centers content horizontally */
-            height: 100vh; /* Ensures body takes full viewport height */
+            flex-direction: column; /* Empile les éléments verticalement */
+            justify-content: center; /* Centre le contenu verticalement */
+            align-items: center; /* Centre le contenu horizontalement */
+            height: 100vh; /* La page occupe toute la hauteur de la fenêtre */
             background-color: #f5f5f5;
             margin: 0;
-            padding: 20px; /* Provides padding around the content */
-            overflow: hidden; /* Prevents any scrolling on the page */
-            box-sizing: border-box; /* Includes padding in total width/height calculations */
-        }
-
-        .main-content { /* Container for your main content */
-            display: flex;
-            flex-direction: column;
-            justify-content: center; /* Centers items vertically within this group if there's enough space */
-            align-items: center;
-            width: 100%;
-            max-width: 360px; /* Limits main content width on larger screens */
-            flex-grow: 1; /* Allows this container to take up available space */
-            flex-shrink: 1; /* Allows this container to shrink if needed */
-            min-height: 0; /* Ensures content can truly shrink without causing overflow */
-            text-align: center; /* Ensures text is centered */
-            overflow-y: auto; /* **Permet le défilement INTERNE si le contenu est trop grand** */
-            padding-top: 10px; /* Ajout d'un petit padding interne pour le confort */
-            padding-bottom: 10px; /* Ajout d'un petit padding interne pour le confort */
+            padding: 20px; /* Ajoute un espace autour du contenu */
+            overflow: hidden; /* Empêche tout défilement de la page */
+            box-sizing: border-box; /* Inclut le padding dans la hauteur/largeur totale */
+            /* Ajout d'une marge intérieure minimale pour éviter le défilement si le contenu est juste à la limite */
+            min-height: 0; /* Important pour les flex-items à l'intérieur */
         }
 
         img {
-            max-width: 100%; /* Ensures images don't overflow */
+            max-width: 100%; /* S'assure que les images ne débordent pas */
             height: auto;
-            display: block; /* Removes extra space below images */
-            margin-bottom: 25px; /* Default spacing between images */
-            object-fit: contain; /* Ensures image is fully visible */
-            flex-shrink: 0; /* Prevents images from shrinking unexpectedly */
+            display: block;
+            margin-bottom: 25px; /* Espace après chaque image par défaut */
+            object-fit: contain; /* Assure que l'image est entièrement visible */
+            flex-shrink: 0; /* Empêche l'image de se réduire si l'espace est limité */
         }
 
-        /* Specific adjustment for the Ericka Logo */
+        /* Ajustement spécifique pour le logo Ericka */
         img[alt="Logo Ericka"] {
-            margin-bottom: 35px; /* More space after the logo, before buttons */
+            margin-bottom: 35px; /* Plus d'espace après le logo */
         }
 
         .welcome-text {
@@ -62,17 +48,17 @@
             letter-spacing: -0.5px;
             line-height: 1.2;
             text-align: center;
-            margin-bottom: 25px; /* Space after welcome text */
+            margin-bottom: 25px; /* Espace après le texte de bienvenue */
             flex-shrink: 0;
         }
 
-        .button-group { /* Groups buttons to apply gap and max-width */
+        .button-group {
             display: flex;
             flex-direction: column;
-            gap: 15px; /* Spacing between the buttons */
+            gap: 15px; /* Espacement entre les boutons */
             width: 100%;
-            max-width: 320px; /* Max width for the button group */
-            margin-bottom: 0; /* No bottom margin here, spacing handled by main-content/footer relationship */
+            max-width: 320px; /* Largeur maximale pour les boutons */
+            margin-bottom: 25px; /* Espace sous les boutons avant le footer */
             flex-shrink: 0;
         }
 
@@ -92,7 +78,7 @@
             text-decoration: none;
             transition: background-color 0.2s ease;
             box-sizing: border-box;
-            flex-shrink: 0; /* Prevents individual buttons from shrinking */
+            flex-shrink: 0;
         }
 
         .connexion-button {
@@ -124,32 +110,33 @@
             font-size: 0.75em;
             color: #777;
             text-align: center;
-            margin-top: 20px; /* Space between the main content and footer */
-            flex-shrink: 0; /* Prevents footer from shrinking */
+            /* margin-top: auto; */ /* Supprimez ceci pour un centrage plus équilibré sur toutes les tailles */
+            flex-shrink: 0;
         }
 
-        /* Responsive design for smaller screens */
+        /* Responsive design pour petits écrans */
         @media (max-width: 600px) {
             body {
-                padding: 15px; /* Reduces body padding on mobile */
+                padding: 15px; /* Maintient un padding raisonnable sur mobile */
             }
 
             img {
-                margin-bottom: 20px; /* Reduces space between images on mobile */
+                margin-bottom: 20px; /* Réduit l'espace entre les images sur mobile */
             }
 
             img[alt="Logo Ericka"] {
-                margin-bottom: 30px; /* Adjusts space after logo on mobile */
+                margin-bottom: 30px; /* Ajuste l'espace après le logo sur mobile */
             }
 
             .welcome-text {
                 font-size: 20px;
-                margin-bottom: 20px; /* Reduces space after text on mobile */
+                margin-bottom: 20px; /* Réduit l'espace après le texte sur mobile */
             }
 
             .button-group {
-                max-width: 280px; /* Adjusts max width for buttons on mobile */
-                gap: 12px; /* Reduces space between buttons on mobile */
+                max-width: 280px; /* Ajuste la largeur maximale des boutons sur mobile */
+                gap: 12px; /* Réduit l'espace entre les boutons sur mobile */
+                margin-bottom: 20px; /* Réduit l'espace sous les boutons sur mobile */
             }
 
             .connexion-button,
@@ -160,20 +147,17 @@
 
             footer {
                 font-size: 0.7em;
-                margin-top: 15px; /* Adjusts footer space on mobile */
             }
         }
     </style>
 </head>
 <body>
-    <div class="main-content">
-        <img src="images/Component 2.png" alt="Illustration d'accueil" />
-        <p class="welcome-text">Bienvenue sur</p>
-        <img src="images/Group 5.png" alt="Logo Ericka" />
-        <div class="button-group">
-            <button class="connexion-button"><a href="connexion.html">Connexion</a></button>
-            <button class="inscription-button"><a href="inscription.html">Inscription</a></button>
-        </div>
+    <img src="images/Component 2.png" alt="Illustration d'accueil" />
+    <p class="welcome-text">Bienvenue sur</p>
+    <img src="images/Group 5.png" alt="Logo Ericka" />
+    <div class="button-group">
+        <button class="connexion-button"><a href="connexion.html">Connexion</a></button>
+        <button class="inscription-button"><a href="inscription.html">Inscription</a></button>
     </div>
     <footer><p>V 1.2</p></footer>
 </body>
