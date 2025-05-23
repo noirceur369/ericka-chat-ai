@@ -4,77 +4,79 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Découvrez Ericka</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=SF+Pro+Display:wght@700&display=swap"
+        rel="stylesheet"
+    />
     <style>
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            font-family: 'Inter', sans-serif; /* Utilisation de la police Inter si présente */
             display: flex;
-            justify-content: center; /* Centre horizontalement le conteneur */
-            align-items: center; /* Centre verticalement le conteneur */
-            height: 100vh; /* S'assure que le body occupe toute la hauteur de la fenêtre */
+            flex-direction: column; /* Organise les éléments en colonne */
+            justify-content: space-between; /* Espace le contenu principal et le footer */
+            align-items: center; /* Centre le contenu horizontalement */
+            height: 100vh; /* Le body occupe toute la hauteur de la fenêtre */
             background-color: #f5f5f5;
             margin: 0;
-            padding: 0; /* Supprime le padding du body pour éviter les barres de défilement indésirables */
-            overflow: hidden; /* Empêche le défilement du body */
+            padding: 20px; /* Un padding général pour éviter que le contenu ne touche les bords */
+            overflow: hidden; /* Empêche tout défilement de la page */
+            box-sizing: border-box; /* Inclut le padding dans la hauteur/largeur totale */
         }
 
-        .page-container {
-            background-color: #fff;
-            border-radius: 15px;
-            padding: 20px; /* Padding interne du conteneur */
-            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+        .main-content {
             display: flex;
             flex-direction: column;
+            justify-content: center; /* Centre les éléments du contenu principal verticalement */
             align-items: center;
-            max-width: 360px; /* Largeur maximale du conteneur sur les écrans plus grands */
-            width: calc(100% - 30px); /* Prend 100% de la largeur de la fenêtre moins un padding virtuel de 15px de chaque côté */
-            height: calc(100vh - 30px); /* Prend 100% de la hauteur de la fenêtre moins un padding virtuel de 15px en haut et en bas */
-            box-sizing: border-box; /* Inclut le padding dans les calculs de largeur et de hauteur */
-            overflow-y: auto; /* Permet le défilement interne si le contenu dépasse */
+            width: 100%;
+            max-width: 360px; /* Limite la largeur du contenu sur les grands écrans */
+            flex-grow: 1; /* Permet au contenu principal de prendre l'espace disponible */
+            flex-shrink: 1; /* Permet au contenu principal de se réduire si nécessaire */
+            min-height: 0; /* Assure que le contenu peut se contracter sans forcer de défilement */
+            text-align: center; /* Pour centrer le texte dans le h1 */
         }
 
         img {
-            max-width: 100%; /* S'assure que toutes les images sont responsives et ne dépassent pas leur conteneur */
+            max-width: 100%; /* S'assure que les images ne débordent pas */
             height: auto;
-            display: block;
-            margin-bottom: 10px;
-            border-radius: 8px;
-            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.02);
+            display: block; /* Supprime l'espace sous les images */
+            margin-bottom: 25px; /* Espace après chaque image par défaut */
+            object-fit: contain; /* Assure que l'image est entièrement visible */
+            border-radius: 8px; /* Conserve le border-radius de vos images */
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.02); /* Conserve l'ombre */
+            flex-shrink: 0; /* Empêche les images de se réduire au-delà de leur taille de contenu */
+        }
+
+        /* Ajustement spécifique pour l'image "Ce qu’elle t’apporte" */
+        img[alt="Ce qu’elle t’apporte"] {
+            max-width: 70%; /* Définit la taille maximale de cette image */
+            margin-bottom: 25px; /* Espace après cette image */
         }
 
         h1 {
+            font-family: "SF Pro Display", -apple-system, Roboto, Helvetica, sans-serif; /* Utilise la police SF Pro Display */
             color: #090909;
             font-size: 16px;
-            line-height: 1.2;
+            line-height: 1.5; /* Légèrement augmenté pour une meilleure lisibilité */
             text-align: center;
-            margin-bottom: 15px;
-            padding: 0 10px;
-        }
-
-        .image-wrapper { /* Classe pour le div contenant l'image "Ce qu’elle t’apporte" */
-            text-align: center;
-            margin-bottom: 10px;
-            width: 100%;
-            display: flex;
-            justify-content: center;
-        }
-
-        .image-wrapper img { /* Style spécifique pour l'image "Ce qu’elle t’apporte" */
-            max-width: 70%; /* Définit la taille maximale de cette image dans son wrapper */
-            margin-bottom: 8px;
+            margin-bottom: 30px; /* Espace après le titre avant le footer */
+            padding: 0 10px; /* Padding horizontal pour le texte */
+            flex-shrink: 0;
         }
 
         footer {
             display: flex;
             justify-content: center;
-            padding-top: 20px;
+            align-items: center; /* Centre le bouton de navigation verticalement dans le footer */
             width: 100%;
-            flex-shrink: 0; /* Empêche le footer de rétrécir si le contenu dépasse */
+            padding-top: 20px; /* Espace entre le contenu et le footer */
+            flex-shrink: 0; /* Empêche le footer de rétrécir */
         }
 
         .navigation-button {
             background: none;
             border: none;
-            padding: 10px 20px; /* Ajoute un padding autour de l'image pour une zone de clic plus grande */
+            padding: 0; /* Supprime le padding du bouton pour que l'image gère son propre espacement */
             cursor: pointer;
             display: flex;
             align-items: center;
@@ -82,69 +84,53 @@
         }
 
         .navigation-button img {
-            width: 60px; /* Taille par défaut du bouton */
+            width: 60px; /* Taille fixe pour le bouton de navigation */
             height: auto;
             margin-bottom: 0; /* Annule le margin-bottom générique pour cette image */
         }
 
-        /* Media query pour les écrans mobiles (max-width de 600px) */
-        @media (max-width: 600px) {
-            .navigation-button img {
-                width: 150px; /* Taille du bouton augmentée pour mobile */
-            }
-        }
-
-        /* Media query pour les écrans légèrement plus grands que les mobiles */
-        @media (min-width: 601px) {
-            .page-container {
-                border-radius: 20px;
-                padding: 25px; /* Augmente légèrement le padding interne pour les écrans plus grands */
-                max-width: 400px; /* Augmente la largeur maximale du conteneur */
+        /* Media queries pour la responsivité */
+        @media (max-width: 600px) { /* Appliqué aux écrans de 600px de large ou moins (typiquement mobiles) */
+            body {
+                padding: 15px; /* Réduit le padding du body sur mobile */
             }
 
             img {
-                margin-bottom: 15px;
-                border-radius: 10px;
+                margin-bottom: 20px; /* Réduit l'espace entre les images sur mobile */
+            }
+
+            img[alt="Ce qu’elle t’apporte"] {
+                margin-bottom: 20px; /* Ajuste l'espace après l'image sur mobile */
             }
 
             h1 {
-                font-size: 18px;
-                margin-bottom: 20px;
-                padding: 0 15px;
+                font-size: 14px; /* Réduit la taille du texte du h1 sur mobile */
+                margin-bottom: 25px; /* Ajuste l'espace après le h1 sur mobile */
             }
 
-            .image-wrapper {
-                margin-bottom: 15px;
-            }
-
-            .image-wrapper img {
-                max-width: 50%; /* Ajuste la taille de l'image "Ce qu’elle t’apporte" pour les écrans plus grands */
-                margin-bottom: 10px;
+            footer {
+                padding-top: 15px; /* Ajuste l'espace du footer sur mobile */
             }
 
             .navigation-button img {
-                width: 150px; /* Taille du bouton pour les écrans plus grands */
+                width: 50px; /* Réduit légèrement la taille du bouton sur mobile */
             }
         }
     </style>
 </head>
 <body>
-    <div class="page-container">
+    <div class="main-content">
         <img src="images/Rectangle 3538.jpg" alt="Image principale">
         <img src="images/Slider2.png" alt="Slider image">
-        <div class="image-wrapper">
-            <img src="images/Ce qu’elle t’apporte _.png" alt="Ce qu’elle t’apporte">
-        </div>
-        <div>
-            <h1>
+        <img src="images/Ce qu’elle t’apporte _.png" alt="Ce qu’elle t’apporte">
+        <h1>
             Des cours expliqués clairement, des exercices corrigés, des outils de révision, et des conseils d’orientation.
-            </h1>
-        </div>
-        <footer>
-            <button class="navigation-button" onclick="window.location.href = 'page4.html';">
-                <img src="images/nagigator.png" alt="Navigateur">
-            </button>
-        </footer>
+        </h1>
     </div>
+    <footer>
+        <button class="navigation-button" onclick="window.location.href = 'page4.html';">
+            <img src="images/nagigator.png" alt="Navigateur">
+        </button>
+    </footer>
 </body>
 </html>
