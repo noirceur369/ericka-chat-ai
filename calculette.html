@@ -5,264 +5,519 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calculette</title>
     <style>
-        /* Calculator Container */
-.calculator-container {
-  border-radius: 30px;
-  background-color: #fff;
-  display: flex;
-  margin-left: auto;
-  margin-right: auto;
-  max-width: 480px;
-  width: 100%;
-  padding: 11px;
-  flex-direction: column;
-  overflow: hidden;
-  align-items: stretch;
-}
+        /* Define CSS Variables for easier adjustments */
+        :root {
+            /* Base sizes for desktop/larger screens - will be overridden by media queries for mobile */
+            --button-size: 60px;
+            --grid-gap: 10px;
+            --header-margin-top: 20px;
+            --display-icon-margin-top: 15px;
+            --display-value-margin-top: 25px;
+            --keypad-margin-top: 20px;
+            --keypad-padding: 15px;
+        }
 
-.calculator-body {
-  display: flex;
-  width: 100%;
-  padding: 0 11px;
-  flex-direction: column;
-  align-items: stretch;
-}
+        body {
+            margin: 0;
+            display: flex;
+            justify-content: center; /* Center horizontally */
+            align-items: center;   /* Center vertically for initial layout */
+            min-height: 100vh;     /* Ensure body takes full viewport height */
+            background-color: #f0f0f0; /* Default background for larger screens */
+            font-family: 'SF Pro Display', -apple-system, Roboto, Helvetica, sans-serif;
+            overflow: hidden; /* Prevent body scroll */
+            box-sizing: border-box; /* Global box-sizing */
+        }
+
+        /* Calculator Container - Default for larger screens */
+        .calculator-container {
+            border-radius: 30px;
+            background-color: #fff;
+            display: flex;
+            flex-direction: column;
+            align-items: stretch;
+            width: 90%;
+            max-width: 380px;
+            padding: 11px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            box-sizing: border-box;
+            overflow: hidden;
+            /* For desktop, ensure content is centered within its height */
+            justify-content: space-around; /* Distributes space more evenly */
+        }
+
+        .calculator-body {
+            display: flex;
+            width: 100%;
+            padding: 0 11px;
+            flex-direction: column;
+            align-items: stretch;
+            box-sizing: border-box;
+            flex-grow: 1; /* Allow to take available space */
+            justify-content: space-around; /* Distribute space within body */
+        }
+
+        /* Calculator Header */
+        .calculator-header {
+            display: flex;
+            margin-top: var(--header-margin-top);
+            width: 100%;
+            align-items: center; /* Align items vertically in header */
+            gap: 20px;
+            justify-content: space-between;
+            box-sizing: border-box;
+        }
+
+        .header-content {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            flex-grow: 1;
+        }
+
+        .calculator-title {
+            color: #090909;
+            font-family: "SF Pro Display", -apple-system, Roboto, Helvetica, sans-serif;
+            font-size: 28px;
+            font-weight: 700;
+            line-height: 1;
+            letter-spacing: -0.64px;
+            margin: 0; /* Remove default margin */
+            margin-bottom: 2px; /* Small margin between title and powered by */
+        }
+
+        .powered-by {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-family: Inter, -apple-system, Roboto, Helvetica, sans-serif;
+            font-size: 8px;
+            color: #4c5359;
+            font-weight: 400;
+            letter-spacing: 0.2px;
+            line-height: 1.6;
+        }
+
+        .powered-logo {
+            aspect-ratio: 4.37;
+            object-fit: contain;
+            object-position: center;
+            width: 40px;
+            flex-shrink: 0;
+        }
+
+        .theme-toggle {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+            width: 35px;
+            height: 35px;
+            background-color: #090909;
+            border: none;
+            cursor: pointer;
+            flex-shrink: 0;
+            padding: 0; /* Remove default button padding */
+        }
+
+        /* New icon for theme toggle - ensure you have this image or replace with appropriate one */
+        .theme-icon {
+            width: 20px;
+            height: auto;
+            object-fit: contain;
+        }
+
+        /* Calculator Display */
+        .calculator-display {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            width: 100%;
+            box-sizing: border-box;
+            /* Flex properties for display to push it towards bottom of its flex container */
+            justify-content: flex-end;
+            flex-grow: 1; /* Allow it to take up space above keypad */
+        }
+
+        .calculator-icon { /* This is your backspace icon */
+            width: 20px;
+            height: auto;
+            margin-top: var(--display-icon-margin-top);
+            object-fit: contain;
+            cursor: pointer;
+            transition: transform 0.1s ease-out;
+            /* Hide by default as it's not in the reference image's position */
+            visibility: hidden; /* Hide it but keep space */
+            position: absolute; /* Take it out of flow for better positioning */
+            right: 15px; /* Adjust as needed */
+            top: 15px; /* Adjust as needed within the display area or higher */
+            /* If you want to place it next to the result, you'd need a different structure */
+        }
+
+        .calculator-icon:active {
+            transform: scale(0.9);
+        }
+
+        .display-value {
+            color: #999;
+            text-align: right;
+            font-family: "SF Pro Display", -apple-system, Roboto, Helvetica, sans-serif;
+            font-size: 55px;
+            font-weight: 400;
+            line-height: 1;
+            letter-spacing: -1.44px;
+            margin-top: var(--display-value-margin-top);
+            width: 100%;
+            word-wrap: break-word;
+            min-height: 55px; /* Ensure a minimum height */
+            /* Adjust padding/margins for large numbers if needed */
+            padding-bottom: 10px; /* Give some space below the number */
+        }
+
+        /* Calculator Keypad */
+        .calculator-keypad {
+            border-top: 1px solid rgba(60, 60, 67, 0.29);
+            display: flex;
+            justify-content: center;
+            margin-top: var(--keypad-margin-top);
+            width: 100%;
+            padding: var(--keypad-padding);
+            box-sizing: border-box;
+        }
+
+        .keypad-grid {
+            display: grid;
+            grid-template-columns: repeat(4, var(--button-size));
+            gap: var(--grid-gap);
+            justify-content: center;
+            align-items: center;
+            max-width: 100%;
+        }
+
+        .calc-button {
+            border-radius: 20px;
+            width: var(--button-size);
+            height: var(--button-size);
+            border: none;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 14px;
+            font-weight: 700;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-sizing: border-box;
+            line-height: 1;
+        }
+
+        .calc-button:active {
+            transform: scale(0.95);
+        }
+
+        .number-key {
+            background-color: #4c5359;
+        }
+
+        .function-key {
+            background-color: #4c5359;
+        }
+
+        .operator-key {
+            color: #4c5359;
+            background-color: rgba(0, 122, 255, 0.15);
+        }
+
+        .zero-key {
+            grid-column: span 2;
+            width: calc(2 * var(--button-size) + var(--grid-gap));
+        }
+
+        .equals-key {
+            grid-column: span 2;
+            width: calc(2 * var(--button-size) + var(--grid-gap));
+            background-color: #4373d8;
+        }
+
+        /*
+        ***********************************************
+        MODIFICATIONS POUR MOBILE (max-width: 480px)
+        ***********************************************
+        */
+        @media (max-width: 480px) {
+            body {
+                background-color: #fff;
+                /* Centrage global sur l'ensemble de la hauteur de l'écran */
+                justify-content: center;
+                align-items: center;
+            }
+
+            .calculator-container {
+                border-radius: 0;
+                box-shadow: none;
+                padding: 0;
+                max-width: 100%;
+                width: 100%;
+                /* Ajusté pour prendre l'espace disponible mais laisser de la place pour la barre d'accueil */
+                height: 100%; /* Important pour que flex fonctionne bien */
+                /* Enlève min-height: 100vh pour laisser le contenu se "comprimer" si nécessaire */
+                display: flex;
+                flex-direction: column;
+                /* space-between pour pousser le keypad vers le bas */
+                justify-content: space-between;
+                flex-grow: 1; /* Permet au conteneur de prendre l'espace restant */
+            }
+
+            .calculator-body {
+                padding: 0 15px; /* Padding horizontal du contenu */
+                flex-grow: 1;
+                /* Les éléments du body seront répartis sur la hauteur disponible */
+                justify-content: space-between;
+            }
+
+            /* Variables pour les mobiles de largeur standard */
+            :root {
+                --button-size: 70px; /* Revenu à 70px pour des boutons plus grands */
+                --grid-gap: 12px;     /* Espace standard */
+                --header-margin-top: 40px; /* Plus d'espace en haut */
+                --display-icon-margin-top: 15px; /* Pas utilisé pour backspace ici */
+                --display-value-margin-top: 80px; /* Grande marge pour pousser le 0 vers le bas */
+                --keypad-margin-top: 40px;       /* Plus d'espace avant le keypad */
+                --keypad-padding: 15px;          /* Padding du keypad */
+            }
+            .calculator-title {
+                font-size: 32px;
+            }
+            .powered-by {
+                font-size: 9px;
+            }
+            .powered-logo {
+                width: 48px;
+            }
+            .theme-toggle {
+                width: 40px;
+                height: 40px;
+            }
+            .theme-icon {
+                width: 24px;
+            }
+            .calculator-icon { /* Backspace icon */
+                visibility: hidden; /* Hide it completely */
+                display: none; /* Ensure it takes no space */
+            }
+            .display-value {
+                font-size: 90px; /* Beaucoup plus grand pour le 0 */
+                color: #090909; /* Couleur plus foncée pour le 0 */
+                /* Adjusted margin to ensure it starts higher and has more space */
+                margin-top: var(--display-value-margin-top);
+                /* Add padding bottom to make sure the number isn't too close to the keypad top */
+                padding-bottom: 20px;
+            }
+            .calc-button {
+                font-size: 16px;
+                height: var(--button-size);
+            }
+            .keypad-grid {
+                grid-template-columns: repeat(4, 1fr);
+                gap: var(--grid-gap);
+                max-width: unset;
+                width: 100%;
+            }
+            .zero-key, .equals-key {
+                width: auto;
+            }
+
+            /* Ensure content takes full height on mobile and is spaced */
+            .calculator-body > div { /* Target direct children of calculator-body */
+                margin-bottom: 0; /* Reset default margins between flex items */
+            }
+            .calculator-header { margin-top: var(--header-margin-top); }
+            .calculator-display { /* This will control the space above the keypad */
+                margin-top: auto; /* Push it to the bottom of remaining space */
+                margin-bottom: auto; /* And let it center vertically with flex-grow */
+                flex-grow: 1; /* Allow display area to expand */
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-end; /* Push the 0 to the bottom of the display area */
+            }
+            .calculator-keypad { margin-top: auto; } /* Push keypad to the very bottom */
+        }
+
+        /*
+        ***********************************************
+        AJUSTEMENTS FINES POUR LES DIFFÉRENTES HAUTEURS DE TÉLÉPHONES
+        (y compris les barres de navigation des navigateurs)
+        ***********************************************
+        */
+        /* For standard mobile heights (e.g., iPhone 13/14) */
+        @media (max-width: 480px) and (max-height: 850px) {
+             :root {
+                --button-size: 65px; /* Slightly smaller buttons for this height range */
+                --grid-gap: 10px;
+                --header-margin-top: 30px;
+                --display-value-margin-top: 60px;
+                --keypad-margin-top: 30px;
+                --keypad-padding: 15px;
+            }
+            .display-value {
+                font-size: 80px;
+            }
+            .calc-button {
+                font-size: 15px;
+                height: var(--button-size);
+            }
+        }
+
+        /* For smaller mobile heights (e.g., iPhone SE, or devices with larger browser UI) */
+        @media (max-width: 480px) and (max-height: 750px) {
+            :root {
+                --button-size: 60px; /* Smallest button size for critical fit */
+                --grid-gap: 8px;
+                --header-margin-top: 25px;
+                --display-value-margin-top: 50px;
+                --keypad-margin-top: 25px;
+                --keypad-padding: 12px;
+            }
+            .calculator-title {
+                font-size: 26px;
+            }
+            .display-value {
+                font-size: 70px;
+            }
+            .calc-button {
+                font-size: 14px;
+                height: var(--button-size);
+            }
+            .theme-toggle {
+                width: 35px;
+                height: 35px;
+            }
+            .theme-icon {
+                width: 20px;
+            }
+        }
+
+        /* For very small mobile heights (e.g., older phones or extreme UI) */
+        @media (max-width: 480px) and (max-height: 650px) {
+            :root {
+                --button-size: 55px; /* Even smaller */
+                --grid-gap: 7px;
+                --header-margin-top: 20px;
+                --display-value-margin-top: 40px;
+                --keypad-margin-top: 20px;
+                --keypad-padding: 10px;
+            }
+            .calculator-title {
+                font-size: 24px;
+            }
+            .display-value {
+                font-size: 60px;
+            }
+            .calc-button {
+                font-size: 13px;
+                height: var(--button-size);
+            }
+        }
 
 
-
-/* Calculator Header */
-.calculator-header {
-  align-self: center;
-  display: flex;
-  margin-top: 67px;
-  width: 100%;
-  max-width: 353px;
-  align-items: stretch;
-  gap: 20px;
-  justify-content: space-between;
-}
-
-.header-content {
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-}
-
-.calculator-title {
-  color: #090909;
-  font-family: "SF Pro Display", -apple-system, Roboto, Helvetica, sans-serif;
-  font-size: 32px;
-  font-weight: 700;
-  line-height: 1;
-  letter-spacing: -0.64px;
-  margin: 0;
-}
-
-.powered-by {
-  align-self: start;
-  display: flex;
-  align-items: start;
-  gap: 5px;
-  font-family: Inter, -apple-system, Roboto, Helvetica, sans-serif;
-  font-size: 9px;
-  color: #4c5359;
-  font-weight: 400;
-  letter-spacing: 0.2px;
-  line-height: 1.6;
-}
-
-.powered-logo {
-  aspect-ratio: 4.37;
-  object-fit: contain;
-  object-position: center;
-  width: 48px;
-  flex-shrink: 0;
-}
-
-.theme-toggle {
-  justify-content: center;
-  align-items: center;
-  border-radius: 20px;
-  align-self: start;
-  display: flex;
-  min-height: 39px;
-  padding: 8px;
-  gap: 10px;
-  width: 40px;
-  height: 40px;
-  background-color: #090909;
-  border: none;
-  cursor: pointer;
-}
-
-.theme-icon {
-  aspect-ratio: 1.04;
-  object-fit: contain;
-  object-position: center;
-  width: 24px;
-  align-self: stretch;
-  margin: auto;
-}
-
-/* Calculator Display */
-.calculator-display {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-}
-
-.calculator-icon {
-  aspect-ratio: 1;
-  object-fit: contain;
-  object-position: center;
-  width: 24px;
-  margin-top: 18px;
-}
-
-.display-value {
-  color: #999;
-  text-align: right;
-  font-family: "SF Pro Display", -apple-system, Roboto, Helvetica, sans-serif;
-  font-size: 72px;
-  font-weight: 400;
-  line-height: 1;
-  letter-spacing: -1.44px;
-  margin-top: 94px;
-}
-
-/* Calculator Keypad */
-.calculator-keypad {
-  border-top: 1px solid rgba(60, 60, 67, 0.29);
-  align-self: center;
-  display: flex;
-  margin-top: 28px;
-  width: 100%;
-  padding: 20px;
-  gap: 10px;
-  font-family: "SF Pro Display", -apple-system, Roboto, Helvetica, sans-serif;
-  font-size: 16px;
-  color: #fff;
-  font-weight: 700;
-  white-space: nowrap;
-  line-height: 1;
-  justify-content: start;
-}
-
-.keypad-grid {
-  align-self: stretch;
-  display: flex;
-  flex-wrap: wrap;
-  min-width: 240px;
-  margin: auto;
-  width: 354px;
-  gap: 15px 18px;
-  justify-content: start;
-}
-
-.calc-button {
-  align-self: stretch;
-  border-radius: 20px;
-  min-height: 75px;
-  padding: 15px;
-  width: 75px;
-  height: 75px;
-  border: none;
-  cursor: pointer;
-  font-family: inherit;
-  font-size: inherit;
-  font-weight: inherit;
-  color: inherit;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.number-key {
-  background-color: #4c5359;
-}
-
-.function-key {
-  background-color: #4c5359;
-}
-
-.operator-key {
-  color: #4c5359;
-  background-color: rgba(0, 122, 255, 0.15);
-}
-
-.zero-key {
-  width: 75px;
-}
-
-.equals-key {
-  width: 168px;
-  background-color: #4373d8;
-  padding: 28px 15px;
-}
-
+        /* Class for visual feedback on keyboard press */
+        .calc-button.active-keyboard-press, .calculator-icon.active-keyboard-press {
+            transform: scale(0.9);
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.5) inset;
+        }
     </style>
 </head>
 <body>
     <div class="calculator-container">
         <div class="calculator-body">
-          <div class="calculator-header">
-            <div class="header-content">
-              <h1 class="calculator-title">Calculette</h1>
-              <div class="powered-by">
-                <span class="powered-text">Powered by</span>
-                <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/74e8063fc96e6efa2756c0ac6ee413f1a5ff0a0e?placeholderIfAbsent=true&apiKey=38e47893336945848379668f2dc133bd" alt="Logo" class="powered-logo" />
-              </div>
+            <div class="calculator-header">
+                <div class="header-content">
+                    <h1 class="calculator-title">Calculette</h1>
+                    <div class="powered-by">
+                        <span class="powered-text">Powered by</span>
+                        <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/74e8063fc96e6efa2756c0ac6ee413f1a5ff0a0e?placeholderIfAbsent=true&apiKey=38e47893336945848379668f2dc133bd" alt="Ericka Logo" class="powered-logo" />
+                    </div>
+                </div>
+                <button class="theme-toggle">
+                    <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/d2dc7e1d0512659bfe304c712a269e145fa25807?placeholderIfAbsent=true&apiKey=38e47893336945848379668f2dc133bd" alt="Toggle theme" class="theme-icon" />
+                </button>
             </div>
-            <button class="theme-toggle">
-              <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/d2dc7e1d0512659bfe304c712a269e145fa25807?placeholderIfAbsent=true&apiKey=38e47893336945848379668f2dc133bd" alt="Toggle theme" class="theme-icon" />
-            </button>
-          </div>
-      
-          <div class="calculator-display">
-            <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/c2cdbbf7b74e71a8d47d97827594ebc60325c133?placeholderIfAbsent=true&apiKey=38e47893336945848379668f2dc133bd" alt="Calculator icon" class="calculator-icon" />
-            <output class="display-value">0</output>
-          </div>
-      
-          <div class="calculator-keypad">
-            <div class="keypad-grid">
-              <button class="calc-button function-key">AC</button>
-              <button class="calc-button function-key">+/-</button>
-              <button class="calc-button function-key">%</button>
-              <button class="calc-button operator-key">/</button>
-      
-              <button class="calc-button number-key">7</button>
-              <button class="calc-button number-key">8</button>
-              <button class="calc-button number-key">9</button>
-              <button class="calc-button operator-key">x</button>
-      
-              <button class="calc-button number-key">6</button>
-              <button class="calc-button number-key">5</button>
-              <button class="calc-button number-key">6</button>
-              <button class="calc-button operator-key">-</button>
-      
-              <button class="calc-button number-key">1</button>
-              <button class="calc-button number-key">2</button>
-              <button class="calc-button number-key">3</button>
-              <button class="calc-button operator-key">+</button>
-      
-              <button class="calc-button number-key zero-key">0</button>
-              <button class="calc-button number-key">.</button>
-              <button class="calc-button equals-key">=</button>
+            
+            <div class="calculator-display">
+                <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/c2cdbbf7b74e71a8d47d97827594ebc60325c133?placeholderIfAbsent=true&apiKey=38e47893336945848379668f2dc133bd" alt="Backspace" class="calculator-icon" id="backspace-button" />
+                <output class="display-value">0</output>
             </div>
-          </div>
+            
+            <div class="calculator-keypad">
+                <div class="keypad-grid">
+                    <button class="calc-button function-key" data-key="AC">AC</button>
+                    <button class="calc-button function-key" data-key="+/-">+/-</button>
+                    <button class="calc-button function-key" data-key="%">%</button>
+                    <button class="calc-button operator-key" data-key="/">/</button>
+            
+                    <button class="calc-button number-key" data-key="7">7</button>
+                    <button class="calc-button number-key" data-key="8">8</button>
+                    <button class="calc-button number-key" data-key="9">9</button>
+                    <button class="calc-button operator-key" data-key="*">x</button>
+            
+                    <button class="calc-button number-key" data-key="4">4</button>
+                    <button class="calc-button number-key" data-key="5">5</button>
+                    <button class="calc-button number-key" data-key="6">6</button>
+                    <button class="calc-button operator-key" data-key="-">-</button>
+            
+                    <button class="calc-button number-key" data-key="1">1</button>
+                    <button class="calc-button number-key" data-key="2">2</button>
+                    <button class="calc-button number-key" data-key="3">3</button>
+                    <button class="calc-button operator-key" data-key="+">+</button>
+            
+                    <button class="calc-button number-key zero-key" data-key="0">0</button>
+                    <button class="calc-button number-key" data-key=".">.</button>
+                    <button class="calc-button equals-key" data-key="=">=</button>
+                </div>
+            </div>
         </div>
-      </div>
-      <script>
+    </div>
+    <script>
         const display = document.querySelector(".display-value");
         const buttons = document.querySelectorAll(".calc-button");
+        const backspaceButton = document.getElementById("backspace-button");
+
         let currentInput = "";
         let operator = "";
         let operand = "";
-      
+        
+        // Add data-key attributes to buttons if they don't have them, for keyboard input
+        buttons.forEach(btn => {
+            if (!btn.dataset.key) {
+                if (btn.textContent === 'x') {
+                    btn.dataset.key = '*'; // Map 'x' button to keyboard '*'
+                } else if (btn.textContent === '=') {
+                    btn.dataset.key = '='; // Also handle 'Enter' for keyboard
+                } else if (btn.textContent === 'AC') {
+                    btn.dataset.key = 'AC'; // For escape/backspace
+                }
+                else {
+                    btn.dataset.key = btn.textContent;
+                }
+            }
+        });
+
+
         buttons.forEach((btn) => {
           btn.addEventListener("click", () => {
             const value = btn.textContent;
-      
+            handleButtonClick(value);
+          });
+        });
+
+        // Event listener for the backspace image button
+        backspaceButton.addEventListener('click', () => {
+            handleButtonClick('Backspace');
+        });
+
+
+        // Function to handle button clicks (both mouse and keyboard)
+        function handleButtonClick(value) {
             if (value === "AC") {
               currentInput = "";
               operator = "";
@@ -290,7 +545,7 @@
                   case "-":
                     result = a - b;
                     break;
-                  case "x":
+                  case "x": // Use 'x' for display
                     result = a * b;
                     break;
                   case "/":
@@ -302,19 +557,110 @@
                 operator = "";
                 currentInput = String(result);
               }
-            } else if (["+", "-", "x", "/"].includes(value)) {
+            } else if (["+", "-", "x", "/"].includes(value)) { // 'x' for display
               if (currentInput) {
                 operand = currentInput;
                 operator = value;
                 currentInput = "";
               }
-            } else {
+            } else if (value === 'Backspace') { // Handle Backspace logic
+                if (currentInput.length > 0) {
+                    currentInput = currentInput.slice(0, -1); // Remove last character
+                    if (currentInput === '') { // If empty after deletion, show 0
+                        display.textContent = '0';
+                    } else {
+                        display.textContent = currentInput;
+                    }
+                } else {
+                    display.textContent = '0'; // If already empty, keep 0
+                }
+            }
+            else { // Numbers and dot
               currentInput += value;
               display.textContent = currentInput;
             }
-          });
+        }
+
+        // Keyboard input handling
+        document.addEventListener('keydown', (event) => {
+            const key = event.key;
+            let buttonToPress = null;
+
+            // Map keyboard keys to calculator button values
+            switch (key) {
+                case '0': case '1': case '2': case '3': case '4': case '5': case '6': case '7': case '8': case '9':
+                case '.':
+                    buttonToPress = key;
+                    break;
+                case '+':
+                    buttonToPress = '+';
+                    break;
+                case '-':
+                    buttonToPress = '-';
+                    break;
+                case '*': // Multiplication (keyboard)
+                    buttonToPress = '*'; // Use '*' as internal key to map to 'x' button
+                    break;
+                case '/': // Division (keyboard)
+                    buttonToPress = '/';
+                    break;
+                case 'Enter':
+                case '=':
+                    buttonToPress = '=';
+                    event.preventDefault(); // Prevent default Enter behavior (e.g., form submission)
+                    break;
+                case 'Backspace': // Keyboard backspace
+                    buttonToPress = 'Backspace';
+                    break;
+                case 'Delete': // Could map to AC or Backspace, let's keep it as Backspace for consistency with UI icon
+                    buttonToPress = 'Backspace';
+                    break;
+                case 'Escape': // Clear all
+                    buttonToPress = 'AC';
+                    break;
+                case '%':
+                    buttonToPress = '%';
+                    break;
+            }
+
+            if (buttonToPress) {
+                let targetElement = null;
+
+                if (buttonToPress === 'Backspace') {
+                    targetElement = backspaceButton; // Target the image button
+                } else {
+                    // Try to find by data-key first
+                    targetElement = document.querySelector(`.calc-button[data-key="${buttonToPress}"]`);
+
+                    // If not found by data-key, try by text content (fallback for 'x' button with '*' key)
+                    if (!targetElement) {
+                        if (buttonToPress === '*') { // Map keyboard '*' to 'x' button
+                            targetElement = Array.from(buttons).find(btn => btn.textContent === 'x');
+                        } else {
+                            targetElement = Array.from(buttons).find(btn => btn.textContent === buttonToPress);
+                        }
+                    }
+                }
+
+                if (targetElement) {
+                    targetElement.click();
+                    targetElement.classList.add('active-keyboard-press');
+                    setTimeout(() => {
+                        targetElement.classList.remove('active-keyboard-press');
+                    }, 100);
+                }
+            }
         });
-      </script>
-      
+
+        // Add a class for visual feedback on keyboard press
+        const styleSheet = document.createElement("style");
+        styleSheet.textContent = `
+            .calc-button.active-keyboard-press, .calculator-icon.active-keyboard-press {
+                transform: scale(0.9);
+                box-shadow: 0 0 5px rgba(0, 0, 0, 0.5) inset;
+            }
+        `;
+        document.head.appendChild(styleSheet);
+    </script>
 </body>
 </html>
