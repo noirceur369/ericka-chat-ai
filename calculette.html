@@ -11,7 +11,7 @@
             --button-size: 60px;
             --grid-gap: 10px;
             --header-margin-top: 20px;
-            --display-icon-margin-top: 15px;
+            --display-icon-margin-top: 15px; /* Margin for the backspace icon */
             --display-value-margin-top: 25px;
             --keypad-margin-top: 20px;
             --keypad-padding: 15px;
@@ -42,7 +42,6 @@
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
             box-sizing: border-box;
             overflow: hidden;
-            /* For desktop, ensure content is centered within its height */
             justify-content: space-around; /* Distributes space more evenly */
         }
 
@@ -120,7 +119,6 @@
             padding: 0; /* Remove default button padding */
         }
 
-        /* New icon for theme toggle - ensure you have this image or replace with appropriate one */
         .theme-icon {
             width: 20px;
             height: auto;
@@ -134,24 +132,23 @@
             align-items: flex-end;
             width: 100%;
             box-sizing: border-box;
-            /* Flex properties for display to push it towards bottom of its flex container */
-            justify-content: flex-end;
+            justify-content: flex-end; /* Push content to bottom of its flex container */
             flex-grow: 1; /* Allow it to take up space above keypad */
+            position: relative; /* Needed for absolute positioning of backspace icon */
         }
 
         .calculator-icon { /* This is your backspace icon */
             width: 20px;
             height: auto;
-            margin-top: var(--display-icon-margin-top);
             object-fit: contain;
             cursor: pointer;
             transition: transform 0.1s ease-out;
-            /* Hide by default as it's not in the reference image's position */
-            visibility: hidden; /* Hide it but keep space */
-            position: absolute; /* Take it out of flow for better positioning */
-            right: 15px; /* Adjust as needed */
-            top: 15px; /* Adjust as needed within the display area or higher */
-            /* If you want to place it next to the result, you'd need a different structure */
+            /* Make it visible again */
+            visibility: visible;
+            display: block; /* Ensure it's a block element */
+            position: absolute; /* Position it relative to .calculator-display */
+            top: var(--display-icon-margin-top); /* Use CSS variable for top margin */
+            right: 0; /* Align to the right */
         }
 
         .calculator-icon:active {
@@ -170,7 +167,6 @@
             width: 100%;
             word-wrap: break-word;
             min-height: 55px; /* Ensure a minimum height */
-            /* Adjust padding/margins for large numbers if needed */
             padding-bottom: 10px; /* Give some space below the number */
         }
 
@@ -247,7 +243,6 @@
         @media (max-width: 480px) {
             body {
                 background-color: #fff;
-                /* Centrage global sur l'ensemble de la hauteur de l'écran */
                 justify-content: center;
                 align-items: center;
             }
@@ -258,32 +253,27 @@
                 padding: 0;
                 max-width: 100%;
                 width: 100%;
-                /* Ajusté pour prendre l'espace disponible mais laisser de la place pour la barre d'accueil */
-                height: 100%; /* Important pour que flex fonctionne bien */
-                /* Enlève min-height: 100vh pour laisser le contenu se "comprimer" si nécessaire */
+                height: 100%;
                 display: flex;
                 flex-direction: column;
-                /* space-between pour pousser le keypad vers le bas */
                 justify-content: space-between;
-                flex-grow: 1; /* Permet au conteneur de prendre l'espace restant */
+                flex-grow: 1;
             }
 
             .calculator-body {
-                padding: 0 15px; /* Padding horizontal du contenu */
+                padding: 0 15px;
                 flex-grow: 1;
-                /* Les éléments du body seront répartis sur la hauteur disponible */
                 justify-content: space-between;
             }
 
-            /* Variables pour les mobiles de largeur standard */
             :root {
-                --button-size: 70px; /* Revenu à 70px pour des boutons plus grands */
-                --grid-gap: 12px;     /* Espace standard */
-                --header-margin-top: 40px; /* Plus d'espace en haut */
-                --display-icon-margin-top: 15px; /* Pas utilisé pour backspace ici */
-                --display-value-margin-top: 80px; /* Grande marge pour pousser le 0 vers le bas */
-                --keypad-margin-top: 40px;       /* Plus d'espace avant le keypad */
-                --keypad-padding: 15px;          /* Padding du keypad */
+                --button-size: 70px;
+                --grid-gap: 12px;
+                --header-margin-top: 40px;
+                --display-icon-margin-top: 15px; /* Adjust for backspace icon */
+                --display-value-margin-top: 80px;
+                --keypad-margin-top: 40px;
+                --keypad-padding: 15px;
             }
             .calculator-title {
                 font-size: 32px;
@@ -301,16 +291,20 @@
             .theme-icon {
                 width: 24px;
             }
-            .calculator-icon { /* Backspace icon */
-                visibility: hidden; /* Hide it completely */
-                display: none; /* Ensure it takes no space */
+            .calculator-icon { /* Backspace icon specific rules for mobile */
+                visibility: visible; /* Make it visible */
+                display: block; /* Ensure it takes up space */
+                position: absolute; /* Keep it positioned relative to display area */
+                top: var(--display-icon-margin-top); /* Position from the top of display area */
+                right: 0; /* Align to the right */
+                width: 24px; /* Larger icon */
+                height: 24px;
+                z-index: 10; /* Ensure it's above other elements if overlaps */
             }
             .display-value {
-                font-size: 90px; /* Beaucoup plus grand pour le 0 */
-                color: #090909; /* Couleur plus foncée pour le 0 */
-                /* Adjusted margin to ensure it starts higher and has more space */
+                font-size: 90px;
+                color: #090909;
                 margin-top: var(--display-value-margin-top);
-                /* Add padding bottom to make sure the number isn't too close to the keypad top */
                 padding-bottom: 20px;
             }
             .calc-button {
@@ -327,20 +321,18 @@
                 width: auto;
             }
 
-            /* Ensure content takes full height on mobile and is spaced */
-            .calculator-body > div { /* Target direct children of calculator-body */
-                margin-bottom: 0; /* Reset default margins between flex items */
-            }
             .calculator-header { margin-top: var(--header-margin-top); }
-            .calculator-display { /* This will control the space above the keypad */
-                margin-top: auto; /* Push it to the bottom of remaining space */
-                margin-bottom: auto; /* And let it center vertically with flex-grow */
-                flex-grow: 1; /* Allow display area to expand */
+            .calculator-display {
+                margin-top: auto;
+                margin-bottom: auto;
+                flex-grow: 1;
                 display: flex;
                 flex-direction: column;
-                justify-content: flex-end; /* Push the 0 to the bottom of the display area */
+                justify-content: flex-end;
+                /* Add a small padding-right to display value so backspace icon does not overlap text */
+                padding-right: 30px; /* Enough space for the icon + some gap */
             }
-            .calculator-keypad { margin-top: auto; } /* Push keypad to the very bottom */
+            .calculator-keypad { margin-top: auto; }
         }
 
         /*
@@ -352,7 +344,7 @@
         /* For standard mobile heights (e.g., iPhone 13/14) */
         @media (max-width: 480px) and (max-height: 850px) {
              :root {
-                --button-size: 65px; /* Slightly smaller buttons for this height range */
+                --button-size: 65px;
                 --grid-gap: 10px;
                 --header-margin-top: 30px;
                 --display-value-margin-top: 60px;
@@ -366,12 +358,16 @@
                 font-size: 15px;
                 height: var(--button-size);
             }
+            .calculator-icon {
+                width: 22px;
+                height: 22px;
+            }
         }
 
         /* For smaller mobile heights (e.g., iPhone SE, or devices with larger browser UI) */
         @media (max-width: 480px) and (max-height: 750px) {
             :root {
-                --button-size: 60px; /* Smallest button size for critical fit */
+                --button-size: 60px;
                 --grid-gap: 8px;
                 --header-margin-top: 25px;
                 --display-value-margin-top: 50px;
@@ -395,12 +391,16 @@
             .theme-icon {
                 width: 20px;
             }
+            .calculator-icon {
+                width: 20px;
+                height: 20px;
+            }
         }
 
         /* For very small mobile heights (e.g., older phones or extreme UI) */
         @media (max-width: 480px) and (max-height: 650px) {
             :root {
-                --button-size: 55px; /* Even smaller */
+                --button-size: 55px;
                 --grid-gap: 7px;
                 --header-margin-top: 20px;
                 --display-value-margin-top: 40px;
@@ -417,8 +417,11 @@
                 font-size: 13px;
                 height: var(--button-size);
             }
+            .calculator-icon {
+                width: 18px;
+                height: 18px;
+            }
         }
-
 
         /* Class for visual feedback on keyboard press */
         .calc-button.active-keyboard-press, .calculator-icon.active-keyboard-press {
